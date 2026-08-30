@@ -146,39 +146,7 @@ See `assets/README.md` for full details.
 
 ---
 
-## Deployment to Vercel
 
-### Option A — Drag & Drop (fastest)
-
-1. Zip the `portfolio/` folder contents
-2. Go to [vercel.com/new](https://vercel.com/new)
-3. Drag the zip into the page
-4. Done.
-
-### Option B — GitHub
-
-1. Push this folder to a new GitHub repository
-2. Go to [vercel.com](https://vercel.com) → **New Project** → Import the repo
-3. Vercel auto-detects it as a static site — click **Deploy**
-
-### Option C — Vercel CLI
-
-```bash
-npm i -g vercel
-cd portfolio
-vercel
-```
-
----
-
-## Local Preview
-
-No build step. Just open `index.html` in a browser, or run a quick local server:
-
-```bash
-python -m http.server 8000
-# then visit http://localhost:8000
-```
 
 ---
 
