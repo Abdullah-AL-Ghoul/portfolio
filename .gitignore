@@ -1,0 +1,41 @@
+# ----- OS / Editor -----
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ----- Node / package managers (project is zero-deps, but ignore if added later) -----
+node_modules/
+.npm/
+.pnpm-store/
+yarn-error.log
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# ----- Environment & secrets -----
+.env
+.env.local
+.env.*.local
+
+# ----- Build output -----
+dist/
+build/
+out/
+.cache/
+.vercel/
+
+# ----- Local server logs (dev only) -----
+server.log
+*.log
+
+# ----- AI / agent helpers (not part of the shipped site) -----
+.claude/
+.zcode/
+skills-lock.json

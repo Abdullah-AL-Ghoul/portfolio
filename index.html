@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#06060e" />
+  <meta name="color-scheme" content="dark light" />
+  <script>
+    (function () {
+      try {
+        var lang = new URLSearchParams(location.search).get('lang') ||
+          localStorage.getItem('lang') ||
+          (navigator.language && navigator.language.toLowerCase().startsWith('ar') ? 'ar' : 'en');
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      } catch (e) {}
+      try {
+        var theme = localStorage.getItem('theme');
+        if (!theme) {
+          theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        var colors = { dark: '#06060e', light: '#f0f0f8', cyberpunk: '#0a0014', forest: '#0b1410', sunset: '#160c08' };
+        document.documentElement.setAttribute('data-theme', colors[theme] ? theme : 'dark');
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', colors[theme] || '#06060e');
+      } catch (e) {}
+    })();
+  </script>
+
+  <title>Abdullah Ayman AL-Ghoul · Computer Science Student</title>
+  <meta name="description" content="Portfolio of Abdullah Ayman AL-Ghoul — Computer Science student at Al-Azhar University interested in software engineering, networking, and AI." />
+  <meta name="author" content="Abdullah Ayman AL-Ghoul" />
+  <meta name="keywords" content="Abdullah Al-Ghoul, Computer Science, Portfolio, Software Engineering, Networking, Gaza, Palestine" />
+  <link rel="alternate" hreflang="en" href="https://abdullah-portfolio26.vercel.app/" />
+  <link rel="alternate" hreflang="ar" href="https://abdullah-portfolio26.vercel.app/?lang=ar" />
+  <link rel="alternate" hreflang="x-default" href="https://abdullah-portfolio26.vercel.app/" />
+  <link rel="canonical" href="https://abdullah-portfolio26.vercel.app/" />
+    <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Abdullah Ayman AL-Ghoul" />
+  <meta property="og:title" content="Abdullah Ayman AL-Ghoul · Portfolio" />
+  <meta property="og:description" content="Computer Science student · Software · Networking · AI" />
+  <meta property="og:url" content="https://abdullah-portfolio26.vercel.app/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ar_PS" />
+  <meta property="og:image" content="https://abdullah-portfolio26.vercel.app/assets/og-cover.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Abdullah Ayman AL-Ghoul — Computer Science Student" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Abdullah Ayman AL-Ghoul" />
+  <meta name="twitter:description" content="Computer Science student · Software · Networking · AI" />
+  <meta name="twitter:image" content="https://abdullah-portfolio26.vercel.app/assets/og-cover.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Abdullah Ayman AL-Ghoul",
+    "jobTitle": "Computer Science Student",
+    "description": "Computer Science student at Al-Azhar University, passionate about software engineering, networking, and emerging technologies.",
+    "url": "https://abdullah-portfolio26.vercel.app/",
+    "email": "abdallhalghoul200@gmail.com",
+    "image": "https://abdullah-portfolio26.vercel.app/assets/profile-600.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Gaza",
+      "addressCountry": "PS"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Al-Azhar University"
+    },
+    "knowsAbout": [
+      "Software Engineering",
+      "Computer Networks",
+      "Artificial Intelligence",
+      "Java",
+      "C Programming",
+      "JavaScript"
+    ],
+    "sameAs": [
+      "https://www.linkedin.com/in/abdullah-al-ghoul-a254763a6/",
+      "https://github.com/abdallah-al-ghoul"
+    ]
+  }
+  </script>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='70' text-anchor='middle' font-family='monospace' font-size='42' font-weight='700' fill='%2306b6d4'%3E%26gt;_%3C%2Ftext%3E%3C%2Fsvg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" href="assets/profile-600.jpg" fetchpriority="high" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <link rel="stylesheet" href="styles.css" />
+  <noscript>
+    <style>
+      .hero-text > *, .hero-visual, .hero-visual .floating-card,
+      .reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale {
+        opacity: 1 !important; transform: none !important; animation: none !important;
+      }
+    </style>
+    <div style="position:fixed;top:0;left:0;right:0;z-index:10000;background:#ef4444;color:#fff;text-align:center;padding:0.75rem;font-family:system-ui;font-size:0.9rem;">
+      JavaScript is required for the best experience on this portfolio.
+    </div>
+  </noscript>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+  <!-- Icon sprite: 56 lucide icons inlined as <symbol> (replaces the 348KB lucide.min.js bundle) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-alarm-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></symbol>
+  <symbol id="i-alert-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+  <symbol id="i-badge-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-bar-chart-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+  <symbol id="i-book-marked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v8l3-3 3 3V2"/><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></symbol>
+  <symbol id="i-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></symbol>
+  <symbol id="i-brain-circuit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
+  <symbol id="i-check-circle-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-clipboard-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+  <symbol id="i-code-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+  <symbol id="i-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+  <symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-folder-git-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v5"/><circle cx="13" cy="12" r="2"/><path d="M18 19c-2.8 0-5-2.2-5-5v8"/><circle cx="20" cy="19" r="2"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+  <symbol id="i-graduation-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+  <symbol id="i-image-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" x2="22" y1="2" y2="22"/><path d="M10.41 10.41a2 2 0 1 1-2.83-2.83"/><line x1="13.5" x2="6" y1="13.5" y2="21"/><line x1="18" x2="21" y1="12" y2="15"/><path d="M3.59 3.59A1.99 1.99 0 0 0 3 5v14a2 2 0 0 0 2 2h14c.55 0 1.052-.22 1.41-.59"/><path d="M21 15V5a2 2 0 0 0-2-2H9"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-languages" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></symbol>
+  <symbol id="i-lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-maximize-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+  <symbol id="i-message-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+  <symbol id="i-message-circle-more" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/></symbol>
+  <symbol id="i-message-square-quote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 12a2 2 0 0 0 2-2V8H8"/><path d="M14 12a2 2 0 0 0 2-2V8h-2"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></symbol>
+  <symbol id="i-mic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" x2="22" y1="2" y2="22"/><path d="M18.89 13.23A7.12 7.12 0 0 0 19 12v-2"/><path d="M5 10v2a7 7 0 0 0 12 5"/><path d="M15 9.34V5a3 3 0 0 0-5.68-1.33"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12"/><line x1="12" x2="12" y1="19" y2="22"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></symbol>
+  <symbol id="i-monitor-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 10 2 2 4-4"/><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M12 17v4"/><path d="M8 21h8"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol>
+    <symbol id="i-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+  <symbol id="i-send-horizontal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+  <symbol id="i-sunset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10V2"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m16 6-4 4-4-4"/><path d="M16 18a4 4 0 0 0-8 0"/></symbol>
+  <symbol id="i-trash-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></symbol>
+  <symbol id="i-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+  <symbol id="i-tree-pine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-volume-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+</svg>
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-live="polite" aria-label="Loading">
+    <div class="preloader-inner">
+      <div class="preloader-logo">
+        <span class="preloader-prompt">&gt;_</span>
+        <span class="preloader-name" data-i18n="brand">Abdullah</span>
+      </div>
+      <div class="preloader-bar">
+        <div class="preloader-fill"></div>
+      </div>
+      <div class="preloader-status" data-i18n="preloader.loading">Loading portfolio…</div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-follower" id="cursor-follower" aria-hidden="true"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand" aria-label="Home">
+        <span class="brand-prompt">&gt;_</span>
+        <span class="brand-name" data-i18n="brand">Abdullah</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#skills" data-i18n="nav.skills">Skills</a>
+        <a href="#projects" data-i18n="nav.projects">Projects</a>
+        <a href="#certs" data-i18n="nav.certs">Certifications</a>
+        <a href="#experience" data-i18n="nav.exp">Experience</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="lang-toggle" aria-label="Switch language" title="Switch language" aria-pressed="false" data-i18n-aria="nav.lang" data-i18n-title="nav.lang">
+          <i data-lucide="languages"></i>
+          <span id="lang-label">AR</span>
+        </button>
+        <div class="theme-picker" id="theme-picker">
+          <button class="icon-btn" id="theme-toggle" aria-label="Change theme" aria-haspopup="menu" aria-expanded="false" title="Change theme">
+            <i data-lucide="moon"></i>
+          </button>
+          <div class="theme-menu" id="theme-menu" role="menu" hidden>
+            <div class="theme-menu-label" data-i18n="theme.label">Theme</div>
+            <button type="button" role="menuitemradio" data-theme-choice="dark" aria-checked="false">
+              <span class="theme-dot" style="--swatch:#0b0b16"></span><span data-i18n="theme.dark">Dark</span>
+            </button>
+            <button type="button" role="menuitemradio" data-theme-choice="light" aria-checked="false">
+              <span class="theme-dot" style="--swatch:#f0f0f8"></span><span data-i18n="theme.light">Light</span>
+            </button>
+            <button type="button" role="menuitemradio" data-theme-choice="cyberpunk" aria-checked="false">
+              <span class="theme-dot" style="--swatch:#ff00aa"></span><span data-i18n="theme.cyberpunk">Cyberpunk</span>
+            </button>
+            <button type="button" role="menuitemradio" data-theme-choice="forest" aria-checked="false">
+              <span class="theme-dot" style="--swatch:#7dcea0"></span><span data-i18n="theme.forest">Forest</span>
+            </button>
+            <button type="button" role="menuitemradio" data-theme-choice="sunset" aria-checked="false">
+              <span class="theme-dot" style="--swatch:#ff8c42"></span><span data-i18n="theme.sunset">Sunset</span>
+            </button>
+          </div>
+        </div>
+        <button class="icon-btn nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home">
+      <!-- Animated Background Blobs -->
+      <div class="hero-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-cursor" id="hero-cursor-glow" aria-hidden="true"></div>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <span class="status-pill">
+            <span class="dot"></span>
+            <span data-i18n="hero.status">Open to opportunities</span>
+          </span>
+
+          <h1 class="hero-title">
+            <span class="hero-greet" data-i18n="hero.greet">Hi, I'm</span>
+            <span class="accent">Abdullah Ayman AL-Ghoul</span>
+            <span class="hero-subtitle">
+              <span data-i18n="hero.role">Computer Science Student</span>
+              <span class="hero-divider">·</span>
+              <span class="typed-wrap">
+                <span class="typed" id="typed"></span>
+                <span class="typed-caret" aria-hidden="true">|</span>
+              </span>
+            </span>
+          </h1>
+
+          <p class="hero-desc" data-i18n="hero.desc">
+            CS student at Al-Azhar University, passionate about software engineering, networking, cybersecurity, and emerging technologies. I build practical solutions and never stop learning.
+          </p>
+
+          <div class="hero-meta">
+            <span><i data-lucide="map-pin"></i> <span data-i18n="hero.loc">Gaza, Palestine</span></span>
+            <span><i data-lucide="graduation-cap"></i> <span data-i18n="hero.uni">Al-Azhar University</span></span>
+            <span><i data-lucide="mail"></i> abdallhalghoul200@gmail.com</span>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects">
+              <i data-lucide="folder-git-2"></i>
+              <span data-i18n="hero.cta1">View Projects</span>
+            </a>
+            <a class="btn btn-ghost" href="#contact">
+              <i data-lucide="send"></i>
+              <span data-i18n="hero.cta2">Contact Me</span>
+            </a>
+            <a class="btn btn-outline" href="assets/Abdullah_ALGhoul_CV.pdf" download>
+              <i data-lucide="download"></i>
+              <span data-i18n="hero.cta3">Download CV</span>
+            </a>
+          </div>
+
+          <div class="hero-socials">
+            <a href="https://www.linkedin.com/in/abdullah-al-ghoul-a254763a6/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://github.com/abdallah-al-ghoul" target="_blank" rel="noopener" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
+            <a href="mailto:abdallhalghoul200@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="avatar-wrap">
+            <div class="avatar-ring"></div>
+            <img src="assets/profile-600.jpg" alt="Abdullah Ayman AL-Ghoul" class="avatar" width="296" height="296" loading="eager" decoding="async" fetchpriority="high" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="avatar-fallback" style="display:none;">
+              <span>&gt;_</span>
+            </div>
+          </div>
+          <div class="floating-card top">
+            <i data-lucide="code-2"></i>
+            <span>Java · C · JS</span>
+          </div>
+          <div class="floating-card bottom">
+            <i data-lucide="network"></i>
+            <span>Networking</span>
+          </div>
+          <div class="floating-card left">
+            <i data-lucide="brain"></i>
+            <span>AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">
+        <i data-lucide="chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- Tech stack (clean, static, no dots) -->
+    <div class="techstack" aria-label="Tech stack">
+      <span>Java</span>
+      <span>C</span>
+      <span>JavaScript</span>
+      <span>HTML5</span>
+      <span>CSS3</span>
+      <span>TCP/IP</span>
+      <span>VLAN</span>
+      <span>Cisco Packet Tracer</span>
+      <span>Git</span>
+      <span>GitHub</span>
+      <span>MikroTik</span>
+      <span>AI Tools</span>
+      <span>React</span>
+      <span>Firebase</span>
+      <span>PWA</span>
+    </div>
+
+    <div class="section-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 70" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="dividerGrad1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="var(--bg-elev)" stop-opacity="0"/>
+            <stop offset="50%" stop-color="var(--accent)" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="var(--bg-elev)" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#dividerGrad1)" d="M0,40 C240,70 480,10 720,35 C960,55 1200,15 1440,40 L1440,70 L0,70 Z"/>
+      </svg>
+    </div>
+
+    <section class="stats">
+      <div class="container stats-grid">
+        <div class="stat reveal-up">
+          <div class="stat-icon"><i data-lucide="badge-check"></i></div>
+          <div class="stat-num">11+</div>
+          <div class="stat-label" data-i18n="stats.certs">Certifications</div>
+        </div>
+        <div class="stat reveal-up">
+          <div class="stat-icon"><i data-lucide="book-open"></i></div>
+          <div class="stat-num">3+</div>
+          <div class="stat-label" data-i18n="stats.years">Years Learning</div>
+        </div>
+        <div class="stat reveal-up">
+          <div class="stat-icon"><i data-lucide="folder-git-2"></i></div>
+          <div class="stat-num">7</div>
+          <div class="stat-label" data-i18n="stats.projects">Projects</div>
+        </div>
+        <div class="stat reveal-up">
+          <div class="stat-icon"><i data-lucide="message-square-quote"></i></div>
+          <div class="stat-num">2</div>
+          <div class="stat-label" data-i18n="stats.recs">Recommendation Letters</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 70" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="dividerGrad2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="var(--bg)" stop-opacity="0"/>
+            <stop offset="50%" stop-color="var(--accent-purple)" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="var(--bg)" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#dividerGrad2)" d="M0,30 C240,5 480,55 720,30 C960,5 1200,55 1440,30 L1440,70 L0,70 Z"/>
+      </svg>
+    </div>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal-up">
+          <span class="eyebrow" data-i18n="about.eyebrow">01 · About</span>
+          <h2 class="section-title" data-i18n="about.title">Who am I?</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text reveal-left">
+            <p data-i18n="about.p1">
+              I'm Abdullah Al-Ghoul, a Computer Science student who believes technology is one of the most powerful tools for solving real-world problems. I enjoy learning, experimenting, and building practical solutions that combine logic, creativity, and innovation.
+            </p>
+            <p data-i18n="about.p2">
+              My interests span software engineering, networking, cybersecurity, and artificial intelligence. I constantly seek opportunities to improve my skills, explore new concepts, and contribute to meaningful technical projects.
+            </p>
+            <p data-i18n="about.p3">
+              My long-term goal is to become a highly skilled Software Engineer with strong foundations in networking, cybersecurity, and modern software development practices.
+            </p>
+
+            <div class="strengths reveal-up">
+              <span class="chip"><i data-lucide="brain"></i> <span data-i18n="about.s1">Problem Solving</span></span>
+              <span class="chip"><i data-lucide="users"></i> <span data-i18n="about.s2">Teamwork</span></span>
+              <span class="chip"><i data-lucide="message-circle"></i> <span data-i18n="about.s3">Communication</span></span>
+              <span class="chip"><i data-lucide="book-open"></i> <span data-i18n="about.s4">Self-Learning</span></span>
+              <span class="chip"><i data-lucide="lightbulb"></i> <span data-i18n="about.s5">Critical Thinking</span></span>
+              <span class="chip"><i data-lucide="mic"></i> <span data-i18n="about.s6">Public Speaking</span></span>
+            </div>
+          </div>
+
+          <aside class="about-card reveal-right">
+            <div class="info-row">
+              <i data-lucide="graduation-cap"></i>
+              <div>
+                <div class="info-label" data-i18n="about.edu">Education</div>
+                <div class="info-value" data-i18n="about.school">B.Sc. Computer Science · Al-Azhar University</div>
+                <div class="info-sub" data-i18n="about.year">2023 – 2027/2028 (expected)</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <i data-lucide="map-pin"></i>
+              <div>
+                <div class="info-label" data-i18n="about.loc">Location</div>
+                <div class="info-value" data-i18n="about.city">Gaza, Palestine</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <i data-lucide="languages"></i>
+              <div>
+                <div class="info-label" data-i18n="about.langs">Languages</div>
+                <div class="info-value" data-i18n="about.ar">Arabic — Native</div>
+                <div class="info-value" data-i18n="about.en">English — Professional</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <i data-lucide="heart"></i>
+              <div>
+                <div class="info-label" data-i18n="about.focus">Focus Areas</div>
+                <div class="info-value" data-i18n="about.focusv">Software · Networks · Security · AI</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="skills">
+      <div class="container">
+        <div class="section-head reveal-up">
+          <span class="eyebrow" data-i18n="skills.eyebrow">02 · Skills</span>
+          <h2 class="section-title" data-i18n="skills.title">Tech Stack</h2>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-card reveal-scale">
+            <div class="skill-head">
+              <i data-lucide="code-2" aria-hidden="true"></i>
+              <h3 data-i18n="skills.prog">Programming</h3>
+              <span class="skill-meta" data-i18n="skills.meta.prog">4 technologies</span>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-row" data-tier="4">
+                <span class="skill-name">Java</span>
+                <span class="skill-tier" aria-label="Expert" data-i18n-aria="tier.expert">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+              <li class="skill-row" data-tier="3">
+                <span class="skill-name">JavaScript</span>
+                <span class="skill-tier" aria-label="Advanced" data-i18n-aria="tier.advanced">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+              <li class="skill-row" data-tier="4">
+                <span class="skill-name">HTML5 / CSS3</span>
+                <span class="skill-tier" aria-label="Expert" data-i18n-aria="tier.expert">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+              <li class="skill-row" data-tier="3">
+                <span class="skill-name">C</span>
+                <span class="skill-tier" aria-label="Advanced" data-i18n-aria="tier.advanced">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal-scale">
+            <div class="skill-head">
+              <i data-lucide="network" aria-hidden="true"></i>
+              <h3 data-i18n="skills.net">Networking &amp; Infra</h3>
+              <span class="skill-meta" data-i18n="skills.meta.net">4 areas</span>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-row" data-tier="4">
+                <span class="skill-name">TCP/IP &amp; Subnetting</span>
+                <span class="skill-tier" aria-label="Expert" data-i18n-aria="tier.expert">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+              <li class="skill-row" data-tier="3">
+                <span class="skill-name">VLAN &amp; Routing</span>
+                <span class="skill-tier" aria-label="Advanced" data-i18n-aria="tier.advanced">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+              <li class="skill-row" data-tier="3">
+                <span class="skill-name">DHCP / DNS / NAT</span>
+                <span class="skill-tier" aria-label="Advanced" data-i18n-aria="tier.advanced">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+              <li class="skill-row" data-tier="3">
+                <span class="skill-name">Cisco Packet Tracer</span>
+                <span class="skill-tier" aria-label="Advanced" data-i18n-aria="tier.advanced">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal-scale">
+            <div class="skill-head">
+              <i data-lucide="wrench" aria-hidden="true"></i>
+              <h3 data-i18n="skills.tools">Tools &amp; Platforms</h3>
+              <span class="skill-meta" data-i18n="skills.meta.tools">4 tools</span>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-row" data-tier="3">
+                <span class="skill-name">Git &amp; GitHub</span>
+                <span class="skill-tier" aria-label="Advanced" data-i18n-aria="tier.advanced">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+              <li class="skill-row" data-tier="4">
+                <span class="skill-name">AI Tools &amp; Prompting</span>
+                <span class="skill-tier" aria-label="Expert" data-i18n-aria="tier.expert">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+              <li class="skill-row" data-tier="3">
+                <span class="skill-name">Windows</span>
+                <span class="skill-tier" aria-label="Advanced" data-i18n-aria="tier.advanced">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+              <li class="skill-row" data-tier="2">
+                <span class="skill-name">Linux (basics)</span>
+                <span class="skill-tier" aria-label="Intermediate" data-i18n-aria="tier.intermediate">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+              </li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="skills-visual reveal-up">
+          <div class="skills-radar-wrap">
+            <svg id="skills-radar" viewBox="0 0 340 340" role="img" aria-label="Skills radar chart"></svg>
+          </div>
+          <div class="skills-radar-legend" id="skills-radar-legend"></div>
+        </div>
+
+        <div class="learning reveal-up">
+          <h3 data-i18n="skills.cur">Currently Learning</h3>
+          <div class="learning-tags">
+            <span data-i18n="skills.l1">Frontend Development</span>
+            <span data-i18n="skills.l2">Java OOP</span>
+            <span data-i18n="skills.l3">Data Structures</span>
+            <span data-i18n="skills.l4">Algorithms</span>
+            <span data-i18n="skills.l5">Software Engineering Principles</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head reveal-up">
+          <span class="eyebrow" data-i18n="proj.eyebrow">03 · Projects</span>
+          <h2 class="section-title" data-i18n="proj.title">Featured Projects</h2>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card featured reveal-scale" data-project="p4">
+            <div class="project-cover" data-cover="edu">
+              <div class="project-cover-edu"></div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag" data-i18n="proj.p4tag">Live</div>
+              <div class="project-icon"><i data-lucide="graduation-cap" aria-hidden="true"></i></div>
+              <h3 data-i18n="proj.p4t">AL-Azher IT Hub</h3>
+              <p data-i18n="proj.p4d">
+                Bilingual educational platform for Al-Azhar University IT students — lectures, resources, and study materials. Built with React, Tailwind CSS, and Firebase, with PWA support for offline access.
+              </p>
+              <div class="project-tags">
+                <span>React</span><span>Tailwind CSS</span><span>Firebase</span><span>PWA</span>
+              </div>
+              <div class="project-links">
+                <a class="btn btn-sm btn-primary" href="https://al-azher-it-hub.vercel.app/" target="_blank" rel="noopener">
+                  <i data-lucide="external-link"></i> <span data-i18n="proj.live">Live Site</span>
+                </a>
+                <button type="button" class="btn btn-sm btn-ghost" data-case-open="p4">
+                  <i data-lucide="book-open"></i> <span data-i18n="proj.case">Case Study</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal-scale" data-project="p1">
+            <div class="project-cover" data-cover="portfolio">
+              <div class="project-cover-grid"></div>
+              <div class="project-cover-glow"></div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag" data-i18n="proj.p1tag">Live · This Site</div>
+              <div class="project-icon"><i data-lucide="globe" aria-hidden="true"></i></div>
+              <h3 data-i18n="proj.p1t">Personal Portfolio Website</h3>
+              <p data-i18n="proj.p1d">
+                A responsive, modern, bilingual portfolio showcasing my skills, projects, and educational milestones. Built with semantic HTML, modern CSS, and vanilla JavaScript. Includes dark/light theme and full RTL support.
+              </p>
+              <div class="project-tags">
+                <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>i18n</span><span>RTL</span>
+              </div>
+              <div class="project-links">
+                <a class="btn btn-sm btn-primary" href="https://abdullah-portfolio26.vercel.app/" target="_blank" rel="noopener">
+                  <i data-lucide="external-link"></i> <span data-i18n="proj.live">Live Site</span>
+                </a>
+                <button type="button" class="btn btn-sm btn-ghost" data-case-open="p1">
+                  <i data-lucide="book-open"></i> <span data-i18n="proj.case">Case Study</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal-scale" data-project="p2">
+            <div class="project-cover" data-cover="network">
+              <div class="project-cover-nodes">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag" data-i18n="proj.p2tag">Completed</div>
+              <div class="project-icon"><i data-lucide="network" aria-hidden="true"></i></div>
+              <h3 data-i18n="proj.p2t">Enterprise Network Design</h3>
+              <p data-i18n="proj.p2d">
+                Designed and implemented a segmented business network using VLANs, DHCP, DNS, NAT, subnetting, and Router-on-a-Stick architecture in Cisco Packet Tracer.
+              </p>
+              <div class="project-tags">
+                <span>Cisco Packet Tracer</span><span>VLAN</span><span>DHCP</span><span>DNS</span><span>NAT</span><span>Routing</span>
+              </div>
+              <div class="project-links">
+                <a class="btn btn-sm btn-outline" href="https://drive.google.com/drive/folders/18qSsF9Tf5nvHELcvJfpIqqO4rk7ipbp9?usp=sharing" target="_blank" rel="noopener">
+                  <i data-lucide="file-text"></i> <span data-i18n="proj.diagram">Project Diagram</span>
+                </a>
+                <button type="button" class="btn btn-sm btn-ghost" data-case-open="p2">
+                  <i data-lucide="book-open"></i> <span data-i18n="proj.case">Case Study</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal-scale" data-project="p3">
+            <div class="project-cover" data-cover="cloud">
+              <div class="project-cover-cloud"></div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag" data-i18n="proj.p3tag">Concept Proposal</div>
+              <div class="project-icon"><i data-lucide="cloud" aria-hidden="true"></i></div>
+              <h3 data-i18n="proj.p3t">Smart University Virtual Lab</h3>
+              <p data-i18n="proj.p3d">
+                Proposed cloud-based virtual desktop infrastructure enabling university students to access a full Windows workstation from mobile devices via RDP. Designed to help students without personal computers access programming environments remotely.
+              </p>
+              <div class="project-tags">
+                <span>RDP</span><span>Windows</span><span>Azure</span><span>Cloud Infra</span><span>VPN</span>
+              </div>
+              <div class="project-status" data-i18n="proj.p3status">
+                <i data-lucide="info"></i> Proposal / future implementation
+              </div>
+              <div class="project-links">
+                <button type="button" class="btn btn-sm btn-ghost" data-case-open="p3">
+                  <i data-lucide="book-open"></i> <span data-i18n="proj.case">Case Study</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal-scale" data-project="p5">
+            <div class="project-cover" data-cover="tasks">
+              <div class="project-cover-tasks">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag" data-i18n="proj.p5tag">Team Project</div>
+              <div class="project-icon"><i data-lucide="clipboard-list" aria-hidden="true"></i></div>
+              <h3 data-i18n="proj.p5t">Task Manager</h3>
+              <p data-i18n="proj.p5d">
+                Team task management application for organizing and tracking shared tasks with colleagues. Features task creation, assignment, status tracking, and deadline management.
+              </p>
+              <div class="project-tags">
+                <span>Java</span><span>OOP</span><span>File I/O</span><span>Team Collaboration</span>
+              </div>
+              <div class="project-links">
+                <button type="button" class="btn btn-sm btn-ghost" data-case-open="p5">
+                  <i data-lucide="book-open"></i> <span data-i18n="proj.case">Case Study</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal-scale" data-project="p6">
+            <div class="project-cover" data-cover="library">
+              <div class="project-cover-library">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag" data-i18n="proj.p6tag">Completed</div>
+              <div class="project-icon"><i data-lucide="book-marked" aria-hidden="true"></i></div>
+              <h3 data-i18n="proj.p6t">Library Management System</h3>
+              <p data-i18n="proj.p6d">
+                Java-based library management system for managing books, borrowers, and lending operations. Includes add, search, borrow, return functionality with data persistence.
+              </p>
+              <div class="project-tags">
+                <span>Java</span><span>OOP</span><span>Data Structures</span><span>File I/O</span>
+              </div>
+              <div class="project-links">
+                <button type="button" class="btn btn-sm btn-ghost" data-case-open="p6">
+                  <i data-lucide="book-open"></i> <span data-i18n="proj.case">Case Study</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal-scale" data-project="p7">
+            <div class="project-cover" data-cover="timer">
+              <div class="project-cover-timer">
+                <span class="timer-dial"></span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag" data-i18n="proj.p7tag">Personal Project</div>
+              <div class="project-icon"><i data-lucide="alarm-clock" aria-hidden="true"></i></div>
+              <h3 data-i18n="proj.p7t">SmartTimeCoach</h3>
+              <p data-i18n="proj.p7d">
+                Python productivity assistant with automated reminders that helps manage tasks and study schedules more effectively.
+              </p>
+              <div class="project-tags">
+                <span>Python</span><span>Automation</span><span>Scheduling</span>
+              </div>
+              <div class="project-links">
+                <button type="button" class="btn btn-sm btn-ghost" data-case-open="p7">
+                  <i data-lucide="book-open"></i> <span data-i18n="proj.case">Case Study</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="certs">
+      <div class="container">
+        <div class="section-head reveal-up">
+          <span class="eyebrow" data-i18n="certs.eyebrow">04 · Certifications</span>
+          <h2 class="section-title" data-i18n="certs.title">Verified Credentials</h2>
+        </div>
+
+        <div class="certs-grid">
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/google-ai-fundamentals.jpg" data-cert-title="AI Fundamentals" data-cert-org="Google · Coursera">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="brain"></i></span>
+            <div class="cert-date" data-i18n="certs.c10d">Aug 2026</div>
+            <div class="cert-org" data-i18n="certs.c10o">Google · Coursera</div>
+            <span class="cert-title" data-i18n="certs.c10t">AI Fundamentals</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/fa03448a.jpg" data-cert-title="Learn Git & GitHub" data-cert-org="M3aarf Platform">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="folder-git-2"></i></span>
+            <div class="cert-date" data-i18n="certs.c11d">Aug 2026</div>
+            <div class="cert-org" data-i18n="certs.c11o">M3aarf Platform</div>
+            <span class="cert-title" data-i18n="certs.c11t">Learn Git &amp; GitHub</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/nvidia-ai.jpg" data-cert-title="AI for All: From Basics to GenAI Practice" data-cert-org="NVIDIA Academy">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="cpu"></i></span>
+            <div class="cert-date" data-i18n="certs.c1d">Mar 2026</div>
+            <div class="cert-org" data-i18n="certs.c1o">NVIDIA Academy</div>
+            <span class="cert-title" data-i18n="certs.c1t">AI for All: From Basics to GenAI Practice</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/openai-ai-foundations.jpg" data-cert-title="AI Foundations" data-cert-org="OpenAI Academy">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="sparkles"></i></span>
+            <div class="cert-date" data-i18n="certs.c2d">Jul 2026</div>
+            <div class="cert-org" data-i18n="certs.c2o">OpenAI Academy</div>
+            <span class="cert-title" data-i18n="certs.c2t">AI Foundations</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/claude-code-in-action.jpg" data-cert-title="Claude Code in Action" data-cert-org="Anthropic · Coursera">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="brain-circuit"></i></span>
+            <div class="cert-date" data-i18n="certs.c9d">Aug 2026</div>
+            <div class="cert-org" data-i18n="certs.c9o">Anthropic · Coursera</div>
+            <span class="cert-title" data-i18n="certs.c9t">Claude Code in Action</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/anthropic-claude-code-101.png" data-cert-title="Claude Code 101" data-cert-org="Anthropic">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="brain-circuit"></i></span>
+            <div class="cert-date" data-i18n="certs.c8d">Aug 2026</div>
+            <div class="cert-org" data-i18n="certs.c8o">Anthropic</div>
+            <span class="cert-title" data-i18n="certs.c8t">Claude Code 101</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/anthropic-claude101.png" data-cert-title="Claude 101" data-cert-org="Anthropic">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="brain-circuit"></i></span>
+            <div class="cert-date" data-i18n="certs.c3d">Jul 2026</div>
+            <div class="cert-org" data-i18n="certs.c3o">Anthropic</div>
+            <span class="cert-title" data-i18n="certs.c3t">Claude 101</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/saylor-cs101.jpg" data-cert-title="CS101: Introduction to Programming I" data-cert-org="Saylor Academy">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="graduation-cap"></i></span>
+            <div class="cert-date" data-i18n="certs.c4d">Jan 2026</div>
+            <div class="cert-org" data-i18n="certs.c4o">Saylor Academy</div>
+            <span class="cert-title" data-i18n="certs.c4t">CS101: Introduction to Programming I</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/icdl.jpg" data-cert-title="ICDL Base Certification" data-cert-org="Edraak">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="monitor-check"></i></span>
+            <div class="cert-date" data-i18n="certs.c5d">Jan 2026</div>
+            <div class="cert-org" data-i18n="certs.c5o">Edraak</div>
+            <span class="cert-title" data-i18n="certs.c5t">ICDL Base Certification</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/hp-data-science.jpg" data-cert-title="Data Science & Analytics" data-cert-org="HP LIFE">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="bar-chart-3"></i></span>
+            <div class="cert-date" data-i18n="certs.c7d">2025</div>
+            <div class="cert-org" data-i18n="certs.c7o">HP LIFE</div>
+            <span class="cert-title" data-i18n="certs.c7t">Data Science &amp; Analytics</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/hp-critical-thinking.jpg" data-cert-title="Critical Thinking in the Age of AI" data-cert-org="HP LIFE">
+            <span class="cert-icon" aria-hidden="true"><i data-lucide="lightbulb"></i></span>
+            <div class="cert-date" data-i18n="certs.c6d">2025</div>
+            <div class="cert-org" data-i18n="certs.c6o">HP LIFE</div>
+            <span class="cert-title" data-i18n="certs.c6t">Critical Thinking in the Age of AI</span>
+            <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
+            <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head reveal-up">
+          <span class="eyebrow" data-i18n="exp.eyebrow">05 · Experience</span>
+          <h2 class="section-title" data-i18n="exp.title">Experience &amp; Milestones</h2>
+        </div>
+
+        <div class="exp-grid">
+          <div class="exp-card reveal-right stagger-container">
+            <h3 data-i18n="exp.techh" class="stagger-item">Technical Experience</h3>
+            <div class="timeline">
+              <div class="t-item stagger-item">
+                <div class="t-marker"></div>
+                <div class="t-body">
+                  <h4 data-i18n="exp.t1">Networking &amp; IT Support Projects</h4>
+                  <span class="t-period" data-i18n="exp.t1per">2023 – Present</span>
+                  <ul>
+                    <li data-i18n="exp.t1a">LAN design &amp; IP addressing plans</li>
+                    <li data-i18n="exp.t1b">Router, DHCP, DNS, NAT configuration</li>
+                    <li data-i18n="exp.t1c">Connectivity troubleshooting</li>
+                    <li data-i18n="exp.t1d">Technical documentation &amp; flowcharts</li>
+                    <li data-i18n="exp.t1e">Community technical support</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-card reveal-left stagger-container">
+            <h3 data-i18n="exp.milestone" class="stagger-item">Milestones</h3>
+            <div class="timeline">
+              <div class="t-item stagger-item" data-milestone="m1">
+                <div class="t-marker"></div>
+                <div class="t-body">
+                  <h4 data-i18n="exp.m1">2026 · NVIDIA AI Certification</h4>
+                  <span class="t-period" data-i18n="exp.m1sub">Generative AI · NVIDIA Academy</span>
+                  <button type="button" class="t-open" data-tl-open="m1" aria-label="View details" title="View details">
+                    <i data-lucide="chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="t-item stagger-item" data-milestone="m1b">
+                <div class="t-marker"></div>
+                <div class="t-body">
+                  <h4 data-i18n="exp.m1b">2026 · OpenAI & Anthropic AI Tracks</h4>
+                  <span class="t-period" data-i18n="exp.m1bsub">AI Foundations · Claude 101 · Claude Code 101 · Claude Code in Action</span>
+                  <button type="button" class="t-open" data-tl-open="m1b" aria-label="View details" title="View details">
+                    <i data-lucide="chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="t-item stagger-item" data-milestone="m2">
+                <div class="t-marker"></div>
+                <div class="t-body">
+                  <h4 data-i18n="exp.m2">2025 · ICDL Certification</h4>
+                  <span class="t-period" data-i18n="exp.m2sub">Edraak · Word, Excel, Internet Security</span>
+                  <button type="button" class="t-open" data-tl-open="m2" aria-label="View details" title="View details">
+                    <i data-lucide="chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="t-item stagger-item" data-milestone="m3">
+                <div class="t-marker"></div>
+                <div class="t-body">
+                  <h4 data-i18n="exp.m3">2024 · Networking Projects</h4>
+                  <span class="t-period" data-i18n="exp.m3sub">VLAN, DHCP/NAT segments</span>
+                  <button type="button" class="t-open" data-tl-open="m3" aria-label="View details" title="View details">
+                    <i data-lucide="chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="t-item stagger-item" data-milestone="m4">
+                <div class="t-marker"></div>
+                <div class="t-body">
+                  <h4 data-i18n="exp.m4">2023 · CS Journey Begins</h4>
+                  <span class="t-period" data-i18n="exp.m4sub">Al-Azhar University</span>
+                  <button type="button" class="t-open" data-tl-open="m4" aria-label="View details" title="View details">
+                    <i data-lucide="chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="feedback">
+      <div class="container">
+        <div class="section-head reveal-up">
+          <span class="eyebrow" data-i18n="test.eyebrow">06 · Feedback</span>
+          <h2 class="section-title" data-i18n="test.title">Recommendations</h2>
+        </div>
+
+        <div class="testimonials-grid">
+          <figure class="testimonial reveal-right stagger-container">
+            <blockquote class="stagger-item" data-i18n="test.q1">
+              "Abdullah is one of the most passionate students I have taught. He demonstrates strong collaboration, presentation, time management, and problem-solving skills."
+            </blockquote>
+            <figcaption class="stagger-item">
+              <div class="t-avatar">
+                <img src="assets/dr-almasri.jpg" alt="Mr. Abdelbaset R. Almasri" width="64" height="64" loading="lazy" decoding="async" onerror="this.style.display='none';" />
+                <span class="t-avatar-fallback" aria-hidden="true">AB</span>
+              </div>
+              <div>
+                <div class="t-name" data-i18n="test.n1">Mr. Abdelbaset R. Almasri</div>
+                <div class="t-role" data-i18n="test.r1">Lecturer of Computer Science · Al-Azhar University</div>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="testimonial reveal-up stagger-container">
+            <blockquote class="stagger-item" data-i18n="test.q2">
+              "Abdullah has been a remarkable student and an asset to our university. He is hardworking, reliable, and works exceptionally well in teams."
+            </blockquote>
+            <figcaption class="stagger-item">
+              <div class="t-avatar">
+                <img src="assets/dr-ahmed.jpg" alt="Dr. Adel A. Ahmed" width="64" height="64" loading="lazy" decoding="async" onerror="this.style.display='none';" />
+                <span class="t-avatar-fallback" aria-hidden="true">AA</span>
+              </div>
+              <div>
+                <div class="t-name" data-i18n="test.n2">Dr. Adel A. Ahmed</div>
+                <div class="t-role" data-i18n="test.r2">Lecturer of Computer Science · Al-Azhar University</div>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="testimonial reveal-left stagger-container">
+            <blockquote class="stagger-item" data-i18n="test.q3">
+              "Abdullah is an exceptional team member who is collaborative, reliable, and a natural problem solver. A dedicated self-learner and a strong communicator who always elevates the quality of our projects."
+            </blockquote>
+            <figcaption class="stagger-item">
+              <div class="t-avatar">
+                <img src="assets/yazan.jpg" alt="Yazan W. Abo_Elqomboz" width="64" height="64" loading="lazy" decoding="async" onerror="this.style.display='none';" />
+                <span class="t-avatar-fallback" aria-hidden="true">YW</span>
+              </div>
+              <div>
+                <div class="t-name" data-i18n="test.n3">Yazan W. Abo_Elqomboz</div>
+                <div class="t-role" data-i18n="test.r3">Project Team Member</div>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-info reveal-left">
+          <span class="eyebrow" data-i18n="contact.eyebrow">07 · Contact</span>
+          <h2 class="section-title" data-i18n="contact.title">Let's Connect</h2>
+          <p data-i18n="contact.desc">
+            Have an opportunity, scholarship, or a project to discuss? I'd love to hear from you.
+          </p>
+
+          <div class="availability" aria-label="Response availability">
+            <span class="availability-dot" aria-hidden="true"></span>
+            <span class="availability-text" data-i18n="contact.avail">Replies within 24 hours</span>
+          </div>
+
+          <ul class="contact-list">
+            <li>
+              <i data-lucide="mail"></i>
+              <a href="mailto:abdallhalghoul200@gmail.com">abdallhalghoul200@gmail.com</a>
+            </li>
+            <li>
+              <i data-lucide="linkedin"></i>
+              <a href="https://www.linkedin.com/in/abdullah-al-ghoul-a254763a6/" target="_blank" rel="noopener">linkedin.com/in/abdullah-al-ghoul-a254763a6</a>
+            </li>
+            <li>
+              <i data-lucide="map-pin"></i>
+              <span data-i18n="contact.loc">Gaza, Palestine</span>
+            </li>
+          </ul>
+        </div>
+
+        <form class="contact-form reveal-right" id="contact-form" action="#" method="POST" novalidate>
+          <div class="field">
+            <label for="name" data-i18n="form.name">Name</label>
+            <input type="text" id="name" name="name" required autocomplete="name" aria-describedby="form-status" />
+          </div>
+          <div class="field">
+            <label for="email" data-i18n="form.email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email" aria-describedby="form-status" />
+          </div>
+          <div class="field">
+            <label for="subject" data-i18n="form.subject">Subject</label>
+            <input type="text" id="subject" name="subject" required autocomplete="off" aria-describedby="form-status" />
+          </div>
+          <div class="field">
+            <label for="message" data-i18n="form.message">Message</label>
+            <textarea id="message" name="message" rows="5" required aria-describedby="form-status"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i data-lucide="send"></i>
+            <span data-i18n="form.send">Send Message</span>
+          </button>
+          <p class="form-note" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="reveal-up">
+        <div class="brand">
+          <span class="brand-prompt">&gt;_</span>
+          <span data-i18n="brand">Abdullah</span>
+        </div>
+        <p class="footer-tag" data-i18n="footer.tag">Building with curiosity, learning with intent.</p>
+      </div>
+
+      <div class="footer-socials reveal-up">
+        <a href="mailto:abdallhalghoul200@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+        <a href="https://www.linkedin.com/in/abdullah-al-ghoul-a254763a6/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/abdallah-al-ghoul" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+      </div>
+
+      <p class="footer-copy">© <span id="year"></span> Abdullah Ayman AL-Ghoul · <span data-i18n="footer.rights">All rights reserved</span></p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+
+  <!-- Project Case Study Modal -->
+  <div class="case-modal" id="case-modal" role="dialog" aria-modal="true" aria-labelledby="case-modal-title" hidden>
+    <div class="case-modal-backdrop" data-case-close></div>
+    <div class="case-modal-content" role="document">
+      <button class="case-modal-close" data-case-close aria-label="Close case study">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="case-modal-head">
+        <span class="case-modal-tag" id="case-modal-tag"></span>
+        <h3 id="case-modal-title">Project</h3>
+        <div class="case-modal-stack" id="case-modal-stack"></div>
+      </div>
+      <div class="case-modal-body" id="case-modal-body"></div>
+      <div class="case-modal-foot" id="case-modal-links"></div>
+    </div>
+  </div>
+
+  <!-- Timeline / Milestone Modal -->
+  <div class="tl-modal" id="tl-modal" role="dialog" aria-modal="true" aria-labelledby="tl-modal-title" hidden>
+    <div class="tl-modal-backdrop" data-tl-close></div>
+    <div class="tl-modal-content" role="document">
+      <button class="tl-modal-close" data-tl-close aria-label="Close details">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="tl-modal-head">
+        <span class="tl-modal-date" id="tl-modal-date"></span>
+        <h3 id="tl-modal-title">Milestone</h3>
+      </div>
+      <div class="tl-modal-body" id="tl-modal-body"></div>
+      <div class="tl-modal-foot" id="tl-modal-links"></div>
+    </div>
+  </div>
+
+  <!-- Testimonial Modal -->
+  <div class="rec-modal" id="rec-modal" role="dialog" aria-modal="true" aria-labelledby="rec-modal-title" hidden>
+    <div class="rec-modal-backdrop" data-rec-close></div>
+    <div class="rec-modal-content" role="document">
+      <button class="rec-modal-close" data-rec-close aria-label="Close recommendation">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="rec-modal-header">
+        <div class="rec-modal-avatar" id="rec-modal-avatar">
+          <span class="rec-modal-avatar-fallback" id="rec-modal-avatar-fallback"></span>
+        </div>
+        <div class="rec-modal-info">
+          <h3 id="rec-modal-title"></h3>
+          <p id="rec-modal-role" class="rec-modal-role"></p>
+        </div>
+      </div>
+      <div class="rec-modal-body">
+        <div class="rec-modal-quote-mark" aria-hidden="true">"</div>
+        <blockquote id="rec-modal-quote" class="rec-modal-quote"></blockquote>
+      </div>
+      <div class="rec-modal-footer">
+        <div class="rec-modal-badge">
+          <i data-lucide="badge-check"></i>
+          <span data-i18n="recs.verified">Verified Recommendation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificate Lightbox Modal -->
+  <div class="cert-modal" id="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title" hidden>
+    <div class="cert-modal-backdrop" data-close></div>
+    <div class="cert-modal-content" role="document">
+      <button class="cert-modal-close" data-close aria-label="Close certificate viewer">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="cert-modal-header">
+        <div>
+          <h3 id="cert-modal-title">Certificate</h3>
+          <p id="cert-modal-org" class="cert-modal-org"></p>
+        </div>
+        <a class="btn btn-sm btn-outline" id="cert-modal-download" href="#" download>
+          <i data-lucide="download"></i> <span data-i18n="certs.download">Download</span>
+        </a>
+      </div>
+      <div class="cert-modal-body">
+        <img id="cert-modal-img" src="" alt="Certificate preview" loading="lazy" decoding="async" />
+        <div class="cert-modal-fallback" id="cert-modal-fallback" hidden>
+          <i data-lucide="image-off"></i>
+          <p data-i18n="certs.noimage">Certificate image not uploaded yet.</p>
+          <p class="cert-modal-hint" data-i18n="certs.noimageHint">Drop the file into assets/certs/ and reload.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <!-- ====== AI Portfolio Assistant ====== -->
+  <div class="ai-assistant" id="ai-assistant" data-open="false">
+    <button class="ai-fab" id="ai-fab" type="button" aria-label="Open portfolio assistant" aria-expanded="false" aria-controls="ai-panel">
+      <span class="ai-fab-icon" data-icon="closed">
+        <i data-lucide="message-circle-more"></i>
+      </span>
+      <span class="ai-fab-icon" data-icon="open" hidden>
+        <i data-lucide="x"></i>
+      </span>
+      <span class="ai-fab-pulse" aria-hidden="true"></span>
+    </button>
+
+    <section class="ai-panel" id="ai-panel" role="dialog" aria-modal="false" aria-labelledby="ai-title" hidden>
+      <header class="ai-head">
+        <div class="ai-head-left">
+          <div class="ai-avatar" aria-hidden="true">
+            <i data-lucide="bot"></i>
+          </div>
+          <div>
+            <h2 class="ai-title" id="ai-title" data-i18n="ai.title">Portfolio Assistant</h2>
+            <p class="ai-status">
+              <span class="ai-status-dot" aria-hidden="true"></span>
+              <span data-ai-status-text data-i18n="ai.status">Online · ready to help</span>
+            </p>
+          </div>
+        </div>
+        <div class="ai-head-actions">
+          <button class="ai-icon-btn" id="ai-speak-btn" type="button" aria-label="Read reply aloud" title="Read reply aloud" data-i18n-aria="ai.speak" data-i18n-title="ai.speak">
+            <i data-lucide="volume-2"></i>
+          </button>
+          <button class="ai-icon-btn" id="ai-clear" type="button" aria-label="Clear conversation" title="Clear conversation" data-i18n-aria="ai.clear" data-i18n-title="ai.clear">
+            <i data-lucide="trash-2"></i>
+          </button>
+          <button class="ai-icon-btn" id="ai-minimize" type="button" aria-label="Minimize" title="Minimize" data-i18n-aria="ai.minimize" data-i18n-title="ai.minimize">
+            <i data-lucide="minus"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="ai-messages" id="ai-messages" role="log" aria-live="polite" aria-atomic="false">
+        <!-- Messages injected by script.js -->
+      </div>
+
+      <div class="ai-suggestions" id="ai-suggestions" aria-label="Suggested questions" data-i18n-aria="ai.suggest">
+        <!-- Suggestion chips injected by script.js -->
+      </div>
+
+      <form class="ai-form" id="ai-form" autocomplete="off">
+        <label class="visually-hidden" for="ai-input" data-i18n="ai.input">Ask the assistant</label>
+        <input
+          class="ai-input"
+          id="ai-input"
+          type="text"
+          inputmode="text"
+          enterkeyhint="send"
+          maxlength="500"
+          placeholder="Ask me anything about Abdullah’s work…"
+          aria-label="Ask the assistant"
+          data-i18n-aria="ai.input"
+          data-i18n-placeholder="ai.placeholder"
+        />
+        <button class="ai-mic" id="ai-voice-btn" type="button" aria-label="Use voice input" title="Use voice input" data-i18n-aria="ai.voice" data-i18n-title="ai.voice" disabled>
+          <i data-lucide="mic"></i>
+        </button>
+        <button class="ai-send" id="ai-send" type="submit" aria-label="Send message" data-i18n-aria="ai.send">
+          <i data-lucide="send-horizontal"></i>
+        </button>
+      </form>
+    </section>
+  </div>
+</body>
+</html>
