@@ -337,28 +337,44 @@ alter table public.audit_logs         enable row level security;
 -- reads admin-only data through authenticated policies below.
 
 -- Content tables: public read of published, admin full access.
+-- Policy expressions are parse-checked at CREATE POLICY time, so the
+-- public-read USING clause is built per table from the columns it actually
+-- has (some tables have status/deleted_at, others only enabled, some neither).
 do $$
-declare t text;
+declare
+  t           text;
+  has_status  boolean;
+  has_deleted boolean;
+  has_enabled boolean;
+  pub_using   text;
 begin
   foreach t in array array[
     'projects','skills','skill_categories','certifications',
     'experiences','recommendations','social_links','about_profile','site_settings'
   ] loop
+    select
+      exists(select 1 from information_schema.columns
+             where table_schema = 'public' and table_name = t and column_name = 'status'),
+      exists(select 1 from information_schema.columns
+             where table_schema = 'public' and table_name = t and column_name = 'deleted_at'),
+      exists(select 1 from information_schema.columns
+             where table_schema = 'public' and table_name = t and column_name = 'enabled')
+    into has_status, has_deleted, has_enabled;
+
+    pub_using := concat_ws(' and ',
+      case when has_status  then $q$status = 'published'$q$ end,
+      case when has_deleted then $q$deleted_at is null$q$ end,
+      case when has_enabled then $q$enabled = true$q$ end);
+    if pub_using = '' then pub_using := 'true'; end if;
+
     execute format($f$
       create policy %1$s_public_read on public.%1$s
-        for select to anon using (
-          (not exists (select 1 from information_schema.columns
-                       where table_schema='public' and table_name='%1$s' and column_name='status')
-           or status = 'published')
-          and (not exists (select 1 from information_schema.columns
-                           where table_schema='public' and table_name='%1$s' and column_name='deleted_at')
-               or deleted_at is null)
-        );
+        for select to anon using (%2$s);
       create policy %1$s_admin_read on public.%1$s
         for select to authenticated using (public.is_admin());
       create policy %1$s_admin_write on public.%1$s
         for all to authenticated using (public.is_admin()) with check (public.is_admin());
-    $f$, t);
+    $f$, t, pub_using);
   end loop;
 end $$;
 
