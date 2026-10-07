@@ -251,7 +251,7 @@ create table if not exists public.anonymous_visitors (
   country        text not null default '',  -- coarse (Vercel geo country code)
   region         text not null default '',
   referrer_domain text not null default '',
-  returning      boolean not null default false,
+  is_returning   boolean not null default false,
   identified_name  text,                    -- ONLY from a voluntary contact submission
   identified_email text,                    -- ONLY from a voluntary contact submission
   identified_at  timestamptz
