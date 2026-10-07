@@ -17,3 +17,10 @@ admin/dist/
 # Local tooling
 *.log
 .vercel
+---
+
+# Ephemeral test artifacts
+gui-test-screenshots/
+tests/package.json
+tests/package-lock.json
+tests/node_modules/
