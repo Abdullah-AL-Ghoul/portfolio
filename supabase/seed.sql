@@ -97,12 +97,12 @@ insert into public.skills (name, name_ar, category, tier, related_projects, enab
 on conflict do nothing;
 
 -- ---------- projects ----------
-insert into public.projects (slug, legacy_key, title_en, title_ar, badge_en, badge_ar, summary_en, summary_ar, stack, cover_path, live_url, extra_url, extra_url_label_en, extra_url_label_ar, case_study, status, is_featured, featured_rank, sort_order, published_at) values
+insert into public.projects (slug, legacy_key, title_en, title_ar, badge_en, badge_ar, summary_en, summary_ar, stack, tags, cover_path, live_url, repo_url, extra_url, extra_url_label_en, extra_url_label_ar, case_study, status, is_featured, featured_rank, sort_order, published_at) values
 ('al-azher-it-hub', 'p4', 'AL-Azher IT Hub', 'AL-Azher IT Hub', 'Live', 'مباشر',
  'Bilingual educational platform for Al-Azhar University IT students — lectures, resources, and study materials. Built with React, Tailwind CSS, and Firebase, with PWA support for offline access.',
  'منصة تعليمية ثنائية اللغة لطلبة تكنولوجيا المعلومات في جامعة الأزهر — محاضرات وموارد ومواد دراسية، مبنية بـ React وTailwind CSS وFirebase مع دعم PWA للوصول بدون إنترنت.',
  array['React','Tailwind CSS','Firebase','PWA'], '{education}',
- null, 'https://al-azher-it-hub.vercel.app/', null, '', '',
+ null, 'https://al-azher-it-hub.vercel.app/', null, null, '', '',
  '{"problem":{"en":"Students needed a centralized platform to organize lectures, resources, and study materials.","ar":"احتاج الطلاب منصة مركزية لتنظيم المحاضرات والموارد والمواد الدراسية."},"approach":{"en":"Developed a bilingual educational platform using React, Tailwind CSS, and Firebase.","ar":"طوّرت منصة تعليمية ثنائية اللغة باستخدام React وTailwind CSS وFirebase."},"outcome":{"en":"Created an accessible digital hub that improves students'' access to academic resources.","ar":"أنشأت مركزاً رقمياً سهل الوصول يحسّن وصول الطلاب إلى الموارد الأكاديمية."}}',
  'published', true, 1, 1, now()),
 
@@ -110,7 +110,7 @@ insert into public.projects (slug, legacy_key, title_en, title_ar, badge_en, bad
  'A responsive, modern, bilingual portfolio showcasing my skills, projects, and educational milestones. Built with semantic HTML, modern CSS, and vanilla JavaScript. Includes dark/light theme and full RTL support.',
  'موقع شخصي متجاوب وحديث وثنائي اللغة يعرض مهاراتي ومشاريعي وإنجازاتي التعليمية. مبني بـ HTML دلالي وCSS حديث وJavaScript نقي — بدون أي تبعيات خارجية. يتضمن وضع داكن/فاتح ودعم كامل للعربية.',
  array['HTML5','CSS3','JavaScript','i18n','RTL'], '{}',
- 'https://abdullah-portfolio26.vercel.app/', null, '', '',
+ null, 'https://abdullah-portfolio26.vercel.app/', null, null, '', '',
  '{"problem":{"en":"As a CS student, I needed one fast, professional place to present my skills, projects, and certifications.","ar":"كطالب علوم حاسوب، كنت بحاجة إلى مكان واحد سريع واحترافي أعرض فيه مهاراتي ومشاريعي وشهاداتي."},"approach":{"en":"Built a dependency-free portfolio with semantic HTML, modern CSS, and vanilla JavaScript — bilingual with full RTL support and PWA offline mode.","ar":"بنيت موقعاً بلا تبعيات باستخدام HTML دلالي وCSS حديث وJavaScript نقي — ثنائي اللغة مع دعم RTL كامل وعمل دون اتصال (PWA)."},"outcome":{"en":"A fast, responsive site that loads instantly, works offline, and stays easy to maintain with no build step.","ar":"موقع سريع ومتجاوب يُحمّل فوراً ويعمل دون اتصال ويسهل صيانته بلا خطوات بناء."}}',
  'published', true, 2, 2, now()),
 
@@ -118,7 +118,7 @@ insert into public.projects (slug, legacy_key, title_en, title_ar, badge_en, bad
  'Designed and implemented a segmented business network using VLANs, DHCP, DNS, NAT, subnetting, and Router-on-a-Stick architecture in Cisco Packet Tracer.',
  'صممت ونفذت شبكة أعمال مقسّمة باستخدام VLANs وDHCP وDNS وNAT والعنونة الفرعية ومعمارية Router-on-a-Stick داخل Cisco Packet Tracer.',
  array['Cisco Packet Tracer','VLAN','DHCP','DNS','NAT','Routing'], '{}',
- null, null, 'https://drive.google.com/drive/folders/18qSsF9Tf5nvHELcvJfpIqqO4rk7ipbp9?usp=sharing',
+ null, null, null, 'https://drive.google.com/drive/folders/18qSsF9Tf5nvHELcvJfpIqqO4rk7ipbp9?usp=sharing',
  'Project Diagram', 'مخطط المشروع',
  '{"problem":{"en":"A growing business needed a scalable network with no traffic segmentation between departments and no centralized services.","ar":"شركة متنامية تحتاج شبكة قابلة للتوسع، بلا فصل لحركة المرور بين الأقسام وبلا خدمات مركزية."},"approach":{"en":"Designed a segmented network with per-department VLANs, DHCP/DNS/NAT services, subnetting, and a Router-on-a-Stick architecture in Cisco Packet Tracer.","ar":"صممت شبكة مقسّمة بـ VLAN لكل قسم وخدمات DHCP/DNS/NAT وعنونة فرعية ومعمارية Router-on-a-Stick في Cisco Packet Tracer."},"outcome":{"en":"A scalable, documented topology with isolated broadcast domains and centralized services.","ar":"بنية موثقة قابلة للتوسع مع نطاقات بث معزولة وخدمات مركزية."}}',
  'published', false, 0, 2, now()),
@@ -127,7 +127,7 @@ insert into public.projects (slug, legacy_key, title_en, title_ar, badge_en, bad
  'Proposed cloud-based virtual desktop infrastructure enabling university students to access a full Windows workstation from mobile devices via RDP. Designed to help students without personal computers access programming environments remotely.',
  'مقترح لبنية سطح مكتب افتراضي سحابية تتيح لطلاب الجامعة الوصول إلى محطة عمل ويندوز كاملة من أجهزتهم المحمولة عبر RDP. صُمم لمساعدة الطلاب الذين لا يمتلكون أجهزة حاسوب شخصية.',
  array['RDP','Windows','Azure','Cloud Infra','VPN'], '{}',
- null, null, null, '', '',
+ null, null, null, null, '', '',
  '{"problem":{"en":"Many students without personal computers cannot complete programming assignments or lab work, especially during remote learning.","ar":"كثير من الطلاب بلا حواسيب شخصية لا يستطيعون إنجاز الواجبات البرمجية والعمل المخبري، خصوصاً أثناء التعلم عن بُعد."},"approach":{"en":"Proposed a cloud VDI where students sign in from any mobile device and get a full Windows workstation via RDP, covering Azure VMs, VPN access, and per-session provisioning.","ar":"اقترحت VDI سحابية يدخل منها الطالب من أي جهاز ويحصل على محطة ويندوز كاملة عبر RDP، مع أجهزة Azure الافتراضية والوصول عبر VPN وتجهيز الجلسات."},"outcome":{"en":"A ready-to-implement blueprint that turns any smartphone into a full computer for university labs.","ar":"مخطط جاهز للتنفيذ يحوّل أي هاتف إلى حاسوب كامل للمختبرات الجامعية."},"status_note":{"en":"Proposal / future implementation","ar":"مقترح / تنفيذ مستقبلي"}}',
  'published', false, 0, 3, now()),
 
@@ -135,7 +135,7 @@ insert into public.projects (slug, legacy_key, title_en, title_ar, badge_en, bad
  'Team task management application for organizing and tracking shared tasks with colleagues. Features task creation, assignment, status tracking, and deadline management.',
  'تطبيق لإدارة المهام الجماعية مع الزملاء — يتضمن إنشاء المهام وتعيينها وتتبع حالتها وإدارة المواعيد النهائية.',
  array['Java','OOP','File I/O','Team Collaboration'], '{}',
- null, null, null, '', '',
+ null, null, null, null, '', '',
  '{"problem":{"en":"Our team had no reliable way to assign shared tasks, track their status, or respect deadlines.","ar":"لم تكن لدينا وسيلة موثوقة لتعيين المهام المشتركة وتتبع حالتها واحترام المواعيد النهائية."},"approach":{"en":"Built a Java task management app with OOP design — task creation, assignment, status tracking, and deadline management with file persistence.","ar":"طوّرت تطبيق إدارة مهام بلغة Java بتصميم كائني — إنشاء وتعيين وتتبع حالة وإدارة مواعيد مع حفظ البيانات في ملفات."},"outcome":{"en":"A practical tool that kept the team organized and shipped as a graded team project.","ar":"أداة عملية أبقت الفريق منظماً وسُلّمت كمشروع جماعي مقيّم."}}',
  'published', false, 0, 4, now()),
 
@@ -143,7 +143,7 @@ insert into public.projects (slug, legacy_key, title_en, title_ar, badge_en, bad
  'Java-based library management system for managing books, borrowers, and lending operations. Includes add, search, borrow, return functionality with data persistence.',
  'نظام إدارة مكتبة مبني بلغة الجافا — لإدارة الكتب والمستعيرين وعمليات الإعارة مع إضافة وبحث وإعارة وإرجاع مع حفظ البيانات.',
  array['Java','OOP','Data Structures','File I/O'], '{}',
- null, null, null, '', '',
+ null, null, null, null, '', '',
  '{"problem":{"en":"Manual book tracking made searching titles, managing borrowers, and recording loans slow and unreliable.","ar":"التتبع اليدوي للكتب جعل البحث عن العناوين وإدارة المستعيرين وتسجيل الإعارات بطيئاً وغير موثوق."},"approach":{"en":"Built a Java library system covering add, search, borrow, and return flows, backed by data structures and file persistence.","ar":"بنيت نظام مكتبة بلغة Java يشمل الإضافة والبحث والاستعارة والإرجاع، مدعوماً بهياكل بيانات وحفظ في ملفات."},"outcome":{"en":"A dependable system that streamlines cataloging and lending for a small library.","ar":"نظام موثوق يبسّط الفهرسة والإعارة في مكتبة صغيرة."}}',
  'published', false, 0, 4, now()),
 
@@ -151,7 +151,7 @@ insert into public.projects (slug, legacy_key, title_en, title_ar, badge_en, bad
  'Python productivity assistant with automated reminders that helps manage tasks and study schedules more effectively.',
  'مساعد إنتاجية بلغة Python مع تذكيرات تلقائية يساعد على إدارة المهام وجداول الدراسة بشكل أكثر فعالية.',
  array['Python','Automation','Scheduling'], '{}',
- null, null, null, '', '',
+ null, null, null, null, '', '',
  '{"problem":{"en":"Students struggle with managing tasks and study schedules.","ar":"يعاني الطلاب من إدارة المهام وجداول الدراسة."},"approach":{"en":"Created a Python productivity assistant with automated reminders.","ar":"طوّرت مساعد إنتاجية بلغة Python مع تذكيرات تلقائية."},"outcome":{"en":"Improved personal task organization and time management.","ar":"تحسين تنظيم المهام الشخصية وإدارة الوقت."}}',
  'published', false, 0, 5, now())
 on conflict (slug) do nothing;
