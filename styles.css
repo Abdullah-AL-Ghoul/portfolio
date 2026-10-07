@@ -1761,6 +1761,22 @@ button {
   background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(168, 85, 247, 0.08));
   border-color: rgba(6, 182, 212, 0.3);
 }
+/* Primary featured project dominates: full row, side-by-side on wide screens. */
+@media (min-width: 720px) {
+  .projects-grid .project-card.featured.featured-primary {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: stretch;
+  }
+  .project-card.featured.featured-primary .project-cover { min-height: 260px; }
+  .project-card.featured.featured-primary .project-body { padding: 2rem; }
+  .project-card.featured.featured-primary h3 { font-size: 1.6rem; }
+}
+.project-card.featured.featured-primary .project-tag {
+  background: rgba(6, 182, 212, 0.16);
+  box-shadow: 0 0 18px rgba(6, 182, 212, 0.15);
+}
 .project-card.featured::after {
   content: '';
   position: absolute;
@@ -4737,3 +4753,33 @@ body::after {
   opacity: 0;
   pointer-events: none;
 }
+
+/* ===== V2: progressive-disclosure case study details ===== */
+.case-details {
+  margin-top: 0.9rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  background: var(--glass-bg);
+}
+.case-details summary {
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+}
+.case-details summary::-webkit-details-marker { display: none; }
+.case-details summary i,
+.case-details summary svg {
+  transition: transform 0.25s var(--ease, ease);
+}
+.case-details[open] summary i { transform: rotate(90deg); }
+.case-details summary:hover { color: var(--accent); }
+.case-details .case-block:first-child { padding-top: 0; }
+.case-details[open] summary { border-bottom: 1px solid var(--glass-border); }
+.case-details .case-block { padding: 0.9rem 1.1rem; }

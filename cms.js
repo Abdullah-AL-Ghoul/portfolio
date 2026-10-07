@@ -55,6 +55,7 @@
         if (live && live.href !== p.live_url) live.href = p.live_url;
       }
       card.classList.toggle('featured', !!p.is_featured);
+      card.classList.toggle('featured-primary', Number(p.featured_rank) === 1);
     });
   }
 
@@ -106,7 +107,7 @@
     return d.replace(/Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec/g, function (m) { return map[m] || m; });
   }
 
-  function exposeCases(data, lang) {
+  function exposeCases(data) {
     // Feed CMS case studies to the existing case-study modal.
     var cases = { en: {}, ar: {} };
     (data.projects || []).forEach(function (p) {
@@ -119,6 +120,11 @@
           problem: (cs.problem || {})[l] || '',
           solution: (cs.approach || {})[l] || '',
           result: (cs.outcome || {})[l] || '',
+          implementation: (cs.implementation || {})[l] || '',
+          role: (cs.role || {})[l] || '',
+          challenges: Array.isArray(cs.challenges)
+            ? cs.challenges.map(function (c) { return (c || {})[l] || ''; }).filter(Boolean)
+            : [],
           tech: Array.isArray(p.stack) ? p.stack : [],
           links: []
         };

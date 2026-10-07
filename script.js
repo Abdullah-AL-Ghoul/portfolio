@@ -3120,7 +3120,15 @@
       body.innerHTML =
         block('alert-circle', dict['proj.problem'], data.problem) +
         block('lightbulb', dict['proj.solution'], data.solution) +
-        (data.result ? block('trending-up', dict['proj.result'], data.result, true) : '');
+        (data.result ? block('trending-up', dict['proj.result'], data.result, true) : '') +
+        // Progressive disclosure: deep implementation details only when present
+        // (dashboard-managed case studies), collapsed by default.
+        ((data.implementation || (data.challenges && data.challenges.length)) ? `
+          <details class="case-details">
+            <summary><i data-lucide="chevron-right"></i> ${esc(dict['proj.impl_label'] || 'Implementation details')}</summary>
+            ${data.implementation ? block('code-2', dict['proj.impl'] || 'Implementation', data.implementation) : ''}
+            ${(data.challenges || []).map((c) => block('wrench', dict['proj.challenge'] || 'Challenge', c)).join('')}
+          </details>` : '');
 
       const foot = [];
       data.links.forEach((l) => {
