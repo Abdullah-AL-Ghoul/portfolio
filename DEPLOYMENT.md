@@ -32,8 +32,8 @@ Both talk to the same Supabase project (one Postgres, two RLS roles).
 | Variable | Value |
 |----------|-------|
 | `SUPABASE_URL` | `https://<project>.supabase.co` |
-| `SUPABASE_ANON_KEY` | anon key |
-| `SUPABASE_SERVICE_ROLE_KEY` | service_role key |
+| `SUPABASE_PUBLISHABLE_KEY` | publishable key (`sb_publishable_...`) |
+| `SUPABASE_SECRET_KEY` | secret key (`sb_secret_...`) — treat as a real secret |
 | `LLM_API_KEY` *(optional)* | same as before |
 | `LLM_API_URL`, `LLM_MODEL` *(optional)* | same as before |
 
@@ -43,7 +43,7 @@ Never add the service-role key to the public HTML/JS bundle.
 | Variable | Value |
 |----------|-------|
 | `VITE_SUPABASE_URL` | same Project URL |
-| `VITE_SUPABASE_ANON_KEY` | anon key |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | publishable key (`sb_publishable_...`) |
 
 ## Deploy
 
