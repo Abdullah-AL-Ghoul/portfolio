@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { listAll, create, update, softDelete, restore, purge, setStatus } from '../lib/api';
-
 /**
  * Generic CRUD page driven by a field schema.
  * schema = {
@@ -93,6 +92,7 @@ export default function CrudPage({ schema }) {
           {showTrashed ? 'Hide trash' : `Trash (${trashed.length})`}
         </button>
         <div className="spacer" />
+        <span className="muted">{rows ? `${visible.length} of ${rows.length}` : ''}</span>
         <button className="btn primary" onClick={() => setEditing('new')}>+ New</button>
       </div>
 
@@ -160,6 +160,7 @@ export default function CrudPage({ schema }) {
       {editing && (
         <EditDialog
           schema={schema}
+          isNew={editing === 'new'}
           row={editing === 'new' ? { status: 'draft' } : editing}
           busy={busy}
           onCancel={() => setEditing(null)}
@@ -170,7 +171,13 @@ export default function CrudPage({ schema }) {
   );
 }
 
-function EditDialog({ schema, row, busy, onCancel, onSave }) {
+function EditDialog({ schema, isNew, row, busy, onCancel, onSave }) {
+  useEffect(() => {
+    function onKey(e) { if (e.key === 'Escape') onCancel(); }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onCancel]);
+
   const [form, setForm] = useState(() => {
     const init = { status: row.status || 'draft' };
     schema.fields.forEach((f) => {
@@ -189,7 +196,7 @@ function EditDialog({ schema, row, busy, onCancel, onSave }) {
   return (
     <div className="dialog-backdrop" role="dialog" aria-modal="true" aria-label={`Edit ${schema.title}`}>
       <form className="dialog" onSubmit={submit}>
-        <h3>{editing === 'new' ? 'New' : 'Edit'} — {schema.title}</h3>
+        <h3>{isNew ? 'New' : 'Edit'} — {schema.title}</h3>
         {schema.fields.map((f) => (
           <Field key={f.key} field={f} value={form[f.key]} onChange={(v) => set(f.key, v)} />
         ))}

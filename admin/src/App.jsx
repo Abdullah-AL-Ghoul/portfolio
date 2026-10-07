@@ -6,6 +6,7 @@ import Shell from './components/Shell.jsx';
 import Overview from './pages/Overview.jsx';
 import Projects from './pages/Projects.jsx';
 import Skills from './pages/Skills.jsx';
+import Assistant from './pages/Assistant.jsx';
 import Certifications from './pages/Certifications.jsx';
 import Experience from './pages/Experience.jsx';
 import Recommendations from './pages/Recommendations.jsx';
@@ -67,6 +68,7 @@ export default function App() {
           <Route path="/" element={<RequireAuth><Shell /></RequireAuth>}>
             <Route index element={<Overview />} />
             <Route path="projects" element={<Projects />} />
+            <Route path="assistant" element={<Assistant />} />
             <Route path="skills" element={<Skills />} />
             <Route path="certifications" element={<Certifications />} />
             <Route path="experience" element={<Experience />} />

@@ -73,14 +73,21 @@ export default function Overview() {
             </table>
           ) : <div className="empty">No active visitors right now.</div>}
         </div>
-        <div className="card">
-          <h3 style={{ marginTop: 0 }}>Quick links</h3>
-          <p className="muted">Common owner tasks.</p>
-          <div className="row wrap">
-            <Link className="btn sm" to="/projects">Manage projects</Link>
-            <Link className="btn sm" to="/cv">Upload CV</Link>
-            <Link className="btn sm" to="/messages">Inbox</Link>
-            <Link className="btn sm" to="/analytics">Analytics</Link>
+        <div>
+          <div className="card" style={{ marginBottom: '1rem' }}>
+            <h3 style={{ marginTop: 0 }}>✨ Smart assistant</h3>
+            <p className="muted">Describe new content in Arabic or English and let the assistant draft it for you — review, then save.</p>
+            <Link className="btn primary sm" to="/assistant">Open Smart Assistant</Link>
+          </div>
+          <div className="card">
+            <h3 style={{ marginTop: 0 }}>Quick links</h3>
+            <p className="muted">Common owner tasks.</p>
+            <div className="row wrap">
+              <Link className="btn sm" to="/projects">Manage projects</Link>
+              <Link className="btn sm" to="/cv">Upload CV</Link>
+              <Link className="btn sm" to="/messages">Inbox</Link>
+              <Link className="btn sm" to="/analytics">Analytics</Link>
+            </div>
           </div>
         </div>
       </div>

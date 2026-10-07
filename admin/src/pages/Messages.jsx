@@ -21,9 +21,9 @@ export default function Messages() {
   useEffect(load, []);
 
   async function patch(id, fields) {
-    const { error } = await supabase.from('contact_messages').update(patch).eq('id', id);
+    const { error } = await supabase.from('contact_messages').update(fields).eq('id', id);
     if (error) return setError(error.message);
-    setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, ...patch } : m)));
+    setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, ...fields } : m)));
   }
 
   async function toggleOpen(m) {
