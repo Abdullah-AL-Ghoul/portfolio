@@ -596,6 +596,8 @@
 
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    // CMS binding re-applies localized content after the static i18n pass.
+    document.dispatchEvent(new CustomEvent('pf:langchange'));
 
     // Update meta
     const titleEl = $('title');
@@ -3104,7 +3106,9 @@
       const lang = state.lang === 'ar' ? 'ar' : 'en';
       const dict = i18n[lang];
       const cases = PROJECT_CASES[lang];
-      const data = cases && cases[id];
+      // CMS override: dashboard-managed case studies win over the static ones.
+      const override = window.PF_CASES_OVERRIDE && window.PF_CASES_OVERRIDE[lang] && window.PF_CASES_OVERRIDE[lang][id];
+      const data = override || (cases && cases[id]);
       if (!data) return;
 
       lastFocused = document.activeElement;

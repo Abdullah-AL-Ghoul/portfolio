@@ -5,7 +5,7 @@
    for navigations (fresh HTML wins when online).
    ============================================ */
 
-const CACHE = 'abdullah-portfolio-v5';
+const CACHE = 'abdullah-portfolio-v6';
 const MAX_CACHE_ITEMS = 60;
 
 // Core shell — cached at install time for offline first paint.
@@ -15,6 +15,8 @@ const CORE = [
   './404.html',
   './styles.css',
   './script.js',
+  './analytics.js',
+  './cms.js',
   './manifest.webmanifest',
   './assets/profile-600.jpg'
 ];
