@@ -592,6 +592,8 @@
     const dict = i18n[lang];
     if (!dict) return;
 
+    if (window.PFTrack) window.PFTrack('language_change', lang);
+
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 
@@ -715,6 +717,7 @@
     $$('[data-theme-choice]', menu).forEach((btn) => {
       btn.addEventListener('click', () => {
         applyTheme(btn.dataset.themeChoice);
+        if (window.PFTrack) window.PFTrack('theme_change', btn.dataset.themeChoice);
         setOpen(false);
         syncChecks();
       });
@@ -985,7 +988,31 @@
    * @returns {Promise<'sent' | 'mailto'>}
    */
   async function submitFormPayload(form, payload) {
-    // If a real Formspree endpoint is configured, try it first.
+    // 1) First-party endpoint (Vercel serverless → Supabase). When the backend
+    //    is configured it stores the message in the dashboard inbox; on any
+    //    absence/failure we fall through so the visitor experience never breaks.
+    try {
+      const honeypot = (form.querySelector('input[name="company"]') || {}).value || '';
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: payload.name,
+          email: payload.email,
+          subject: payload.subject,
+          message: payload.message,
+          company: honeypot,
+          visitor_id: (window.PFAnalytics && window.PFAnalytics.getVisitorId) ? window.PFAnalytics.getVisitorId() : undefined
+        })
+      });
+      if (res.ok) {
+        const out = await res.json().catch(() => ({}));
+        if (out && out.ok === true) return 'sent';
+      }
+    } catch (err) {
+      // network failure or API down — fall through to mailto
+    }
+    // 2) Optional Formspree endpoint, if configured.
     if (FORMSPREE_ENDPOINT && /^https?:\/\//.test(FORMSPREE_ENDPOINT)) {
       try {
         const res = await fetch(FORMSPREE_ENDPOINT, {
@@ -998,7 +1025,7 @@
         // network failure or CORS — fall through to mailto
       }
     }
-    // Mailto fallback — opens the visitor's email client.
+    // 3) Mailto fallback — opens the visitor's email client.
     const body =
       `Name: ${payload.name}\n` +
       `Email: ${payload.email}\n\n` +
@@ -1053,6 +1080,7 @@
 
     try {
       const result = await submitFormPayload(form, { name, email, subject, message });
+      if (window.PFTrack) window.PFTrack('contact_submit', result === 'sent' ? 'api' : 'mailto');
       if (result === 'sent') {
         showToast(dict['form.success'] || 'Message sent successfully!', 'success');
         if (status) {
@@ -1082,6 +1110,17 @@
       }
     }
   };
+
+  // contact_open fires once, on the visitor's first interaction with the form.
+  let contactOpenTracked = false;
+  const contactFormEl = $('#contact-form');
+  if (contactFormEl) {
+    contactFormEl.addEventListener('focusin', () => {
+      if (contactOpenTracked) return;
+      contactOpenTracked = true;
+      if (window.PFTrack) window.PFTrack('contact_open', 'form');
+    }, { passive: true });
+  }
 
   // ============== Footer year ==============
 

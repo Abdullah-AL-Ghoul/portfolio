@@ -115,6 +115,7 @@
     </div>
   </noscript>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="analytics.js"></script>
 </head>
 <body>
 
@@ -301,7 +302,7 @@
               <i data-lucide="send"></i>
               <span data-i18n="hero.cta2">Contact Me</span>
             </a>
-            <a class="btn btn-outline" href="assets/Abdullah_ALGhoul_CV.pdf" download>
+            <a class="btn btn-outline" href="/api/cv-download" download>
               <i data-lucide="download"></i>
               <span data-i18n="hero.cta3">Download CV</span>
             </a>
@@ -1090,6 +1091,11 @@
           <div class="field">
             <label for="message" data-i18n="form.message">Message</label>
             <textarea id="message" name="message" rows="5" required aria-describedby="form-status"></textarea>
+          </div>
+          <!-- Honeypot: hidden from humans, catches bots. Left empty by real users. -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
           </div>
           <button type="submit" class="btn btn-primary">
             <i data-lucide="send"></i>

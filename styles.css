@@ -4725,3 +4725,15 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .avatar-wrap { animation: none; }
 }
+
+/* ===== V2: contact-form honeypot (hidden from humans, visible to bots) ===== */
+.hp-field {
+  position: absolute !important;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
