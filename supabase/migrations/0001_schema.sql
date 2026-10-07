@@ -8,7 +8,14 @@
 
 create extension if not exists pgcrypto;
 
--- ---------- helpers ----------
+-- ---------- identity ----------
+create table if not exists public.admin_users (
+  user_id    uuid primary key references auth.users(id) on delete cascade,
+  email      text not null unique,
+  created_at timestamptz not null default now()
+);
+
+-- ---------- helpers (defined after admin_users exists — SQL function bodies are validated at creation) ----------
 create or replace function public.is_admin()
 returns boolean
 language sql stable security definer set search_path = public
@@ -17,13 +24,6 @@ as $$
     select 1 from public.admin_users a where a.user_id = auth.uid()
   );
 $$;
-
--- ---------- identity ----------
-create table if not exists public.admin_users (
-  user_id    uuid primary key references auth.users(id) on delete cascade,
-  email      text not null unique,
-  created_at timestamptz not null default now()
-);
 
 -- ---------- settings & about (singleton documents) ----------
 create table if not exists public.site_settings (
