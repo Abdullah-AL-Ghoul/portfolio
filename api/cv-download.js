@@ -19,7 +19,7 @@ module.exports = async function handler(req, res) {
 
   const ip = readClientIp(req);
   if (!rateLimit(`cv:${ip}`, 20, 60 * 1000)) {
-    return res.redirect(429, FALLBACK_CV);
+    return json(res, 429, { ok: false, error: 'rate_limited' });
   }
 
   if (!configured()) return res.redirect(302, FALLBACK_CV);

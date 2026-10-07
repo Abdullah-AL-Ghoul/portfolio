@@ -102,7 +102,7 @@ module.exports = async function handler(req, res) {
     if (body.is_new_visitor === true) {
       await sb(`anonymous_visitors?id=eq.${visitorId}`, {
         method: 'PATCH',
-        body: { session_count: Number(body.session_count) || 1 }
+        body: { session_count: Math.min(9999, Math.max(1, Number(body.session_count) || 1)) }
       }).catch(() => {});
     }
 
