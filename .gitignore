@@ -24,3 +24,5 @@ gui-test-screenshots/
 tests/package.json
 tests/package-lock.json
 tests/node_modules/
+
+.env*
