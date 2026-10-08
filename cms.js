@@ -28,12 +28,21 @@
   }
 
   function applyProjects(data, lang) {
-    var cards = document.querySelectorAll('.project-card[data-project]');
+    var grid = document.querySelector('.projects-grid');
+
+    // Dynamic cards from a previous apply are rebuilt from scratch each time
+    // so removals/unpublish and language switches stay consistent.
+    if (grid) {
+      Array.prototype.slice.call(grid.querySelectorAll('.project-card[data-dynamic]')).forEach(function (c) {
+        c.remove();
+      });
+    }
+
     var byKey = {};
     (data.projects || []).forEach(function (p) {
       if (p.legacy_key) byKey[p.legacy_key] = p;
     });
-    cards.forEach(function (card) {
+    document.querySelectorAll('.project-card[data-project]').forEach(function (card) {
       var key = card.getAttribute('data-project');
       var p = byKey[key];
       if (!p) return;
@@ -57,6 +66,154 @@
       card.classList.toggle('featured', !!p.is_featured);
       card.classList.toggle('featured-primary', Number(p.featured_rank) === 1);
     });
+
+    // Projects published from the dashboard that have no static card are
+    // rendered here, so "add in dashboard → appears on the site" actually works.
+    if (!grid) return;
+    var present = {};
+    document.querySelectorAll('.project-card[data-project]').forEach(function (c) {
+      present[c.getAttribute('data-project')] = true;
+    });
+    var added = 0;
+    (data.projects || []).forEach(function (p) {
+      var key = p.legacy_key || p.slug;
+      if (!key || present[key]) return;
+      present[key] = true;
+      grid.appendChild(buildProjectCard(p, key, lang));
+      added++;
+    });
+    if (added && window.lucide) window.lucide.createIcons();
+  }
+
+  // Keyword-based cover variant / icon selection for dashboard-added projects.
+  function pickCoverIcon(p) {
+    var hay = ((p.title_en || '') + ' ' + (p.title_ar || '') + ' ' +
+      (Array.isArray(p.stack) ? p.stack.join(' ') : '')).toLowerCase();
+    if (/network|cisco|vlan|dns|dhcp|router|switch|شبك/.test(hay)) return { cover: 'network', icon: 'network' };
+    if (/cloud|azure|aws|rdp|vdi|سحاب/.test(hay)) return { cover: 'cloud', icon: 'cloud' };
+    if (/library|book|مكتب/.test(hay)) return { cover: 'library', icon: 'book-marked' };
+    if (/task|todo|coach|timer|pomodoro|مهم|مؤقت/.test(hay)) return { cover: 'tasks', icon: 'alarm-clock' };
+    if (/school|university|course|تعليم|جامع/.test(hay)) return { cover: 'edu', icon: 'graduation-cap' };
+    if (/ai|machine learning|ذكاء|bot/.test(hay)) return { cover: 'portfolio', icon: 'brain-circuit' };
+    return { cover: 'portfolio', icon: 'folder-git-2' };
+  }
+
+  function buildCover(p, lang) {
+    var wrap = document.createElement('div');
+    wrap.className = 'project-cover';
+    if (p.cover_path) {
+      // Media-library path: real image wins over decorative variants.
+      var img = document.createElement('img');
+      img.src = p.cover_path;
+      img.alt = '';
+      img.loading = 'lazy';
+      wrap.appendChild(img);
+      return wrap;
+    }
+    var pick = pickCoverIcon(p);
+    wrap.setAttribute('data-cover', pick.cover);
+    var inner = document.createElement('div');
+    inner.className = 'project-cover-' + pick.cover;
+    if (pick.cover === 'portfolio') {
+      wrap.appendChild(inner);
+      var glow = document.createElement('div');
+      glow.className = 'project-cover-glow';
+      wrap.appendChild(glow);
+      return wrap;
+    }
+    if (pick.cover === 'network' || pick.cover === 'tasks' || pick.cover === 'library') {
+      var n = pick.cover === 'tasks' ? 4 : 6;
+      for (var i = 0; i < n; i++) inner.appendChild(document.createElement('span'));
+      wrap.appendChild(inner);
+      return wrap;
+    }
+    if (pick.cover === 'timer') {
+      var dial = document.createElement('span');
+      dial.className = 'timer-dial';
+      inner.appendChild(dial);
+    }
+    wrap.appendChild(inner);
+    return wrap;
+  }
+
+  function buildProjectCard(p, key, lang) {
+    var article = document.createElement('article');
+    article.className = 'project-card';
+    // No reveal classes: the IntersectionObserver only observes markup present
+    // at load, so dynamically added cards must be visible immediately.
+    article.setAttribute('data-project', key);
+    article.setAttribute('data-dynamic', '1');
+
+    article.appendChild(buildCover(p, lang));
+
+    var body = document.createElement('div');
+    body.className = 'project-body';
+
+    var tag = document.createElement('div');
+    tag.className = 'project-tag';
+    tag.textContent = (lang === 'ar' ? p.badge_ar : p.badge_en) || (lang === 'ar' ? 'مشروع' : 'Project');
+    body.appendChild(tag);
+
+    var iconWrap = document.createElement('div');
+    iconWrap.className = 'project-icon';
+    var icon = document.createElement('i');
+    icon.setAttribute('data-lucide', pickCoverIcon(p).icon);
+    icon.setAttribute('aria-hidden', 'true');
+    iconWrap.appendChild(icon);
+    body.appendChild(iconWrap);
+
+    var h3 = document.createElement('h3');
+    h3.textContent = (lang === 'ar' ? (p.title_ar || p.title_en) : p.title_en) || p.title_en || key;
+    body.appendChild(h3);
+
+    var summary = document.createElement('p');
+    summary.textContent = (lang === 'ar' ? (p.summary_ar || p.summary_en) : p.summary_en) || '';
+    body.appendChild(summary);
+
+    if (Array.isArray(p.stack) && p.stack.length) {
+      var tags = document.createElement('div');
+      tags.className = 'project-tags';
+      p.stack.forEach(function (t) {
+        var s = document.createElement('span');
+        s.textContent = t;
+        tags.appendChild(s);
+      });
+      body.appendChild(tags);
+    }
+
+    var links = document.createElement('div');
+    links.className = 'project-links';
+    if (p.live_url) {
+      var a = document.createElement('a');
+      a.className = 'btn btn-sm btn-primary';
+      a.href = p.live_url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      var ai = document.createElement('i');
+      ai.setAttribute('data-lucide', 'external-link');
+      var al = document.createElement('span');
+      al.setAttribute('data-i18n', 'proj.live');
+      al.textContent = lang === 'ar' ? 'الموقع مباشر' : 'Live Site';
+      a.appendChild(ai);
+      a.appendChild(al);
+      links.appendChild(a);
+    }
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn-sm btn-ghost';
+    btn.setAttribute('data-case-open', key);
+    var bi = document.createElement('i');
+    bi.setAttribute('data-lucide', 'book-open');
+    var bl = document.createElement('span');
+    bl.setAttribute('data-i18n', 'proj.case');
+    bl.textContent = lang === 'ar' ? 'دراسة الحالة' : 'Case Study';
+    btn.appendChild(bi);
+    btn.appendChild(bl);
+    links.appendChild(btn);
+    body.appendChild(links);
+
+    article.appendChild(body);
+    return article;
   }
 
   function applyCerts(data, lang) {
@@ -134,8 +291,9 @@
   }
 
   function apply(data) {
-    var lang = document.documentElement.lang === 'ar' ? 'ar' : 'en';
     if (!data || !data.enabled) return;
+    state.data = data;
+    var lang = document.documentElement.lang === 'ar' ? 'ar' : 'en';
     applyProjects(data, lang);
     applyCerts(data, lang);
     applyRecommendations(data, lang);
@@ -163,8 +321,10 @@
 
   fetchContent();
 
-  // Re-apply when the visitor switches language.
+  // Re-apply when the visitor switches language. Prefer the data applied most
+  // recently (covers direct PFCMS.apply callers); fall back to the cache.
   document.addEventListener('pf:langchange', function () {
+    if (state.data) { apply(state.data); return; }
     try {
       var cached = JSON.parse(localStorage.getItem('pf_cms_cache') || 'null');
       if (cached) apply(cached.data);

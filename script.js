@@ -3161,8 +3161,10 @@
       if (lastFocused && lastFocused.focus) lastFocused.focus();
     }
 
-    $$('[data-case-open]').forEach((btn) => {
-      btn.addEventListener('click', () => open(btn.dataset.caseOpen));
+    // Delegated: also fires for cards added dynamically by the CMS (cms.js).
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-case-open]');
+      if (btn) open(btn.dataset.caseOpen);
     });
 
     modal.addEventListener('click', (e) => {

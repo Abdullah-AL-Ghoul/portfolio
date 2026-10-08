@@ -70,18 +70,20 @@ try {
   userId = r1.json?.id;
   if (!userId) throw new Error('creating auth user failed: ' + JSON.stringify(r1.json).slice(0, 300));
   record('setup auth user', true, userId.slice(0, 8));
+  // admin_users table has columns: user_id, email, created_at (no role col).
   const r2 = await api('/rest/v1/admin_users', {
     method: 'POST',
-    body: JSON.stringify({ user_id: userId, email: EMAIL, role: 'admin' }),
+    body: JSON.stringify({ user_id: userId, email: EMAIL }),
     headers: { Prefer: 'return=minimal' }
   });
   record('setup admin_users row', r2.status >= 200 && r2.status < 300, `HTTP ${r2.status}`);
 
   /* 2 — login + overview */
   await page.goto(ADMIN + '/login', { waitUntil: 'networkidle' });
+  await page.waitForSelector('#email', { timeout: 15000 });
   await page.fill('#email', EMAIL);
   await page.fill('#password', PASS);
-  await page.click('button[type="submit"]');
+  await page.locator('button:has-text("Sign in")').click();
   await page.waitForFunction(() => !location.pathname.startsWith('/login'), null, { timeout: 20000 }).catch(() => {});
   await page.waitForTimeout(1500);
   const on = await page.locator('.page-title').textContent().catch(() => '');
@@ -125,17 +127,64 @@ try {
   await page.locator('tr:has-text("QA E2E Project (edited)")').locator('button:has-text("Publish")').click();
   await page.waitForTimeout(1500);
   await page.waitForSelector('tr:has-text("QA E2E Project (edited)") .badge.published', { timeout: 15000 });
-  // content endpoint is edge-cached; poll up to ~25s for the new slug
-  let liveSlug = null;
-  for (let i = 0; i < 25; i++) {
+
+  // /api/content is no-store → the published row should appear immediately.
+  // (The public page injects CMS content client-side, so raw HTML won't show it —
+  //  verify the API, then confirm the row renders in a real browser DOM.)
+  let apiHas = false;
+  for (let i = 0; i < 20; i++) {
     const raw = await fetch(PUBLIC + '/api/content').then((x) => x.json()).catch(() => null);
-    const list = (raw && raw.projects) || [];
-    const found = list.find((p) => p && p.slug === slug);
-    const site = await fetch(PUBLIC + '/').then((r) => r.text()).catch(() => '');
-    if (found && site.includes('QA E2E')) { liveSlug = slug; break; }
-    await new Promise((r) => setTimeout(r, 1000));
+    if (raw && Array.isArray(raw.projects) && raw.projects.some((p) => p && p.slug === slug)) { apiHas = true; break; }
+    await new Promise((r) => setTimeout(r, 750));
   }
-  record('public site reflects publish', !!liveSlug, liveSlug ?? 'not yet visible after 25s');
+  record('publish → /api/content includes new project', apiHas, apiHas ? slug : 'not present after 15s');
+
+  // Public-site dynamic rendering: a dashboard-added project with NO legacy_key
+  // must get a card rendered by cms.js (dynamic card path) — plus the case
+  // study modal must open from that dynamically created card.
+  const pub = await browser.newPage({ viewport: { width: 1366, height: 900 } });
+  await pub.goto(PUBLIC + '/', { waitUntil: 'networkidle' });
+  await pub.waitForTimeout(3000);
+  const dynCard = pub.locator(`.project-card[data-dynamic]:has-text("QA E2E Project (edited)")`);
+  const dynCount = await dynCard.count();
+  record('public DOM renders dashboard-added project card', dynCount > 0, `cards: ${dynCount}`);
+  if (dynCount > 0) {
+    await dynCard.scrollIntoViewIfNeeded();
+    await dynCard.locator('[data-case-open]').click();
+    await pub.waitForTimeout(800);
+    const modalVisible = await pub.locator('#case-modal').isVisible();
+    record('case modal opens from dynamic card', modalVisible, modalVisible ? '' : 'modal not visible');
+    await pub.keyboard.press('Escape');
+  }
+  await pub.screenshot({ path: `${SHOTS}/05-public-site.png` });
+
+  // Supported overlay path: editing a SEEDED project (static card matched by
+  // legacy_key) must change what a visitor sees.
+  const EDIT_KEY = 'p5';           // task-manager — a seeded card on the public site
+  const NEW_SUMMARY = 'E2E propagation check ' + stamp;
+  const upd = await api('/rest/v1/projects?legacy_key=eq.' + EDIT_KEY, {
+    method: 'PATCH',
+    body: JSON.stringify({ summary_en: NEW_SUMMARY }),
+    headers: { Prefer: 'return=representation' }
+  });
+  record('patch seeded project p5', upd.status >= 200 && upd.status < 300, `HTTP ${upd.status}`);
+
+  const pub2 = await browser.newPage({ viewport: { width: 1366, height: 900 } });
+  await pub2.goto(PUBLIC + '/', { waitUntil: 'networkidle' });
+  await pub2.waitForTimeout(3000);
+  const domHas = await pub2.locator(`text=${NEW_SUMMARY}`).count();
+  record('public DOM reflects seeded-project edit', domHas > 0, `matches: ${domHas}`);
+  await pub2.close();
+
+  // restore the original summary so live content is unchanged
+  const orig = 'Team task management application for organizing projects and assignments in a software engineering course.';
+  await api('/rest/v1/projects?legacy_key=eq.' + EDIT_KEY, {
+    method: 'PATCH',
+    body: JSON.stringify({ summary_en: orig }),
+    headers: { Prefer: 'return=minimal' }
+  });
+  record('restored seeded project p5', true);
+
   await page.screenshot({ path: `${SHOTS}/04-published.png` });
 } finally {
   /* ---------- cleanup: purge test project + delete throwaway admin ---------- */
