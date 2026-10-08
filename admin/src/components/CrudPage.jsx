@@ -50,6 +50,10 @@ export default function CrudPage({ schema }) {
             try { payload[f.key] = raw.trim() ? JSON.parse(raw) : {}; }
             catch { throw new Error(`“${f.label}” is not valid JSON.`); }
           } else payload[f.key] = raw ?? {};
+        } else if (f.type === 'tags') {
+          // tags fields are text[] in the DB — never send a bare string.
+          const v = form[f.key];
+          payload[f.key] = Array.isArray(v) ? v : String(v ?? '').split(',').map((s) => s.trim()).filter(Boolean);
         } else {
           payload[f.key] = form[f.key];
         }
@@ -181,7 +185,7 @@ function EditDialog({ schema, isNew, row, busy, onCancel, onSave }) {
   const [form, setForm] = useState(() => {
     const init = { status: row.status || 'draft' };
     schema.fields.forEach((f) => {
-      init[f.key] = row[f.key] ?? f.default ?? (f.type === 'checkbox' ? false : f.type === 'tags' || f.type === 'localized' ? (f.type === 'localized' ? { en: '', ar: '' } : '') : '');
+      init[f.key] = row[f.key] ?? f.default ?? (f.type === 'checkbox' ? false : f.type === 'tags' ? [] : f.type === 'localized' ? { en: '', ar: '' } : f.type === 'json' ? {} : '');
     });
     return init;
   });
