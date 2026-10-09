@@ -1,39 +1,45 @@
-# Abdullah Portfolio V2 — Platform upgrade
+# Abdullah Ayman AL-Ghoul — Portfolio
 
-Two apps, one Postgres — the way V2 was designed to run.
+Bilingual (EN/AR) personal portfolio for a full-stack web developer.
+Vanilla HTML/CSS/JS, no build step, PWA with offline support, 5 themes
+(dark default), an AI assistant, and an optional Supabase-backed CMS.
 
-| App | URL | Source |
-|-----|-----|--------|
-| Public site | https://abdullah-portfolio26.vercel.app | `index.html` (static, no build) |
-| Admin dashboard | new project — e.g. `abdullah-portfolio-admin.vercel.app` | `admin/` (React + Vite SPA, noindex) |
+**Live:** https://abdullah-portfolio26.vercel.app
 
-## Quick start
+## How it runs
 
-**Public site — no build, no `npm install`:**
+The public site is fully static and works with or without a backend:
+
+- **No Supabase configured** — the site ships its static content, the contact
+  form falls back to `mailto:`, and nothing breaks.
+- **With Supabase** — the same site becomes CMS-driven (projects, skills,
+  certifications, services and freelance profiles come from Postgres) and the
+  contact form stores submissions server-side.
+
+## Local preview
+
+No build, no `npm install`:
+
 ```bash
 python -m http.server
 # open http://localhost:8000
 ```
 
-**Admin dashboard:**
-```bash
-cd admin
-npm install
-npm run dev    # http://localhost:5173
-```
+## Layout
 
-The public site works identically with or without a backend (graceful degradation):
-no Supabase configured → the site ships its static content, the contact form falls back to mailto, and the dashboard is unreachable — but nothing breaks.
+| Path | Purpose |
+|------|---------|
+| `index.html`, `styles.css`, `script.js` | The public site |
+| `cms.js` | Binds Supabase content into the DOM (graceful degradation) |
+| `analytics.js` | Privacy-preserving, cookie-less analytics |
+| `sw.js`, `manifest.webmanifest` | PWA offline shell |
+| `api/` | Vercel serverless functions (`/api/content`, `/api/contact`, `/api/track`, `/api/chat`, `/api/cv-download`) |
+| `supabase/migrations/` | Postgres schema, storage and RLS policies (`0001`–`0003`) |
+| `assets/` | CV, certificates, icons and imagery |
+| `vercel.json` | Headers, caching and clean-URL config |
 
-With Supabase (see [DEPLOYMENT.md](DEPLOYMENT.md)), the same public site becomes CMS-driven,
-the contact form writes to your inbox, and the dashboard controls everything.
+## Deployment
 
-## What's new in V2
-- **Projects** now have a true hierarchy: a primary featured row (full-width hero treatment), secondary featured cards, then the rest — no longer a flat grid.
-- **Case studies** deep-dive when you need them: the quick Problem → Solution → Result triptych is always visible, and dashboard-managed implementation/challenge details expand with a click.
-- **Contact form** no longer depends on a third party: it validates server-side, rate-limits, honeypots bots, stores every submission in a lightweight inbox (New → In Review → Replied → Archived), and falls back to mailto if the backend is absent.
-- **CV is now versioned:** every upload is kept; the active published version is the only one the public ever downloads. If no version is active, the bundled `assets/Abdullah_ALGhoul_CV.pdf` continues to be served. Every download is counted.
-- **Privacy-preserving analytics:** anonymous visitor + session IDs (no cookies, no fingerprinting), only coarse country/region from the host's geo header, device/browser/host from the visited-once User-Agent. Nothing invasive, everything useful in the dashboard.
-- **A complete dashboard** for the owner: Overview, Projects/Skills/Certifications/Experience/Recommendations (full CRUD with draft/publish/archived + trash → restore → hard-delete), About + Settings (single JSON documents), Media + CV, Messages inbox, Analytics, Audit Log.
-
-See **[DEPLOYMENT.md](DEPLOYMENT.md)** for the two-project setup and env steps.
+Deployed on Vercel as a static site with serverless functions; content lives in
+Supabase. Environment variables (`SUPABASE_URL`, `SUPABASE_SECRET_KEY`, etc.) are
+configured in the Vercel project — see `.env.example` for the full list.

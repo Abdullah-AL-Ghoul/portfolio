@@ -1,28 +1,27 @@
-# v0 runtime files
-__v0_runtime_loader.js
-__v0_devtools.tsx
-__v0_jsx-dev-runtime.ts
-
-# Common ignores
-node_modules
-.next/
+# Local environment / secrets (never commit real keys)
 .env
 .env.*
 !.env.example
-.DS_Store
 
-# Admin dashboard build output
+# Vercel local linkage and per-machine env pulls
+.vercel/
+
+# Dependencies / build output
+node_modules/
 admin/dist/
 
-# Local tooling
-*.log
-.vercel
----
+# Admin dashboard is a separate Vercel project — not part of the public site repo
+admin/
 
-# Ephemeral test artifacts
+# Local tooling, plans, reports and test artifacts (kept on disk, not published)
+.zcode/
+.agents/
+.claude/
+docs/
+tests/
 gui-test-screenshots/
-tests/package.json
-tests/package-lock.json
-tests/node_modules/
+*.log
 
-.env*
+# OS noise
+.DS_Store
+Thumbs.db
