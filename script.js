@@ -594,7 +594,7 @@
     lang: new URLSearchParams(location.search).get('lang') ||
       localStorage.getItem('lang') ||
       (navigator.language?.startsWith('ar') ? 'ar' : 'en'),
-    theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+    theme: localStorage.getItem('theme') || 'dark'
   };
 
   // ============== Lifecycle hooks ==============

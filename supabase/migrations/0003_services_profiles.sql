@@ -59,19 +59,49 @@ alter table public.professional_profiles enable row level security;
 --   services:            status='published' AND deleted_at IS NULL
 --   professional_profiles: is_active AND deleted_at IS NULL AND profile_url <> ''
 -- Admin (authenticated via is_admin()) gets full access, same as 0001.
-create policy if not exists services_public_read on public.services
-  for select to anon using (status = 'published' and deleted_at is null);
-create policy if not exists services_admin_read on public.services
-  for select to authenticated using (public.is_admin());
-create policy if not exists services_admin_write on public.services
-  for all to authenticated using (public.is_admin()) with check (public.is_admin());
+-- Note: PostgreSQL has no `create policy if not exists`, so idempotent
+-- policy creation is done via a pg_policies guard (matching 0001's
+-- run-once convention while staying safe if partially applied).
+do $$
+begin
+  if not exists (select 1 from pg_policies
+                 where schemaname = 'public' and tablename = 'services'
+                   and policyname = 'services_public_read') then
+    create policy services_public_read on public.services
+      for select to anon using (status = 'published' and deleted_at is null);
+  end if;
+  if not exists (select 1 from pg_policies
+                 where schemaname = 'public' and tablename = 'services'
+                   and policyname = 'services_admin_read') then
+    create policy services_admin_read on public.services
+      for select to authenticated using (public.is_admin());
+  end if;
+  if not exists (select 1 from pg_policies
+                 where schemaname = 'public' and tablename = 'services'
+                   and policyname = 'services_admin_write') then
+    create policy services_admin_write on public.services
+      for all to authenticated using (public.is_admin()) with check (public.is_admin());
+  end if;
 
-create policy if not exists professional_profiles_public_read on public.professional_profiles
-  for select to anon using (is_active and deleted_at is null and profile_url <> '');
-create policy if not exists professional_profiles_admin_read on public.professional_profiles
-  for select to authenticated using (public.is_admin());
-create policy if not exists professional_profiles_admin_write on public.professional_profiles
-  for all to authenticated using (public.is_admin()) with check (public.is_admin());
+  if not exists (select 1 from pg_policies
+                 where schemaname = 'public' and tablename = 'professional_profiles'
+                   and policyname = 'professional_profiles_public_read') then
+    create policy professional_profiles_public_read on public.professional_profiles
+      for select to anon using (is_active and deleted_at is null and profile_url <> '');
+  end if;
+  if not exists (select 1 from pg_policies
+                 where schemaname = 'public' and tablename = 'professional_profiles'
+                   and policyname = 'professional_profiles_admin_read') then
+    create policy professional_profiles_admin_read on public.professional_profiles
+      for select to authenticated using (public.is_admin());
+  end if;
+  if not exists (select 1 from pg_policies
+                 where schemaname = 'public' and tablename = 'professional_profiles'
+                   and policyname = 'professional_profiles_admin_write') then
+    create policy professional_profiles_admin_write on public.professional_profiles
+      for all to authenticated using (public.is_admin()) with check (public.is_admin());
+  end if;
+end $$;
 
 -- ---------- seed: services (copy grounded in the seeded projects p1..p7) ----------
 -- related_project_keys are actual legacy_keys from supabase/seed.sql:

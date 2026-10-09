@@ -15,10 +15,7 @@
         document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
       } catch (e) {}
       try {
-        var theme = localStorage.getItem('theme');
-        if (!theme) {
-          theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-        }
+        var theme = localStorage.getItem('theme') || 'dark';
         var colors = { dark: '#08090a', light: '#f4f5f9', cyberpunk: '#0a0014', forest: '#0b1410', sunset: '#160c08' };
         document.documentElement.setAttribute('data-theme', colors[theme] ? theme : 'dark');
         var meta = document.querySelector('meta[name="theme-color"]');

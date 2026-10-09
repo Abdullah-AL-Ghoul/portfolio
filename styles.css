@@ -409,11 +409,12 @@ button {
 }
 
 .section-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  /* V3.1 elevation: section voice dialed up to match the hero display scale. */
+  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
   font-weight: 700;
   margin-bottom: var(--space-6);
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
   color: var(--text);
 }
 
@@ -469,7 +470,8 @@ button {
     border-color var(--dur-micro) var(--ease-out),
     color var(--dur-micro) var(--ease-out),
     box-shadow var(--dur-micro) var(--ease-out),
-    opacity var(--dur-micro) var(--ease-out);
+    opacity var(--dur-micro) var(--ease-out),
+    transform var(--dur-micro) var(--ease-out);
 }
 .btn i {
   width: 18px;
@@ -491,6 +493,12 @@ button {
   color: #0a0a14; /* dark-on-accent (9.58:1 in dark, verified) */
   box-shadow: 0 2px 10px var(--accent-glow);
   border: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    box-shadow: 0 8px 28px var(--accent-glow);
+    transform: translateY(-2px);
+  }
 }
 [data-theme='light'] .btn-primary {
   color: #ffffff; /* white-on-accent (5.02:1 in light, verified) */
@@ -770,6 +778,29 @@ button {
   80%      { transform: translate(3%, 2%); }
 }
 
+/* V3.1 elevation: precision-engineering backdrop — a fine technical grid plus
+   one static accent glow. No motion (looping bg is banned, §4.3); pure depth. */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    radial-gradient(ellipse 70% 55% at 22% 30%, rgba(53, 196, 232, 0.11), transparent 70%);
+  background-size: 56px 56px, 56px 56px, 100% 100%;
+  -webkit-mask-image: radial-gradient(ellipse 90% 85% at 40% 35%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 85% at 40% 35%, #000 30%, transparent 78%);
+}
+[data-theme='light'] .hero::after {
+  background-image:
+    linear-gradient(rgba(8, 9, 10, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 9, 10, 0.035) 1px, transparent 1px),
+    radial-gradient(ellipse 70% 55% at 22% 30%, rgba(6, 117, 176, 0.09), transparent 70%);
+}
+
 /* Animated background blobs — deleted in the V3 pass (§4.3: looping background
    blobs are banned). The #hero-cursor-glow element remains (script.js:1830
    drives it) but has no visual box; the .hero-blobs wrapper is inert. */
@@ -827,11 +858,12 @@ button {
   50% { opacity: 0.5; }
 }
 .hero-title {
-  /* V3 display role (§1.1) — exact clamp, weight, tracking and line-height. */
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  /* V3.1 elevation: display voice dialed up — bigger clamp, heavier weight,
+     same tight tracking. Role of §1.1 unchanged. */
+  font-size: clamp(2.7rem, 6.6vw, 4.8rem);
+  font-weight: 700;
+  line-height: 1.03;
+  letter-spacing: -0.035em;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -1853,16 +1885,29 @@ button {
     transform: scaleX(1);
   }
 }
-/* V3 §3.2 hover: border + glow shadow, 150ms — no translateY (§4.3). */
+/* V3.1 elevation: hover now lifts the card (5px) with a deep ambient shadow plus
+   the accent edge — replaces the V3 border-only hover. Transform was already in
+   the card's transition list (reveal path), so this stays scoped and smooth. */
 @media (hover: hover) and (pointer: fine) {
   .project-card:hover {
     border-color: var(--accent);
-    box-shadow: 0 2px 12px var(--accent-glow);
+    box-shadow:
+      0 18px 44px rgba(0, 0, 0, 0.45),
+      0 2px 18px var(--accent-glow);
+    transform: translateY(-5px);
+  }
+  .project-card:hover .project-cover img {
+    transform: scale(1.06);
   }
 }
+.project-cover img {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
 .project-card.featured {
-  /* Spotlight signal: single-accent border, flat surface (was a 2-stop gradient) */
+  /* V3.1 elevation: the spotlight reads before it is hovered — accent border plus
+     a quiet permanent glow so hierarchy is visible at rest, not only on hover. */
   border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-glow), 0 14px 40px rgba(0, 0, 0, 0.35);
 }
 /* Primary featured project dominates: full row, side-by-side on wide screens. */
 /* Spotlight cover also reads taller in the single-column mobile flow. */
