@@ -15,7 +15,8 @@ const EVENTS = new Set([
   'page_view', 'session_start', 'session_end',
   'project_view', 'project_click', 'github_click', 'live_demo_click',
   'cv_download', 'contact_open', 'contact_submit',
-  'social_link_click', 'language_change', 'outbound_click', 'theme_change'
+  'social_link_click', 'language_change', 'outbound_click', 'theme_change',
+  'service_view', 'service_cta_click', 'hire_me_click', 'freelance_profile_view', 'freelance_profile_click'
 ]);
 
 function parseUA(ua) {

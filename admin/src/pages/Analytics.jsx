@@ -78,9 +78,27 @@ export default function Analytics() {
     const topProjects = Object.entries(projects).map(([name, views]) => ({ name, views }))
       .sort((a, b) => b.views - a.views).slice(0, 8);
 
+    // Service CTA clicks (event_target = service slug)
+    const serviceCta = {};
+    events.filter((e) => e.event_type === 'service_cta_click').forEach((e) => {
+      const key = e.event_target || 'unknown';
+      serviceCta[key] = (serviceCta[key] || 0) + 1;
+    });
+    const serviceCtaBreakdown = Object.entries(serviceCta).map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value).slice(0, 8);
+
+    // Freelance profile clicks (event_target = platform)
+    const profileClicks = {};
+    events.filter((e) => e.event_type === 'freelance_profile_click').forEach((e) => {
+      const key = e.event_target || 'unknown';
+      profileClicks[key] = (profileClicks[key] || 0) + 1;
+    });
+    const profileClickBreakdown = Object.entries(profileClicks).map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value).slice(0, 8);
+
     // Conversions
     const conv = {};
-    ['cv_download', 'contact_submit', 'contact_open', 'github_click', 'live_demo_click', 'outbound_click', 'social_link_click'].forEach((t) => {
+    ['cv_download', 'contact_submit', 'contact_open', 'github_click', 'live_demo_click', 'outbound_click', 'social_link_click', 'hire_me_click'].forEach((t) => {
       conv[t] = events.filter((e) => e.event_type === t).length;
     });
 
@@ -99,7 +117,7 @@ export default function Analytics() {
     const returning = visitors.filter((v) => v.session_count > 1).length;
 
     return {
-      viewsSeries, uniqSeries, topPages, topProjects, conv,
+      viewsSeries, uniqSeries, topPages, topProjects, serviceCtaBreakdown, profileClickBreakdown, conv,
       devices: pie(byDevice), browsers: pie(byBrowser), countries: pie(byCountry),
       totalViews: events.filter((e) => e.event_type === 'page_view').length,
       totalSessions: sessions.length,
@@ -127,6 +145,7 @@ export default function Analytics() {
         <div className="card stat-card"><div className="stat-num">{derived.totalVisitors ? Math.round((derived.returning / derived.totalVisitors) * 100) : 0}%</div><div className="stat-label">Returning</div></div>
         <div className="card stat-card"><div className="stat-num">{derived.conv.cv_download}</div><div className="stat-label">CV downloads</div></div>
         <div className="card stat-card"><div className="stat-num">{derived.conv.contact_submit}</div><div className="stat-label">Contact submissions</div></div>
+        <div className="card stat-card"><div className="stat-num">{derived.conv.hire_me_click}</div><div className="stat-label">Hire-me clicks</div></div>
       </div>
 
       <div className="card" style={{ marginBottom: '1rem' }}>
@@ -172,6 +191,32 @@ export default function Analytics() {
                 </BarChart>
               </ResponsiveContainer>
             : <div className="empty">No project views yet.</div>}
+        </div>
+        <div className="card">
+          <h3 style={{ marginTop: 0 }}>Service CTA clicks</h3>
+          {derived.serviceCtaBreakdown.length
+            ? <ResponsiveContainer width="100%" height={200}>
+                <BarChart data={derived.serviceCtaBreakdown} layout="vertical">
+                  <XAxis type="number" hide />
+                  <YAxis dataKey="name" type="category" stroke="#9a9ab0" fontSize={11} width={140} />
+                  <Tooltip contentStyle={{ background: '#101020', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8 }} />
+                  <Bar dataKey="value" fill="#fbbf24" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            : <div className="empty">No service CTA clicks yet.</div>}
+        </div>
+        <div className="card">
+          <h3 style={{ marginTop: 0 }}>Freelance profile clicks</h3>
+          {derived.profileClickBreakdown.length
+            ? <ResponsiveContainer width="100%" height={200}>
+                <BarChart data={derived.profileClickBreakdown} layout="vertical">
+                  <XAxis type="number" hide />
+                  <YAxis dataKey="name" type="category" stroke="#9a9ab0" fontSize={11} width={140} />
+                  <Tooltip contentStyle={{ background: '#101020', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8 }} />
+                  <Bar dataKey="value" fill="#f87171" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            : <div className="empty">No freelance profile clicks yet.</div>}
         </div>
         <div className="card">
           <h3 style={{ marginTop: 0 }}>Devices</h3>

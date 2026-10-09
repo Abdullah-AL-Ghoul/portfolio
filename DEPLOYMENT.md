@@ -75,3 +75,16 @@ Required: the three `SUPABASE_*` env vars above. Without them the site still wor
 
 ## Analytics retention
 A helper is included: `public.analytics_retention()` deletes `analytics_events` older than 90 days. Schedule it in Supabase (Cron → `select public.analytics_retention();` daily or weekly via pg_cron) or call it manually.
+
+---
+
+# V3 wave (services + freelance profiles)
+
+## New migration — run manually BEFORE relying on the new sections
+`supabase/migrations/0003_services_profiles.sql` — adds `services` and `professional_profiles` tables (with RLS: anon read only published/active rows; admin full access via `is_admin()`), partial indexes, and seeds 3 published services (Full-Stack Web Applications, Business Dashboards & Admin Panels, AI-Powered Web Applications). **Run it in the Supabase SQL Editor** — DDL cannot be executed by tooling. Until it runs, `/api/content` returns `services: []` / `professional_profiles: []` and both new public sections stay hidden (by design). Re-runs are safe (`if not exists` / `on conflict (slug) do nothing`) though the header says run once. Zero freelance profiles are seeded on purpose — add real ones via the dashboard.
+
+## Dashboard redeploy note
+The admin project must be redeployed to get the new Services / Freelance Profiles CRUD pages and the analytics breakdowns (service CTA clicks, freelance profile clicks, hire-me tile). No new env vars; just redeploy the `admin` root-directory project. Deploy the public site the same way as before (static + api/ functions); the service-worker cache is already bumped to v10 in source.
+
+## Nothing was deployed in the V3 wave
+The live site and admin still serve the pre-V3 build. All V3 changes exist on the `develop` working tree (uncommitted). After deploying, verify: the two new sections appear once 0003 is applied and services/profiles rows exist, the dashboard's /services and /profiles pages work, and the new analytics breakdowns populate as events fire.

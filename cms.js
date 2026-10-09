@@ -216,8 +216,202 @@
     return article;
   }
 
-  function applyCerts(data, lang) {
-    document.querySelectorAll('.cert-card').forEach(function (card) {
+  // ===== Services ("What I Build") =====
+  // Rendered from data.services; the whole section stays hidden while the
+  // array is empty (section starts hidden in the static markup too).
+  function applyServices(data, lang) {
+    var section = document.getElementById('services');
+    var grid = document.getElementById('services-grid');
+    if (!section || !grid) return;
+    var rows = Array.isArray(data.services) ? data.services : [];
+    section.hidden = rows.length === 0;
+
+    // Idempotent rebuild: clear previous render, then re-create every card so
+    // removals, unpublish and language switches stay consistent.
+    grid.textContent = '';
+
+    if (!rows.length) return;
+
+    // Keys of every project card currently on the page (static + dynamic),
+    // used to decide whether a related-project link has a real target.
+    var present = {};
+    document.querySelectorAll('.project-card[data-project]').forEach(function (c) {
+      var key = c.getAttribute('data-project');
+      if (key) present[key] = true;
+    });
+
+    rows.forEach(function (s) {
+      grid.appendChild(buildServiceCard(s, lang, present));
+    });
+    if (window.lucide) window.lucide.createIcons();
+    // Analytics: let script.js observe the freshly rendered cards for
+    // service_view. Guarded + try/catch — tracking must never break rendering.
+    try { if (window.PFServiceTracking) window.PFServiceTracking.observe(); } catch (e) {}
+  }
+
+  function buildServiceCard(s, lang, projectKeys) {
+    var article = document.createElement('article');
+    article.className = 'service-card';
+    article.setAttribute('data-service', s.slug || '');
+
+    // Icon (CMS-picked lucide name, safe fallback).
+    var iconWrap = document.createElement('div');
+    iconWrap.className = 'service-icon';
+    var icon = document.createElement('i');
+    icon.setAttribute('data-lucide', s.icon || 'code-2');
+    icon.setAttribute('aria-hidden', 'true');
+    iconWrap.appendChild(icon);
+    article.appendChild(iconWrap);
+
+    var h3 = document.createElement('h3');
+    h3.textContent = (lang === 'ar' ? (s.title_ar || s.title_en) : s.title_en) || s.title_en || s.slug || '';
+    article.appendChild(h3);
+
+    var summary = document.createElement('p');
+    summary.className = 'service-summary';
+    summary.textContent = (lang === 'ar' ? (s.summary_ar || s.summary_en) : s.summary_en) || '';
+    article.appendChild(summary);
+
+    // features: jsonb array of {en, ar}
+    if (Array.isArray(s.features) && s.features.length) {
+      var feats = document.createElement('ul');
+      feats.className = 'service-features';
+      s.features.forEach(function (f) {
+        var li = document.createElement('li');
+        li.textContent = pickLocalized(f, lang);
+        if (li.textContent) feats.appendChild(li);
+      });
+      if (feats.children.length) article.appendChild(feats);
+    }
+
+    // technologies: text[] → chips
+    if (Array.isArray(s.technologies) && s.technologies.length) {
+      var tags = document.createElement('div');
+      tags.className = 'service-tags';
+      s.technologies.forEach(function (t) {
+        var span = document.createElement('span');
+        span.textContent = t;
+        tags.appendChild(span);
+      });
+      article.appendChild(tags);
+    }
+
+    // Related-project link: only when a related key matches a card on the page.
+    if (Array.isArray(s.related_project_keys)) {
+      var related = s.related_project_keys.find(function (k) { return k && projectKeys[k]; });
+      if (related) {
+        var rel = document.createElement('a');
+        rel.className = 'service-related';
+        rel.href = '#projects';
+        var relLabel = document.createElement('span');
+        relLabel.setAttribute('data-i18n', 'services.related');
+        relLabel.textContent = lang === 'ar' ? 'مشروع مرتبط' : 'Related project';
+        rel.appendChild(relLabel);
+        var relArrow = document.createElement('i');
+        relArrow.setAttribute('data-lucide', 'chevron-right');
+        relArrow.setAttribute('aria-hidden', 'true');
+        rel.appendChild(relArrow);
+        article.appendChild(rel);
+      }
+    }
+
+    // CTA → contact. Label comes from the CMS row, i18n fallback otherwise.
+    var cta = document.createElement('a');
+    cta.className = 'btn btn-sm btn-primary service-cta';
+    cta.href = '#contact';
+    cta.setAttribute('data-service-cta', s.slug || '');
+    var ctaLabel = document.createElement('span');
+    var label = (lang === 'ar' ? s.cta_label_ar : s.cta_label_en);
+    if (label) {
+      ctaLabel.textContent = label;
+    } else {
+      ctaLabel.setAttribute('data-i18n', 'services.cta');
+      ctaLabel.textContent = lang === 'ar' ? 'اطلب مشروعاً' : 'Discuss a project';
+    }
+    cta.appendChild(ctaLabel);
+    article.appendChild(cta);
+
+    return article;
+  }
+
+  // ===== Professional profiles ("Work with me") =====
+  function applyProfiles(data, lang) {
+    var section = document.getElementById('freelance');
+    var grid = document.getElementById('profiles-grid');
+    if (!section || !grid) return;
+    var rows = Array.isArray(data.professional_profiles) ? data.professional_profiles : [];
+    // profile_url='' rows are excluded server-side; guard here anyway.
+    var usable = rows.filter(function (p) { return p && p.profile_url; });
+    section.hidden = usable.length === 0;
+
+    grid.textContent = '';
+    if (!usable.length) return;
+    usable.forEach(function (p) {
+      grid.appendChild(buildProfileCard(p, lang));
+    });
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  function buildProfileCard(p, lang) {
+    var card = document.createElement('a');
+    card.className = 'profile-card';
+    card.setAttribute('data-profile', p.platform || '');
+    card.href = p.profile_url;
+    card.target = '_blank';
+    card.rel = 'noopener';
+
+    var iconWrap = document.createElement('div');
+    iconWrap.className = 'profile-icon';
+    var icon = document.createElement('i');
+    icon.setAttribute('data-lucide', p.icon || 'globe');
+    icon.setAttribute('aria-hidden', 'true');
+    iconWrap.appendChild(icon);
+
+    var platform = document.createElement('span');
+    platform.className = 'profile-platform';
+    platform.textContent = p.platform || '';
+    iconWrap.appendChild(platform);
+    card.appendChild(iconWrap);
+
+    var h3 = document.createElement('h3');
+    h3.className = 'profile-name';
+    h3.textContent = p.display_name || p.username || p.platform || '';
+    card.appendChild(h3);
+
+    if (p.username) {
+      var user = document.createElement('span');
+      user.className = 'profile-user';
+      user.textContent = p.username.indexOf('@') === 0 ? p.username : '@' + p.username;
+      card.appendChild(user);
+    }
+
+    var title = document.createElement('p');
+    title.className = 'profile-title';
+    title.textContent = (lang === 'ar' ? (p.title_ar || p.title_en) : p.title_en) || '';
+    card.appendChild(title);
+
+    var desc = document.createElement('p');
+    desc.className = 'profile-desc';
+    desc.textContent = (lang === 'ar' ? (p.description_ar || p.description_en) : p.description_en) || '';
+    card.appendChild(desc);
+
+    var view = document.createElement('span');
+    view.className = 'profile-cta';
+    var vi = document.createElement('i');
+    vi.setAttribute('data-lucide', 'external-link');
+    vi.setAttribute('aria-hidden', 'true');
+    var vl = document.createElement('span');
+    vl.setAttribute('data-i18n', 'freelance.view');
+    vl.textContent = lang === 'ar' ? 'عرض الملف' : 'View profile';
+    view.appendChild(vi);
+    view.appendChild(vl);
+    card.appendChild(view);
+
+    if (p.is_featured) card.classList.add('featured');
+    return card;
+  }
+
+  function applyCerts(data, lang) {    document.querySelectorAll('.cert-card').forEach(function (card) {
       var title = card.getAttribute('data-cert-title');
       var match = (data.certifications || []).find(function (c) {
         return c.title_en === title;
@@ -295,8 +489,10 @@
     state.data = data;
     var lang = document.documentElement.lang === 'ar' ? 'ar' : 'en';
     applyProjects(data, lang);
+    applyServices(data, lang);
     applyCerts(data, lang);
     applyRecommendations(data, lang);
+    applyProfiles(data, lang);
     applyAbout(data, lang);
     exposeCases(data);
   }

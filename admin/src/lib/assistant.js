@@ -110,8 +110,11 @@ export function buildDraft(schemaKey, requestText) {
       case 'category': draft[f.key] = guessCategory(text); break;
       case 'kind': draft[f.key] = guessKind(text); break;
       case 'stack': draft[f.key] = stack; break;
-      case 'tags': draft[f.key] = stack; break;
+      case 'technologies': draft[f.key] = stack; break;
       case 'related_projects': draft[f.key] = []; break;
+      case 'related_project_keys': draft[f.key] = []; break;
+      case 'features': draft[f.key] = [{ en: ar ? '' : text, ar: ar ? text : '' }]; break;
+      case 'tags': draft[f.key] = stack; break;
       case 'summary_en': draft[f.key] = ar ? '' : text; break;
       case 'summary_ar': draft[f.key] = ar ? text : ''; break;
       case 'quote_en': draft[f.key] = ar ? '' : text; break;

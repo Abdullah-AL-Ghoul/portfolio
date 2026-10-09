@@ -150,8 +150,72 @@ export const recommendationSchema = {
   ]
 };
 
+export const serviceSchema = {
+  table: 'services',
+  title: 'Services',
+  subtitle: 'What I build — shown on the public site. Published rows only; order by sort_order.',
+  orderBy: 'sort_order',
+  columns: [
+    { key: 'title_en', label: 'Title' },
+    { key: 'slug', label: 'Slug', render: (r) => <span className="mono">{r.slug}</span> },
+    { key: 'technologies', label: 'Stack', render: (r) => (r.technologies || []).slice(0, 3).join(', ') }
+  ],
+  defaults: { features: [], technologies: [], related_project_keys: [], icon: 'code', cta_label_en: '', cta_label_ar: '', sort_order: 0 },
+  fields: [
+    { key: 'slug', label: 'Slug (URL key)', type: 'text', placeholder: 'my-service' },
+    { key: 'title_en', label: 'Title (EN)', type: 'text' },
+    { key: 'title_ar', label: 'Title (AR)', type: 'text' },
+    { key: 'summary_en', label: 'Summary (EN)', type: 'textarea', rows: 2 },
+    { key: 'summary_ar', label: 'Summary (AR)', type: 'textarea', rows: 2 },
+    { key: 'features', label: 'Features (JSON array of {en, ar} objects)', type: 'json', rows: 8, default: [] },
+    { key: 'technologies', label: 'Technologies', type: 'tags' },
+    { key: 'related_project_keys', label: 'Related project slugs', type: 'tags' },
+    { key: 'icon', label: 'Icon (lucide name)', type: 'text', default: 'code' },
+    { key: 'cta_label_en', label: 'CTA label (EN)', type: 'text', default: '' },
+    { key: 'cta_label_ar', label: 'CTA label (AR)', type: 'text', default: '' },
+    { key: 'sort_order', label: 'Sort order', type: 'number', default: 0 }
+  ]
+};
+
+export const profileSchema = {
+  table: 'professional_profiles',
+  title: 'Freelance Profiles',
+  subtitle: 'Real platforms where you have an active profile — never invent one. Published freely to the public site.',
+  orderBy: 'display_order',
+  columns: [
+    { key: 'platform', label: 'Platform', render: (r) => <span className="badge">{r.platform}</span> },
+    { key: 'display_name', label: 'Name' },
+    { key: 'username', label: 'Username', render: (r) => <span className="mono">{r.username}</span> },
+    { key: 'is_featured', label: 'Featured', render: (r) => (r.is_featured ? '★' : '—') }
+  ],
+  defaults: { is_active: true, is_featured: false, display_order: 0, icon: 'external-link', title_en: '', title_ar: '', description_en: '', description_ar: '' },
+  fields: [
+    { key: 'platform', label: 'Platform', type: 'select', options: [
+      { value: 'upwork', label: 'Upwork' },
+      { value: 'khamsat', label: 'Khamsat' },
+      { value: 'mostaql', label: 'Mostaql' },
+      { value: 'freelancer', label: 'Freelancer' },
+      { value: 'contra', label: 'Contra' },
+      { value: 'linkedin', label: 'LinkedIn' },
+      { value: 'custom', label: 'Custom' }
+    ]},
+    { key: 'display_name', label: 'Display name', type: 'text' },
+    { key: 'username', label: 'Username/handle', type: 'text', default: '' },
+    { key: 'profile_url', label: 'Profile URL', type: 'text' },
+    { key: 'title_en', label: 'Title (EN)', type: 'text', default: '' },
+    { key: 'title_ar', label: 'Title (AR)', type: 'text', default: '' },
+    { key: 'description_en', label: 'Description (EN)', type: 'textarea', rows: 2, default: '' },
+    { key: 'description_ar', label: 'Description (AR)', type: 'textarea', rows: 2, default: '' },
+    { key: 'icon', label: 'Icon (lucide name)', type: 'text', default: 'external-link' },
+    { key: 'is_active', label: 'Active', type: 'checkbox' },
+    { key: 'is_featured', label: 'Featured', type: 'checkbox' },
+    { key: 'display_order', label: 'Display order', type: 'number', default: 0 }
+  ]
+};
+
 export const SCHEMAS = {
   projects: { label: 'Project', singular: 'project', plural: 'projects', schema: projectSchema, prompt: 'Add a project with a title, summary, tech stack, and optional links.' },
+  services: { label: 'Service', singular: 'service', plural: 'services', schema: serviceSchema, prompt: 'Add a service (e.g. a full-stack web app) with a title, summary, and tech stack.' },
   skills: { label: 'Skill', singular: 'skill', plural: 'skills', schema: skillSchema, prompt: 'Add a skill with a name and category (programming/networking/tools/frontend/ai/learning).' },
   certifications: { label: 'Certification', singular: 'certification', plural: 'certifications', schema: certificationSchema, prompt: 'Add a certification with title, issuer, and issue date.' },
   experiences: { label: 'Experience', singular: 'experience', plural: 'experiences', schema: experienceSchema, prompt: 'Add an experience entry (employment/internship/academic/volunteer) with title, org, and summary.' },

@@ -7,6 +7,8 @@ const NAV = [
   { group: 'Manage', items: [
     { label: 'Overview', to: '/', icon: '▦' },
     { label: 'Projects', to: '/projects', icon: '◈' },
+    { label: 'Services', to: '/services', icon: '◈' },
+    { label: 'Freelance Profiles', to: '/profiles', icon: '◈' },
     { label: 'Skills', to: '/skills', icon: '◈' },
     { label: 'Certifications', to: '/certifications', icon: '◈' },
     { label: 'Experience', to: '/experience', icon: '◈' },

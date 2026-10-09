@@ -75,15 +75,17 @@
 }
 .preloader-fill {
   height: 100%;
-  width: 0%;
+  width: 100%;
   background: linear-gradient(90deg, var(--accent, #06b6d4), var(--accent-2, #a855f7));
   border-radius: 3px;
-  animation: preloader-fill 1.5s ease-in-out infinite;
+  /* V3 §4.3: transform-only indeterminate loader (was a width/margin-left keyframe). */
+  transform-origin: left;
+  animation: preloaderFill 1.5s ease-in-out infinite;
 }
-@keyframes preloader-fill {
-  0% { width: 0%; margin-left: 0; }
-  50% { width: 60%; margin-left: 20%; }
-  100% { width: 0%; margin-left: 100%; }
+@keyframes preloaderFill {
+  0%   { transform: translateX(-100%) scaleX(0.6); }
+  50%  { transform: translateX(-20%) scaleX(0.6); }
+  100% { transform: translateX(100%) scaleX(0.6); }
 }
 .preloader-status {
   font-size: 0.8rem;
@@ -99,27 +101,34 @@ html {
 }
 
 :root {
-  /* Dark theme (default) */
-  --bg: #06060e;
+  /* Dark theme (default) — V3 "Dark Precision Engineering".
+     Values are the binding targets of docs/v3/08-design-system.md §2.
+     Contrast (computed this session, WCAG L formula): text/bg 18.73,
+     text-dim/bg 6.48, accent/bg 9.69, primary label #0a0a14 on accent 9.58. */
+  --bg: #08090a;
   --bg-elev: #0d0d1a;
-  --bg-elev-2: #12122a;
+  --bg-elev-2: #141428;
   --border: rgba(255, 255, 255, 0.06);
-  --text: #e8e8f0;
-  --text-dim: #9a9ab8;
+  --text: #f7f8f8;
+  --text-dim: #8b93a7;
   --text-faint: #7b7b96;
-  --accent: #06b6d4;
+  --accent: #35c4e8;
   --accent-2: #22d3ee;
   --accent-glow: rgba(6, 182, 212, 0.35);
   --accent-purple: #a855f7;
   --accent-pink: #ec4899;
   --accent-blue: #3b82f6;
   --success: #10b981;
+  /* Form validation error state (§2 invariants): #ef4444 passes 4.5:1 on every
+     theme's dark bg; the light theme overrides it (see its block). */
+  --danger: #ef4444;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.6);
   --gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #a855f7 100%);
   --gradient-soft: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(59, 130, 246, 0.08), rgba(168, 85, 247, 0.08));
 
-  /* Glassmorphism */
+  /* Glassmorphism — kept only for the theme menu, modals, toasts and other
+     real layer distinctions (§1.3); flat fills are the default surface. */
   --glass-bg: rgba(255, 255, 255, 0.04);
   --glass-bg-hover: rgba(255, 255, 255, 0.07);
   --glass-border: rgba(255, 255, 255, 0.08);
@@ -130,30 +139,69 @@ html {
   --font-en: 'Inter', system-ui, -apple-system, sans-serif;
   --font-ar: 'Cairo', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  /* V3 display voice (§1.4): tight grotesque for display/section-title/h3 only —
+     body stays Inter. Cairo follows in the stack so Arabic display lines fall
+     back to the AR face (Instrument Sans ships latin glyphs only). */
+  --font-display: 'Instrument Sans', 'Cairo', var(--font-en);
 
+  /* Radius / sizing (§1.3) */
   --radius: 14px;
   --radius-sm: 8px;
   --radius-lg: 20px;
   --container: 1180px;
   --nav-h: 72px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* V3 spacing scale — 8px base (§1.2). New layout uses only these + logical props. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 5rem;
+  --space-10: 6rem;
+  --section-rhythm: clamp(4rem, 10vw, 6.5rem);
+
+  /* V3 motion tokens (§4) — derived from the type-scale headline system.
+     --transition is kept by name for backward compatibility only. */
+  --dur-micro: 150ms;
+  --dur-routine: 300ms;
+  --dur-reveal: 500ms;
+  --dur-load: 1000ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: var(--dur-routine) var(--ease-in-out);
+
+  /* V3 type roles (§1.1) for component h3s, labels and meta. */
+  --font-h3-size: clamp(1.25rem, 2vw, 1.5rem);
+  --label-size: 0.75rem;
+  --meta-size: 0.875rem;
 }
 
-/* Light theme */
+/* Light theme — §2 delta. --accent corrected to #0675b0 during implementation:
+   the spec's original #0a84c4 measured 4.11:1 on a white primary label (fails the
+   4.5:1 invariant); #0675b0 measures 5.02:1 label / 4.61:1 text on bg — both pass. */
 [data-theme='light'] {
-  --bg: #f0f0f8;
+  --bg: #f4f5f9;
   --bg-elev: #ffffff;
   --bg-elev-2: #f8f8fc;
-  --border: rgba(0, 0, 0, 0.08);
-  --text: #0a0a18;
+  --border: rgba(0, 0, 0, 0.1);
+  --text: #0a0a14;
   --text-dim: #4a4a60;
   --text-faint: #67678c;
-  --accent: #0891b2;
-  --accent-2: #06b6d4;
-  --accent-glow: rgba(8, 145, 178, 0.2);
+  --accent: #0675b0;
+  --accent-2: #0b7fae;
+  --accent-glow: rgba(6, 117, 176, 0.2);
   --accent-purple: #9333ea;
   --accent-pink: #db2777;
   --accent-blue: #2563eb;
+  /* Success is used as small text (form status/toast, §2 invariant 4.5:1):
+     the inherited dark #10b981 measures 2.33:1 on light bg — this value passes. */
+  --success: #047857;
+  /* #ef4444 measured 3.45:1 on light bg — fails 4.5:1; this passes 5.94:1. */
+  --danger: #b91c1c;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.1);
   --gradient-soft: linear-gradient(135deg, rgba(8, 145, 178, 0.06), rgba(59, 130, 246, 0.06), rgba(147, 51, 234, 0.06));
@@ -252,6 +300,15 @@ body::before {
   font-family: var(--font-ar);
 }
 
+/* V3 display voice (§1.4): display lines, section titles and component h3s
+   use the grotesque; body copy stays Inter/Cairo. AR glyphs fall back to
+   Cairo via the --font-display stack. */
+.hero-title,
+.section-title,
+h3 {
+  font-family: var(--font-display);
+}
+
 img,
 svg:not(.lucide) {
   max-width: 100%;
@@ -302,7 +359,8 @@ button {
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--gradient);
+  /* Single-accent discipline (§2): --gradient is retired from surfaces — flat accent. */
+  background: var(--accent);
   transform-origin: left;
   transform: scaleX(0);
   z-index: 200;
@@ -333,26 +391,36 @@ button {
 .eyebrow {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--accent);
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.05em;
+  /* V3 label role (§1.1) */
+  font-size: var(--label-size);
+  font-weight: 500;
+  color: var(--text-dim);
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+[dir='rtl'] .eyebrow {
+  text-transform: none;
+}
+/* Arabic joining doesn't accept letter-spacing — drop tracking on AR overlines. */
+[dir='rtl'] .eyebrow,
+[dir='rtl'] .status-pill {
+  letter-spacing: 0;
 }
 
 .section-title {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
-  margin-bottom: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-6);
   letter-spacing: -0.02em;
   line-height: 1.2;
-  background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text);
 }
 
 .section {
-  padding: 6rem 0;
+  /* Section rhythm token (§1.2): replaces the flat 6rem 0 with a clamped rhythm. */
+  padding-block: var(--section-rhythm);
+  padding-inline: 0;
   position: relative;
   contain: layout style;
 }
@@ -367,15 +435,15 @@ button {
   inset-inline: 0;
   top: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-glow), var(--accent-purple), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
   opacity: 0.6;
   pointer-events: none;
 }
 [dir='rtl'] .section.alt::before {
-  background: linear-gradient(270deg, transparent, var(--accent-glow), var(--accent-purple), transparent);
+  background: linear-gradient(270deg, transparent, var(--accent-glow), transparent);
 }
 .section-head {
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-7);
   text-align: start;
   position: relative;
   z-index: 1;
@@ -387,15 +455,21 @@ button {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.4rem;
+  min-height: 44px; /* §3.1 touch-target floor (submit btn measured 43px) */
   border-radius: var(--radius);
   font-weight: 600;
   font-size: 0.95rem;
-  transition: all var(--transition);
   border: 1px solid transparent;
   white-space: nowrap;
   text-decoration: none;
   position: relative;
-  overflow: hidden;
+  /* Scoped transitions only (§3.1) — the `all` shorthand is banned by the V3 grep gate. */
+  transition:
+    background var(--dur-micro) var(--ease-out),
+    border-color var(--dur-micro) var(--ease-out),
+    color var(--dur-micro) var(--ease-out),
+    box-shadow var(--dur-micro) var(--ease-out),
+    opacity var(--dur-micro) var(--ease-out);
 }
 .btn i {
   width: 18px;
@@ -411,27 +485,23 @@ button {
   width: 15px;
   height: 15px;
 }
+/* V3 button spec (§3.1): flat var(--accent) fill, no gradient/sheen/translateY. */
 .btn-primary {
-  background: linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7);
-  color: #fff;
-  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
+  background: var(--accent);
+  color: #0a0a14; /* dark-on-accent (9.58:1 in dark, verified) */
+  box-shadow: 0 2px 10px var(--accent-glow);
   border: none;
 }
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.5s ease;
+[data-theme='light'] .btn-primary {
+  color: #ffffff; /* white-on-accent (5.02:1 in light, verified) */
 }
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.5);
-  color: #fff;
+  background: var(--accent-2);
+  box-shadow: 0 4px 16px var(--accent-glow);
 }
-.btn-primary:hover::before {
-  transform: translateX(100%);
+.btn-primary:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
 
 .btn-ghost {
@@ -442,7 +512,7 @@ button {
 .btn-ghost:hover {
   background: var(--glass-bg-hover);
   border-color: var(--accent);
-  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.15);
+  color: var(--text);
 }
 .btn-outline {
   background: transparent;
@@ -452,7 +522,6 @@ button {
 .btn-outline:hover {
   border-color: var(--accent);
   color: var(--accent);
-  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.15);
 }
 
 .icon-btn {
@@ -466,7 +535,14 @@ button {
   color: var(--text);
   font-size: 0.85rem;
   font-weight: 500;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .icon-btn i {
   width: 16px;
@@ -494,7 +570,14 @@ button {
   -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--glass-border);
   z-index: 100;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .navbar.scrolled {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -543,16 +626,22 @@ button {
 .nav-links a::after {
   content: '';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   bottom: -2px;
-  width: 0;
+  width: 100%;
   height: 2px;
-  background: var(--gradient);
-  transition: width var(--transition);
+  background: var(--accent);
+  /* V3 §4.3: transform instead of a width transition (layout props never animate). */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+[dir='rtl'] .nav-links a::after {
+  transform-origin: right;
 }
 .nav-links a:hover::after,
 .nav-links a.active::after {
-  width: 100%;
+  transform: scaleX(1);
 }
 .nav-actions {
   display: flex;
@@ -681,74 +770,9 @@ button {
   80%      { transform: translate(3%, 2%); }
 }
 
-/* Animated Background Blobs */
-.hero-blobs {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.35;
-  animation: blobFloat 20s ease-in-out infinite;
-}
-
-.blob-1 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.5) 0%, transparent 70%);
-  top: -10%;
-  inset-inline-end: 5%;
-  animation-delay: 0s;
-}
-
-.blob-2 {
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);
-  bottom: 10%;
-  inset-inline-start: 5%;
-  animation-delay: -7s;
-}
-
-.blob-3 {
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, transparent 70%);
-  top: 40%;
-  inset-inline-end: 25%;
-  animation-delay: -14s;
-}
-.blob-cursor {
-  width: 360px;
-  height: 360px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%);
-  position: absolute;
-  pointer-events: none;
-  transform: translate3d(-50%, -50%, 0);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  will-change: transform, left, top;
-  z-index: 0;
-}
-.hero:hover .blob-cursor { opacity: 1; }
-@media (hover: none), (pointer: coarse) {
-  .blob-cursor { display: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .blob-cursor { display: none; }
-}
-
-@keyframes blobFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(20px, -25px) scale(1.03); }
-  66% { transform: translate(-15px, 15px) scale(0.97); }
-}
+/* Animated background blobs — deleted in the V3 pass (§4.3: looping background
+   blobs are banned). The #hero-cursor-glow element remains (script.js:1830
+   drives it) but has no visual box; the .hero-blobs wrapper is inert. */
 .hero-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -769,11 +793,22 @@ button {
   padding: 0.45rem 1rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
+  /* V3 label role (§1.1): mono overline; sentence case, so AR needs no opt-out */
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  font-weight: 500;
+  letter-spacing: 0.08em;
   border-radius: 999px;
-  font-size: 0.85rem;
   color: var(--text-dim);
   width: fit-content;
-  transition: all var(--transition);
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .status-pill:hover {
   border-color: var(--success);
@@ -792,14 +827,14 @@ button {
   50% { opacity: 0.5; }
 }
 .hero-title {
-  font-size: clamp(1.6rem, 5vw, 3.8rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  /* V3 display role (§1.1) — exact clamp, weight, tracking and line-height. */
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   overflow-wrap: break-word;
 }
 .hero-greet {
@@ -814,18 +849,9 @@ button {
 }
 [dir='rtl'] .hero-greet { letter-spacing: 0.1em; }
 .hero-title .accent {
-  background: linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7, #ec4899);
-  background-size: 300% 300%;
-  animation: gradientText 5s ease infinite;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* Single-accent discipline: no animated gradient fill on the hero name (§1.1). */
+  color: var(--text);
   white-space: nowrap;
-}
-@keyframes gradientText {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 .hero-subtitle {
   font-size: clamp(1rem, 1.5vw, 1.2rem);
@@ -863,14 +889,17 @@ button {
 }
 .hero-desc {
   color: var(--text-dim);
-  font-size: 1.05rem;
+  /* V3 lead role (§1.1) */
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 400;
   max-width: 560px;
 }
 .hero-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 1.25rem;
-  font-size: 0.9rem;
+  /* V3 meta role (§1.1) */
+  font-size: var(--meta-size);
   color: var(--text-faint);
 }
 .hero-meta span {
@@ -904,7 +933,14 @@ button {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   color: var(--text-dim);
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .hero-socials a:hover {
   border-color: var(--accent);
@@ -940,22 +976,16 @@ button {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7, #ec4899, #06b6d4);
-  background-size: 400% 400%;
-  padding: 4px;
-  animation: spinGradient 8s linear infinite;
+  background: var(--accent);
+  padding: 2px;
+  opacity: 0.4;
 }
 .avatar-ring::before {
   content: '';
   position: absolute;
-  inset: 4px;
+  inset: 2px;
   border-radius: 50%;
   background: var(--bg);
-}
-
-@keyframes spinGradient {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 .avatar-wrap::after {
@@ -991,13 +1021,15 @@ button {
   width: 92%;
   height: 92%;
   border-radius: 50%;
-  background: var(--gradient);
+  /* Flat fallback surface (§2): --gradient retired from surfaces. */
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
   font-size: 4rem;
-  color: #fff;
+  color: var(--accent);
   font-weight: 700;
 }
 
@@ -1015,7 +1047,14 @@ button {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   animation: float 5s ease-in-out infinite;
   z-index: 2;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .floating-card:hover {
   transform: translateY(-5px) scale(1.05);
@@ -1116,12 +1155,7 @@ button {
 .stat-num {
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   font-weight: 800;
-  background: linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7);
-  background-size: 200% 200%;
-  animation: gradientText 5s ease infinite;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text); /* flat — gradient text-fill retired (§1.1/§2) */
   line-height: 1;
 }
 .stat-label {
@@ -1138,7 +1172,14 @@ button {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
   position: relative;
   overflow: hidden;
 }
@@ -1203,7 +1244,14 @@ button {
   border-radius: 999px;
   font-size: 0.85rem;
   color: var(--text-dim);
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .chip:hover {
   background: var(--glass-bg-hover);
@@ -1226,7 +1274,14 @@ button {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
   position: relative;
   overflow: hidden;
 }
@@ -1285,7 +1340,14 @@ button {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
   position: relative;
   overflow: hidden;
 }
@@ -1333,7 +1395,14 @@ button {
   border-radius: var(--radius-sm);
   font-size: 0.82rem;
   color: var(--text-dim);
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .skill-tags span:hover {
   background: rgba(6, 182, 212, 0.1);
@@ -1396,7 +1465,14 @@ button {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--glass-border);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 [data-theme="light"] .skill-tier i {
   background: rgba(0, 0, 0, 0.08);
@@ -1412,8 +1488,8 @@ button {
 }
 /* Top tier gets an extra glow */
 .skill-row[data-tier="4"] .skill-tier i:nth-child(-n+4) {
-  background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-  border-color: transparent;
+  background: var(--accent);
+  border-color: var(--accent);
   box-shadow: 0 0 10px var(--accent-glow);
 }
 .skill-row:hover .skill-tier i {
@@ -1455,7 +1531,14 @@ button {
   border: 1px solid var(--glass-border);
   border-radius: 999px;
   font-size: 0.9rem;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .learning-tags span:hover {
   background: var(--glass-bg-hover);
@@ -1477,12 +1560,18 @@ button {
 .projects-grid .project-card.revealed:nth-child(6) { transition-delay: 0.6s; }
 .project-card {
   position: relative;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
+  /* V3 §3.2 card surface: flat bg-elev, 1px hairline, token radius */
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   display: flex;
   flex-direction: column;
-  transition: all var(--transition);
+  transition:
+    border-color var(--dur-micro) var(--ease-out),
+    box-shadow var(--dur-micro) var(--ease-out),
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility var(--transition);
   overflow: hidden;
   padding: 0;
 }
@@ -1497,7 +1586,6 @@ button {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .project-cover.parallax { will-change: transform; }
-.project-card:hover .project-cover { transform: rotateX(2deg) rotateY(-2deg) scale(1.04); }
 /* Image covers for dashboard-added projects (media library path). */
 .project-cover img {
   width: 100%;
@@ -1568,10 +1656,10 @@ button {
   box-shadow: 0 0 12px var(--accent);
 }
 .project-cover-nodes span:nth-child(1) { top: 30%; left: 20%; }
-.project-cover-nodes span:nth-child(2) { top: 30%; right: 20%; background: var(--accent-purple); box-shadow: 0 0 12px var(--accent-purple); }
+.project-cover-nodes span:nth-child(2) { top: 30%; right: 20%; background: var(--accent-2); box-shadow: 0 0 12px var(--accent-2); }
 .project-cover-nodes span:nth-child(3) { top: 60%; left: 35%; background: var(--success); box-shadow: 0 0 12px var(--success); }
-.project-cover-nodes span:nth-child(4) { top: 60%; right: 35%; background: var(--accent-pink); box-shadow: 0 0 12px var(--accent-pink); }
-.project-cover-nodes span:nth-child(5) { top: 80%; left: 50%; transform: translateX(-50%); background: var(--accent-blue); box-shadow: 0 0 12px var(--accent-blue); }
+.project-cover-nodes span:nth-child(4) { top: 60%; right: 35%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+.project-cover-nodes span:nth-child(5) { top: 80%; left: 50%; transform: translateX(-50%); background: var(--accent-2); box-shadow: 0 0 12px var(--accent-2); }
 .project-cover-nodes span:nth-child(6) { top: 15%; left: 50%; transform: translateX(-50%); background: var(--accent); box-shadow: 0 0 12px var(--accent); }
 .project-cover-nodes::before,
 .project-cover-nodes::after {
@@ -1751,24 +1839,34 @@ button {
   inset-inline-start: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, #06b6d4, #3b82f6, #a855f7);
+  /* V3 single-accent: was a raw 3-stop cyan→blue→purple gradient */
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s ease;
 }
-.project-card:hover::before {
-  transform: scaleX(1);
+[dir='rtl'] .project-card::before {
+  transform-origin: right;
 }
-.project-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(6, 182, 212, 0.3);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(6, 182, 212, 0.1);
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover::before {
+    transform: scaleX(1);
+  }
+}
+/* V3 §3.2 hover: border + glow shadow, 150ms — no translateY (§4.3). */
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px var(--accent-glow);
+  }
 }
 .project-card.featured {
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(168, 85, 247, 0.08));
-  border-color: rgba(6, 182, 212, 0.3);
+  /* Spotlight signal: single-accent border, flat surface (was a 2-stop gradient) */
+  border-color: var(--accent);
 }
 /* Primary featured project dominates: full row, side-by-side on wide screens. */
+/* Spotlight cover also reads taller in the single-column mobile flow. */
+.project-card.featured.featured-primary .project-cover { min-height: 200px; }
 @media (min-width: 720px) {
   .projects-grid .project-card.featured.featured-primary {
     grid-column: 1 / -1;
@@ -1776,26 +1874,26 @@ button {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
     align-items: stretch;
   }
-  .project-card.featured.featured-primary .project-cover { min-height: 260px; }
-  .project-card.featured.featured-primary .project-body { padding: 2rem; }
-  .project-card.featured.featured-primary h3 { font-size: 1.6rem; }
+  .project-card.featured.featured-primary .project-cover { height: 100%; min-height: 300px; }
+  .project-card.featured.featured-primary .project-body { padding: var(--space-6); }
+  .project-card.featured.featured-primary h3 { font-size: clamp(1.4rem, 2.4vw, 1.75rem); }
 }
 .project-card.featured.featured-primary .project-tag {
-  background: rgba(6, 182, 212, 0.16);
-  box-shadow: 0 0 18px rgba(6, 182, 212, 0.15);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  box-shadow: 0 0 18px var(--accent-glow);
 }
-.project-card.featured::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.1), transparent 50%);
-  pointer-events: none;
+/* Clearer case-study entry point on the spotlight (CSS-only; the
+   [data-case-open] hook and its i18n label are unchanged). */
+.project-card.featured.featured-primary .project-links [data-case-open] {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .project-tag {
   display: inline-block;
   padding: 0.3rem 0.8rem;
-  background: rgba(6, 182, 212, 0.1);
-  border: 1px solid rgba(6, 182, 212, 0.3);
+  /* V3: raw cyan rgba → accent token mixes (survives all 5 themes) */
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -1813,20 +1911,30 @@ button {
   align-items: center;
   justify-content: center;
   color: var(--accent);
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
-.project-card:hover .project-icon {
-  background: rgba(6, 182, 212, 0.1);
-  border-color: var(--accent);
-  transform: scale(1.1);
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .project-icon {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border-color: var(--accent);
+    transform: scale(1.1);
+  }
 }
 .project-icon i {
   width: 24px;
   height: 24px;
 }
 .project-card h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: var(--font-h3-size);
+  font-weight: 600;
+  line-height: 1.25;
 }
 .project-card p {
   color: var(--text-dim);
@@ -1845,12 +1953,21 @@ button {
   border-radius: var(--radius-sm);
   font-size: 0.78rem;
   color: var(--text-dim);
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
-.project-tags span:hover {
-  background: rgba(6, 182, 212, 0.08);
-  border-color: rgba(6, 182, 212, 0.3);
-  color: var(--accent);
+@media (hover: hover) and (pointer: fine) {
+  .project-tags span:hover {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+    color: var(--accent);
+  }
 }
 .project-links {
   display: flex;
@@ -1892,7 +2009,14 @@ button {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   padding: 1.25rem 1.5rem;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
   position: relative;
   text-align: start;
   cursor: pointer;
@@ -1957,7 +2081,14 @@ button {
   background: linear-gradient(135deg, rgba(6, 182, 212, 0.12), rgba(168, 85, 247, 0.10));
   border: 1px solid var(--glass-border);
   color: var(--accent);
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .cert-icon i {
   width: 18px;
@@ -1966,7 +2097,7 @@ button {
 .cert-card:hover .cert-icon {
   transform: rotate(-6deg) scale(1.08);
   border-color: rgba(6, 182, 212, 0.4);
-  color: var(--accent-blue);
+  color: var(--accent-2);
   box-shadow: 0 6px 18px rgba(6, 182, 212, 0.18);
 }
 .cert-org {
@@ -2028,7 +2159,14 @@ button {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 2rem;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
   position: relative;
   overflow: hidden;
 }
@@ -2082,7 +2220,14 @@ button {
   box-shadow: 0 0 0 4px var(--bg-elev), 0 0 15px rgba(6, 182, 212, 0.4);
   position: relative;
   z-index: 1;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .t-item:hover .t-marker {
   transform: scale(1.3);
@@ -2166,7 +2311,14 @@ button {
   justify-content: center;
   opacity: 0;
   transform: translateX(6px);
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 [dir='rtl'] .t-open { transform: translateX(-6px); }
 .t-item:hover .t-open,
@@ -2256,7 +2408,7 @@ button {
   display: inline-block;
   height: 6px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-purple));
+  background: var(--accent);
   min-width: 24px;
   opacity: 0.85;
   margin-inline-start: auto;
@@ -2282,7 +2434,14 @@ button {
   background: transparent;
   cursor: pointer;
   padding: 0;
-  transition: all 0.3s ease;
+    transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0.3s ease;
   position: relative;
 }
 .nav-dot:hover {
@@ -2310,7 +2469,14 @@ button {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: all 0.2s ease;
+    transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
   border: 1px solid var(--border);
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
@@ -2348,7 +2514,14 @@ button {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
   position: relative;
   overflow: hidden;
 }
@@ -2373,7 +2546,14 @@ button {
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E") center/contain no-repeat;
   opacity: 0;
   transform: scale(0.7);
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
   pointer-events: none;
   z-index: 1;
 }
@@ -2445,8 +2625,10 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--gradient);
-  color: #fff;
+  /* Flat fallback surface (§2): --gradient retired from surfaces. */
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  color: var(--accent);
   font-weight: 700;
   font-size: 1.1rem;
   z-index: 0;
@@ -2464,60 +2646,68 @@ button {
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 3rem;
+  gap: var(--space-7);
   align-items: start;
 }
 .contact-info p {
   color: var(--text-dim);
-  margin-bottom: 1.5rem;
+  margin-block-end: var(--space-5);
 }
 .availability {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0.5rem 1rem;
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: var(--space-2) var(--space-4);
+  /* §2: derive from the theme's --success token, never a raw green */
+  background: color-mix(in srgb, var(--success) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--success) 30%, transparent);
   border-radius: 999px;
   font-size: 0.85rem;
   color: var(--success);
   font-weight: 500;
-  margin-bottom: 1.75rem;
+  margin-block-end: var(--space-5);
 }
 .availability-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--success);
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 60%, transparent);
   animation: pulseRing 2s ease-out infinite;
 }
 @keyframes pulseRing {
-  0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
-  100% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 60%, transparent); }
+  100% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--success) 0%, transparent); }
 }
 .contact-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  margin-top: 1.5rem;
+  gap: var(--space-3);
+  margin-block-start: var(--space-5);
 }
 .contact-list li {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: var(--space-3);
   color: var(--text-dim);
-  padding: 0.75rem 1rem;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  padding: var(--space-3) var(--space-4);
+  /* §1.3: flat surface — glass tokens are reserved for overlays/dialogs */
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  transition: all var(--transition);
+  transition:
+    background-color var(--dur-micro) var(--ease-out),
+    border-color var(--dur-micro) var(--ease-out),
+    box-shadow var(--dur-micro) var(--ease-out);
 }
-.contact-list li:hover {
-  border-color: var(--accent);
-  background: var(--glass-bg-hover);
-  transform: translateX(5px);
+/* §3.2/§4.3: hover = border + shadow at 150ms, gated to fine pointers.
+   (The old translateX(5px) was LTR-physical and mirrored wrongly in RTL.) */
+@media (hover: hover) and (pointer: fine) {
+  .contact-list li:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px var(--accent-glow);
+  }
 }
 .contact-list i {
   width: 18px;
@@ -2528,27 +2718,22 @@ button {
   color: var(--text);
 }
 .contact-form {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  /* §1.3: flat surface (was --glass-bg + a --gradient-soft ::before sheen —
+     glass tokens stay reserved for the theme menu, modals, toasts). */
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: var(--space-4);
   position: relative;
   overflow: hidden;
-}
-.contact-form::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--gradient-soft);
-  pointer-events: none;
 }
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: var(--space-2);
   position: relative;
   z-index: 1;
 }
@@ -2556,29 +2741,34 @@ button {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-dim);
-  transition: color var(--transition);
+  transition: color var(--dur-micro) var(--ease-out);
 }
 .field:focus-within label {
   color: var(--accent);
 }
 .field input,
 .field textarea {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--glass-border);
+  /* color-mix(var(--text)) keeps the input surface theme-aware — the old
+     rgba(255,255,255,0.03) was invisible on the light/sunset form fills. */
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 0.85rem 1rem;
   color: var(--text);
   font-family: inherit;
   font-size: 0.95rem;
-  transition: all var(--transition);
+  transition:
+    background-color var(--dur-micro) var(--ease-out),
+    border-color var(--dur-micro) var(--ease-out),
+    box-shadow var(--dur-micro) var(--ease-out);
   resize: vertical;
 }
 .field input:focus,
 .field textarea:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow), 0 4px 20px rgba(6, 182, 212, 0.15);
-  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
 }
 .field input::placeholder,
 .field textarea::placeholder {
@@ -2593,17 +2783,16 @@ button {
 
 /* ---------- Footer ---------- */
 .footer {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-top: 1px solid var(--glass-border);
-  padding: 3rem 0 1.5rem;
+  /* §1.3: flat — no glass fill/blur on a page-level surface */
+  background: var(--bg-elev);
+  border-block-start: 1px solid var(--border);
+  padding-block: var(--space-7) var(--space-5);
   position: relative;
 }
 .footer-inner {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  gap: 2rem;
+  gap: var(--space-6);
   align-items: center;
 }
 .footer-tag {
@@ -2613,26 +2802,32 @@ button {
 }
 .footer-socials {
   display: flex;
-  gap: 0.75rem;
+  gap: var(--space-3);
   justify-content: flex-end;
 }
 .footer-socials a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  /* 44×44 effective touch target (§3.1) — was 38×38 */
+  inline-size: 44px;
+  block-size: 44px;
   border-radius: var(--radius-sm);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: transparent;
+  border: 1px solid var(--border);
   color: var(--text-dim);
-  transition: all var(--transition);
+  transition:
+    background-color var(--dur-micro) var(--ease-out),
+    border-color var(--dur-micro) var(--ease-out),
+    color var(--dur-micro) var(--ease-out);
 }
-.footer-socials a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(6, 182, 212, 0.2);
+/* §3.1 tertiary treatment: border+color only, 150ms, gated (§4.3) —
+   no translateY, no raw-cyan shadow. */
+@media (hover: hover) and (pointer: fine) {
+  .footer-socials a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 }
 .footer-socials i,
 .footer-socials svg {
@@ -2644,18 +2839,27 @@ button {
   text-align: center;
   color: var(--text-faint);
   font-size: 0.85rem;
-  border-top: 1px solid var(--border);
-  padding-top: 1.5rem;
-  margin-top: 1rem;
+  border-block-start: 1px solid var(--border);
+  padding-block-start: var(--space-5);
+  margin-block-start: var(--space-4);
 }
 
 /* ---------- RTL Adjustments ---------- */
-[dir='rtl'] .floating-card.top { inset-inline-end: -10%; inset-inline-start: auto; }
-[dir='rtl'] .floating-card.bottom { inset-inline-end: -5%; inset-inline-start: auto; }
+[dir='rtl'] .floating-card.top { inset-inline-end: -10%; inset-inline-start: auto; }[dir='rtl'] .floating-card.bottom { inset-inline-end: -5%; inset-inline-start: auto; }
 [dir='rtl'] .floating-card.left { inset-inline-start: -10%; inset-inline-end: auto; }
 [dir='rtl'] .timeline .t-item:not(:last-child) .t-marker::after {
   left: 50%;
   right: auto;
+}
+/* V3 Arabic display lines (§1.1): AR keeps the same clamps but needs a taller
+   line-height and no letter-spacing (Arabic joining doesn't accept tracking). */
+[dir='rtl'] .hero-title {
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+[dir='rtl'] .section-title {
+  line-height: 1.3;
+  letter-spacing: 0;
 }
 
 /* ---------- Custom Cursor ---------- */
@@ -2829,7 +3033,7 @@ button {
     font-size: 0.78rem;
   }
   .contact-form {
-    padding: 1.25rem;
+    padding: var(--space-4);
   }
   .field input,
   .field textarea {
@@ -2901,20 +3105,19 @@ button {
   transform: translateY(0) translateX(0) scale(1);
 }
 
-/* Hero text lines — slide from LEFT */
-@keyframes heroSlideLeft {
-  from { opacity: 0; transform: translateX(-50px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
+/* Hero text lines — slide from LEFT. V3 §4.3: ONE staggered hero entrance,
+   50ms stair (status 0ms → title 50ms → lead 100ms → CTA 150ms …), last item
+   finishes at 250ms + 700ms = 950ms ≤ the 1000ms --dur-load budget. */
 .hero-text > * {
   animation: heroSlideLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-.hero-text > *:nth-child(1) { animation-delay: 0.1s; }
-.hero-text > *:nth-child(2) { animation-delay: 0.2s; }
-.hero-text > *:nth-child(3) { animation-delay: 0.35s; }
-.hero-text > *:nth-child(4) { animation-delay: 0.45s; }
-.hero-text > *:nth-child(5) { animation-delay: 0.55s; }
-.hero-text > *:nth-child(6) { animation-delay: 0.65s; }
+.hero-text > *:nth-child(1) { animation-delay: 0s; }
+.hero-text > *:nth-child(2) { animation-delay: 50ms; }
+.hero-text > *:nth-child(3) { animation-delay: 100ms; }
+.hero-text > *:nth-child(4) { animation-delay: 150ms; }
+.hero-text > *:nth-child(5) { animation-delay: 200ms; }
+.hero-text > *:nth-child(6) { animation-delay: 250ms; }
+.hero-text > *:nth-child(7) { animation-delay: 300ms; }
 
 /* Hero visual slides in from RIGHT */
 @keyframes heroVisual {
@@ -2922,7 +3125,7 @@ button {
   to   { opacity: 1; transform: translateX(0) scale(1); }
 }
 .hero-visual {
-  animation: heroVisual 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  animation: heroVisual 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
 }
 
 /* Hero floating cards — pop in from center, then float */
@@ -2933,12 +3136,12 @@ button {
 .hero-visual .floating-card {
   opacity: 0;
   animation:
-    cardPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-    float 5s ease-in-out 2s infinite;
+    cardPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    float 5s ease-in-out 1s infinite;
 }
-.hero-visual .floating-card:nth-child(1) { animation-delay: 0.8s, 2s; }
-.hero-visual .floating-card:nth-child(2) { animation-delay: 1.0s, 2.2s; }
-.hero-visual .floating-card:nth-child(3) { animation-delay: 1.2s, 2.4s; }
+.hero-visual .floating-card:nth-child(1) { animation-delay: 0.3s, 1s; }
+.hero-visual .floating-card:nth-child(2) { animation-delay: 0.45s, 1s; }
+.hero-visual .floating-card:nth-child(3) { animation-delay: 0.6s, 1s; }
 
 /* Stats — bouncy pop */
 @keyframes statPop {
@@ -2955,8 +3158,8 @@ button {
 
 /* Section head — eyebrow slides, title fades up */
 @keyframes eyebrowSlide {
-  from { opacity: 0; transform: translateX(-20px); letter-spacing: 0.15em; }
-  to   { opacity: 1; transform: translateX(0);     letter-spacing: 0.05em; }
+  from { opacity: 0; transform: translateX(-20px); letter-spacing: 0.16em; }
+  to   { opacity: 1; transform: translateX(0);     letter-spacing: 0.08em; }
 }
 .section-head.revealed .eyebrow {
   animation: eyebrowSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -2983,7 +3186,14 @@ button {
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
   z-index: 90;
 }
 .back-to-top.visible {
@@ -3213,7 +3423,14 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+    transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
 }
 .ai-icon-btn:hover {
   background: rgba(255, 255, 255, 0.08);
@@ -3377,7 +3594,14 @@ button {
   font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+    transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
   text-align: start;
 }
 .ai-suggestion:hover {
@@ -3456,7 +3680,14 @@ button {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all 0.2s ease;
+    transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
 }
 .ai-mic:hover {
   color: var(--accent);
@@ -3525,7 +3756,14 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+    transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
   flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
 }
@@ -3619,7 +3857,14 @@ button {
   justify-content: center;
   cursor: pointer;
   z-index: 2;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .rec-modal-close:hover {
   background: var(--accent);
@@ -3786,7 +4031,14 @@ button {
   justify-content: center;
   cursor: pointer;
   z-index: 2;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .cert-modal-close:hover {
   background: var(--accent);
@@ -3914,7 +4166,8 @@ body.no-scroll {
   max-height: 88vh;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.6), 0 0 60px rgba(6, 182, 212, 0.1);
+  /* V3: was a raw black + cyan-glow double shadow */
+  box-shadow: var(--shadow-lg);
   animation: cert-zoom-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
@@ -3933,7 +4186,14 @@ body.no-scroll {
   justify-content: center;
   cursor: pointer;
   z-index: 2;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .case-modal-close:hover {
   background: var(--accent);
@@ -3946,61 +4206,76 @@ body.no-scroll {
   height: 18px;
 }
 .case-modal-head {
-  padding: 1.75rem 2rem 1.25rem;
+  padding: var(--space-6) var(--space-6) var(--space-5);
   border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(6, 182, 212, 0.06), transparent);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
 }
 .case-modal-tag {
   display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
+  /* V3 §1.1 label role: mono overline; §3.2 tint via accent mixes */
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent);
-  background: rgba(6, 182, 212, 0.12);
-  border: 1px solid rgba(6, 182, 212, 0.3);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
   padding: 0.25rem 0.7rem;
   border-radius: 999px;
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-3);
+}
+/* AR: uppercase is a no-op but letter-spacing breaks Arabic joining */
+[dir='rtl'] .case-modal-tag {
+  text-transform: none;
+  letter-spacing: 0;
 }
 .case-modal-head h3 {
-  font-size: 1.45rem;
-  font-weight: 800;
+  /* V3 §1.1 h3 binding — unified with component h3s */
+  font-size: var(--font-h3-size);
+  font-weight: 600;
   line-height: 1.25;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-2);
 }
 .case-modal-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: var(--space-2);
 }
 .case-modal-stack span {
-  font-size: 0.72rem;
+  /* V3 §3.3 chip */
+  font-size: 0.8rem;
   font-family: var(--font-mono);
   color: var(--text-dim);
-  background: var(--bg-elev-2);
+  background: transparent;
   border: 1px solid var(--border);
   padding: 0.2rem 0.55rem;
-  border-radius: 6px;
+  border-radius: 999px;
 }
 .case-modal-body {
   flex: 1;
   overflow-y: auto;
-  padding: 1.5rem 2rem;
+  padding: var(--space-5) var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: var(--space-4);
 }
 .case-block-label {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  font-size: 0.8rem;
-  font-weight: 700;
+  /* V3 §1.1 label role: mono, 500, tracked (was sans 700 uppercase) */
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--text);
   margin-bottom: 0.45rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+}
+[dir='rtl'] .case-block-label {
+  text-transform: none;
+  letter-spacing: 0;
 }
 .case-block-label i {
   width: 16px;
@@ -4009,15 +4284,17 @@ body.no-scroll {
 }
 .case-block p {
   color: var(--text-dim);
-  font-size: 0.95rem;
-  line-height: 1.7;
+  /* V3 §1.1 body role */
+  font-size: 1rem;
+  line-height: 1.6;
   margin: 0;
 }
 .case-result {
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(168, 85, 247, 0.08));
-  border: 1px solid var(--glass-border);
+  /* V3 single accent: was a cyan→purple gradient */
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1rem 1.25rem;
+  padding: var(--space-4) var(--space-5);
 }
 .case-result p {
   color: var(--text);
@@ -4026,7 +4303,7 @@ body.no-scroll {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
-  padding: 1.25rem 2rem 1.75rem;
+  padding: var(--space-4) var(--space-6) var(--space-5);
   border-top: 1px solid var(--border);
 }
 .case-modal-foot .btn {
@@ -4039,11 +4316,10 @@ body.no-scroll {
   height: 16px;
 }
 @media (max-width: 720px) {
-  .case-modal { padding: 0.5rem; }
-  .case-modal-head { padding: 1.25rem 1.25rem 1rem; }
-  .case-modal-body { padding: 1.25rem; }
-  .case-modal-foot { padding: 1rem 1.25rem 1.5rem; }
-  .case-modal-head h3 { font-size: 1.2rem; }
+  .case-modal { padding: var(--space-2); }
+  .case-modal-head { padding: var(--space-4) var(--space-4) var(--space-3); }
+  .case-modal-body { padding: var(--space-4); }
+  .case-modal-foot { padding: var(--space-3) var(--space-4) var(--space-4); }
 }
 
 /* ---------- Timeline / Milestone Modal ---------- */
@@ -4097,7 +4373,14 @@ body.no-scroll {
   justify-content: center;
   cursor: pointer;
   z-index: 2;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
 }
 .tl-modal-close:hover {
   background: var(--accent);
@@ -4129,7 +4412,7 @@ body.no-scroll {
 }
 .tl-modal-head h3 {
   font-size: 1.3rem;
-  font-weight: 800;
+  font-weight: 700; /* V3 h3 role (§1.1) — was 800; avoids faux-bold on the display face */
   line-height: 1.3;
   margin: 0;
 }
@@ -4161,7 +4444,7 @@ body.no-scroll {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+  background: var(--accent);
   box-shadow: 0 0 10px var(--accent-glow);
 }
 .tl-modal-foot {
@@ -4266,7 +4549,14 @@ body.no-scroll {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   z-index: 10000;
   opacity: 0;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+    background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   max-width: min(90vw, 420px);
   font-size: 0.9rem;
 }
@@ -4312,7 +4602,14 @@ body.no-scroll {
   border: none;
   color: var(--text-faint);
   cursor: pointer;
-  transition: all var(--transition);
+    transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
   flex-shrink: 0;
 }
 .toast-close:hover {
@@ -4373,7 +4670,14 @@ body.no-scroll {
   font-weight: 600;
   cursor: pointer;
   font-family: inherit;
-  transition: all 0.2s ease;
+    transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
 }
 .a11y-head-actions button:hover {
   color: var(--text);
@@ -4431,7 +4735,14 @@ body.no-scroll {
   color: var(--text-dim);
   cursor: pointer;
   font-size: 0.85rem;
-  transition: all 0.2s ease;
+    transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
 }
 .a11y-item button[data-a11y-go]:hover {
   background: var(--accent);
@@ -4464,11 +4775,11 @@ body.a11y-focus :focus {
 /* ---------- Form Validation ---------- */
 .field-error input,
 .field-error textarea {
-  border-color: #ef4444 !important;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 20%, transparent) !important;
 }
 .form-error {
-  color: #ef4444 !important;
+  color: var(--danger) !important;
 }
 .btn-spinner {
   display: inline-block;
@@ -4522,13 +4833,13 @@ button:disabled {
   bottom: 0;
   inset-inline-start: 0;
   width: 64px;
-  height: 3px;
+  height: 1px;
   border-radius: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-purple));
+  background: var(--accent);
   box-shadow: 0 0 12px var(--accent-glow);
 }
 [dir='rtl'] .section-title::after {
-  background: linear-gradient(270deg, var(--accent), var(--accent-purple));
+  background: var(--accent);
 }
 .section-head.revealed .section-title::after {
   animation: underlineGrow 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
@@ -4538,21 +4849,9 @@ button:disabled {
   to   { transform: scaleX(1); opacity: 1; }
 }
 
-/* Primary button — pulsing glow on hover */
-.btn-primary {
-  animation: btnBreath 3s ease-in-out infinite;
-}
-@keyframes btnBreath {
-  0%, 100% { box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4); }
-  50%      { box-shadow: 0 4px 28px rgba(168, 85, 247, 0.55), 0 0 0 0 rgba(6, 182, 212, 0.25); }
-}
-.btn-primary:hover {
-  animation: none;
-}
-
 /* Ghost button — soft glow on hover */
 .btn-ghost:hover {
-  box-shadow: 0 6px 25px rgba(6, 182, 212, 0.25), inset 0 0 0 1px rgba(6, 182, 212, 0.2);
+  box-shadow: 0 4px 16px var(--accent-glow);
 }
 
 /* Navbar — gradient hairline when scrolled */
@@ -4562,15 +4861,15 @@ button:disabled {
   inset-inline: 0;
   bottom: -1px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-purple), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 .navbar.scrolled::after {
-  opacity: 0.8;
+  opacity: 0.6;
 }
 [dir='rtl'] .navbar::after {
-  background: linear-gradient(270deg, transparent, var(--accent), var(--accent-purple), transparent);
+  background: linear-gradient(270deg, transparent, var(--accent), transparent);
 }
 
 /* Hero avatar — pulsing halo ring */
@@ -4609,10 +4908,9 @@ button:disabled {
   transform: translateY(-2px);
 }
 
-/* Cards — richer hover glow */
+/* Cards — richer hover glow (legacy surfaces; .project-card now follows §3.2) */
 .skill-card:hover,
 .cert-card:hover,
-.project-card:hover,
 .testimonial:hover {
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.3),
@@ -4658,6 +4956,15 @@ button:disabled {
   box-shadow: 0 0 12px var(--accent-glow);
 }
 
+/* Theme switch: kill transitions during a theme swap (§4.3). The
+   [data-theme-switching] attribute is toggled in script.js by the theme handler. */
+[data-theme-switching] *,
+[data-theme-switching] *::before,
+[data-theme-switching] *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
 /* ---------- Reduce motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -4666,9 +4973,16 @@ button:disabled {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    --dur-load: 0.01ms; /* also collapse the orchestrated hero entrance */
   }
   html {
     scroll-behavior: auto;
+  }
+  /* Hide elements whose only purpose is motion (§4.4). */
+  .hero-blobs,
+  .avatar-ring {
+    display: none;
   }
 }
 
@@ -4711,7 +5025,7 @@ button:disabled {
   inset-inline: 0;
   bottom: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.55), rgba(168, 85, 247, 0.55), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
@@ -4720,16 +5034,16 @@ button:disabled {
   opacity: 1;
 }
 
-/* Richer gradient on section titles' accent underline */
+/* Richer accent on section titles' underline */
 .section-title::after {
   content: '';
   display: block;
   width: 64px;
-  height: 3px;
+  height: 1px;
   margin-top: 0.7rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, #06b6d4, #3b82f6, #a855f7);
-  box-shadow: 0 0 16px rgba(6, 182, 212, 0.45);
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
 }
 
 /* Subtle vignette so content pops in dark themes */
@@ -4790,3 +5104,205 @@ body::after {
 .case-details .case-block:first-child { padding-top: 0; }
 .case-details[open] summary { border-bottom: 1px solid var(--glass-border); }
 .case-details .case-block { padding: 0.9rem 1.1rem; }
+
+/* ===== V3 stage 2: services + freelance sections (token-based, logical props) ===== */
+/* Shells start [hidden] in markup; cms.js unhides them when /api/content
+   returns a non-empty "services" / "professional_profiles" array. */
+#services[hidden],
+#freelance[hidden] { display: none; }
+
+.section-intro {
+  margin-block-start: var(--space-3);
+  max-width: 60ch;
+  color: var(--text-dim);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.services-grid,
+.profiles-grid {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+/* Service card — §3.2 surface: flat bg, 1px border, token radius */
+.service-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+}
+.service-card h3 {
+  font-size: var(--font-h3-size);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.service-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  color: var(--accent);
+}
+.service-icon svg { block-size: 1.25rem; inline-size: 1.25rem; }
+.service-summary {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.service-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.service-features li {
+  position: relative;
+  padding-inline-start: 1.1rem;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.service-features li::before {
+  content: '›';
+  position: absolute;
+  inset-inline-start: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.service-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.55rem;
+}
+.service-related {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--dur-micro) var(--ease-out);
+}
+.service-related svg { block-size: 0.9rem; inline-size: 0.9rem; }
+[dir='rtl'] .service-related svg { transform: scaleX(-1); }
+.service-cta { margin-block-start: auto; }
+
+/* Profile cards */
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+}
+.profile-card h3 {
+  font-size: var(--font-h3-size);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.profile-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--accent);
+}
+.profile-icon svg { block-size: 1.25rem; inline-size: 1.25rem; }
+.profile-platform {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.profile-user {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+.profile-title { color: var(--text); font-size: 0.95rem; }
+.profile-desc { color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; }
+.profile-cta {
+  margin-block-start: auto;
+  padding-block-start: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color var(--dur-micro) var(--ease-out);
+}
+.profile-cta svg { block-size: 0.9rem; inline-size: 0.9rem; }
+.profile-card.featured { border-color: var(--accent); }
+
+/* Hire me CTA inside the contact info column */
+.contact-info .hire-me { margin-block-start: var(--space-4); }
+
+/* Hero AI differentiator line (a quiet sub-line, not the headline) */
+.hero-ai {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.hero-ai svg { block-size: 0.95rem; inline-size: 0.95rem; color: var(--accent); flex-shrink: 0; }
+
+/* Hover effects — gated per §4.3 (desktop pointers only), 150ms */
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover,
+  .profile-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px var(--accent-glow);
+  }
+  .service-related:hover { color: var(--accent-2); }
+  .profile-card:hover .profile-cta { color: var(--accent-2); }
+}
+
+/* ===== V3 stage 3a: project grid hierarchy ===== */
+/* Three tiers, one grid:
+   - spotlight: .featured.featured-primary (p4) — full row above;
+   - secondary tier (.tier-2: p1–p3): the default card treatment (§3.2);
+   - additional-work tier (.tier-3: p5–p7): restrained compact variant —
+     shorter cover, tighter body, smaller icon. h3 stays at the §1.1 binding
+     so the type scale stays unified; the tier reads through mass, not size.
+   Dashboard-added cards (cms.js, no tier class) render as the secondary tier. */
+.project-card.tier-3 .project-cover { height: 96px; }
+.project-card.tier-3 .project-body { padding: var(--space-5); gap: var(--space-2); }
+.project-card.tier-3 .project-icon { width: 40px; height: 40px; }
+.project-card.tier-3 .project-icon i { width: 20px; height: 20px; }
+.project-card.tier-3 .project-links { margin-top: 0; }
+
+/* After the reveal settles, the card hover must run at --dur-micro (§4.3):
+   .reveal-scale (later in the sheet) otherwise keeps the whole card on the
+   700ms reveal transition forever. */
+.reveal-scale.revealed.project-card {
+  transition:
+    border-color var(--dur-micro) var(--ease-out),
+    box-shadow var(--dur-micro) var(--ease-out);
+}

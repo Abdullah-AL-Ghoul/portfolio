@@ -5,6 +5,8 @@ import Login from './pages/Login.jsx';
 import Shell from './components/Shell.jsx';
 import Overview from './pages/Overview.jsx';
 import Projects from './pages/Projects.jsx';
+import Services from './pages/Services.jsx';
+import Profiles from './pages/Profiles.jsx';
 import Skills from './pages/Skills.jsx';
 import Assistant from './pages/Assistant.jsx';
 import Certifications from './pages/Certifications.jsx';
@@ -68,6 +70,8 @@ export default function App() {
           <Route path="/" element={<RequireAuth><Shell /></RequireAuth>}>
             <Route index element={<Overview />} />
             <Route path="projects" element={<Projects />} />
+            <Route path="services" element={<Services />} />
+            <Route path="profiles" element={<Profiles />} />
             <Route path="assistant" element={<Assistant />} />
             <Route path="skills" element={<Skills />} />
             <Route path="certifications" element={<Certifications />} />

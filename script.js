@@ -103,8 +103,8 @@
   // ============== Translations ==============
   const i18n = {
     en: {
-      'meta.title': "Abdullah Ayman AL-Ghoul · Computer Science Student",
-      'meta.desc': "Portfolio of Abdullah Ayman AL-Ghoul — Computer Science student at Al-Azhar University interested in software engineering, networking, and AI.",
+      'meta.title': "Abdullah Ayman AL-Ghoul · Full-Stack Web Application Developer",
+      'meta.desc': "Portfolio of Abdullah Ayman AL-Ghoul — full-stack web application developer at Al-Azhar University building web apps, APIs, and practical AI integrations.",
 
       'brand': 'Abdullah',
 
@@ -121,10 +121,11 @@
 
       'hero.status': 'Open to opportunities',
       'hero.greet': "Hi, I'm",
-      'hero.role': 'Computer Science Student',
-      'hero.desc': "CS student at Al-Azhar University, passionate about software engineering, networking, and emerging technologies. I build practical solutions and never stop learning.",
-      'hero.cta1': 'View Projects',
-      'hero.cta2': 'Contact Me',
+      'hero.role': 'Full-Stack Web Application Developer',
+      'hero.desc': "I build web applications end to end — responsive bilingual front ends, dependable APIs, and AI features that do real work.",
+      'hero.ai': 'AI integrations are part of the stack — from chat assistants to workflow automation.',
+      'hero.cta1': 'See my work',
+      'hero.cta2': 'Contact',
       'hero.cta3': 'Download CV',
       'hero.loc': 'Gaza, Palestine',
       'hero.uni': 'Al-Azhar University',
@@ -134,7 +135,18 @@
       'stats.projects': 'Projects',
       'stats.recs': 'Recommendation Letters',
 
-      'about.eyebrow': '01 · About',
+      'services.eyebrow': '// Services',
+      'services.title': 'What I Build',
+      'services.intro': 'The kind of work I take on — from full web applications to focused features.',
+      'services.cta': 'Discuss a project',
+      'services.related': 'Related project',
+
+      'freelance.eyebrow': '// Freelance',
+      'freelance.title': 'Work with me',
+      'freelance.intro': 'Verified professional profiles — hire me through the platform you prefer.',
+      'freelance.view': 'View profile',
+
+      'about.eyebrow': '// About',
       'about.title': 'Who am I?',
       'about.p1': "I'm Abdullah Al-Ghoul, a Computer Science student who believes technology is one of the most powerful tools for solving real-world problems. I enjoy learning, experimenting, and building practical solutions that combine logic, creativity, and innovation.",
       'about.p2': 'My interests span software engineering, networking, cybersecurity, and artificial intelligence. I constantly seek opportunities to improve my skills, explore new concepts, and contribute to meaningful technical projects.',
@@ -156,7 +168,7 @@
       'about.s5': 'Critical Thinking',
       'about.s6': 'Public Speaking',
 
-      'skills.eyebrow': '02 · Skills',
+      'skills.eyebrow': '// Skills',
       'skills.title': 'Tech Stack',
       'skills.prog': 'Programming',
       'skills.net': 'Networking & Infra',
@@ -175,7 +187,7 @@
       'skills.l5': 'Software Engineering Principles',
 
 
-      'proj.eyebrow': '03 · Projects',
+      'proj.eyebrow': '// Projects',
       'proj.title': 'Featured Projects',
       'proj.p1tag': 'Live · This Site',
       'proj.p1t': 'Personal Portfolio Website',
@@ -211,14 +223,14 @@
       'proj.p7t': 'SmartTimeCoach',
       'proj.p7d': 'Python productivity assistant with automated reminders that helps manage tasks and study schedules more effectively.',
 
-      'certs.eyebrow': '04 · Certifications',
+      'certs.eyebrow': '// Certifications',
       'certs.title': 'Verified Credentials',
       'certs.view': 'View certificate',
       'certs.download': 'Download',
       'certs.noimage': 'Certificate image not uploaded yet.',
       'certs.noimageHint': 'Drop the file into assets/certs/ and reload.',
 
-      'exp.eyebrow': '05 · Experience',
+      'exp.eyebrow': '// Experience',
       'exp.title': 'Experience & Milestones',
       'exp.techh': 'Technical Experience',
       'exp.milestone': 'Milestones',
@@ -241,7 +253,7 @@
       'exp.m4': '2023 · CS Journey Begins',
       'exp.m4sub': 'Al-Azhar University',
 
-      'test.eyebrow': '06 · Feedback',
+      'test.eyebrow': '// Feedback',
       'test.title': 'Recommendations',
       'test.q1': '"Abdullah is one of the most passionate students I have taught. He demonstrates strong collaboration, presentation, time management, and problem-solving skills."',
       'test.n1': 'Mr. Abdelbaset R. Almasri',
@@ -253,11 +265,13 @@
       'test.n3': 'Yazan W. Abo_Elqomboz',
       'test.r3': 'Project Team Member',
 
-      'contact.eyebrow': '07 · Contact',
+      'contact.eyebrow': '// Contact',
       'contact.title': "Let's Connect",
       'contact.desc': 'Have an opportunity, scholarship, or a project to discuss? I would love to hear from you.',
       'contact.avail': 'Replies within 24 hours',
       'contact.loc': 'Gaza, Palestine',
+
+      'contact.hire': 'Hire me',
 
       'certs.badge': 'Verified',
       'certs.c1t': 'AI for All: From Basics to GenAI Practice',
@@ -332,8 +346,8 @@
     },
 
     ar: {
-      'meta.title': 'عبدالله أيمن الغول · طالب علوم حاسوب',
-      'meta.desc': 'موقع عبدالله أيمن الغول — طالب علوم حاسوب في جامعة الأزهر، مهتم بهندسة البرمجيات والشبكات والذكاء الاصطناعي.',
+      'meta.title': 'عبدالله أيمن الغول · مطوّر تطبيقات ويب متكامل',
+      'meta.desc': "موقع عبدالله أيمن الغول — مطوّر تطبيقات ويب متكامل في جامعة الأزهر، يبني تطبيقات ويب وواجهات برمجية وتكاملات ذكاء اصطناعي عملية.",
 
       'brand': 'عبدالله',
 
@@ -350,10 +364,11 @@
 
       'hero.status': 'متاح للفرص',
       'hero.greet': 'مرحبًا، أنا',
-      'hero.role': 'طالب علوم حاسوب',
-      'hero.desc': 'طالب علوم حاسوب في جامعة الأزهر، شغوف بهندسة البرمجيات والشبكات والتقنيات الناشئة. أبني حلولًا عملية ولا أتوقف عن التعلم.',
-      'hero.cta1': 'شاهد المشاريع',
-      'hero.cta2': 'تواصل معي',
+      'hero.role': 'مطوّر تطبيقات ويب متكامل',
+      'hero.desc': 'أبني تطبيقات الويب من البداية إلى النهاية — واجهات متجاوبة ثنائية اللغة، وواجهات برمجية موثوقة، وميزات ذكاء اصطناعي تُنجز عملًا حقيقيًا.',
+      'hero.ai': 'تكاملات الذكاء الاصطناعي جزء من أعمالي — من المساعدات الذكية إلى أتمتة سير العمل.',
+      'hero.cta1': 'شاهد أعمالي',
+      'hero.cta2': 'تواصل',
       'hero.cta3': 'تحميل السيرة',
       'hero.loc': 'غزة، فلسطين',
       'hero.uni': 'جامعة الأزهر',
@@ -363,7 +378,18 @@
       'stats.projects': 'مشاريع',
       'stats.recs': 'خطابات توصية',
 
-      'about.eyebrow': '01 · نبذة',
+      'services.eyebrow': '# الخدمات',
+      'services.title': 'ماذا أبني',
+      'services.intro': 'نوع العمل الذي أتقبله — من تطبيقات الويب الكاملة إلى الميزات المركّزة.',
+      'services.cta': 'اطلب مشروعاً',
+      'services.related': 'مشروع مرتبط',
+
+      'freelance.eyebrow': '# العمل الحر',
+      'freelance.title': 'اعمل معي',
+      'freelance.intro': 'ملفات مهنية موثّقة — وظّفني عبر المنصة التي تناسبك.',
+      'freelance.view': 'عرض الملف',
+
+      'about.eyebrow': '# نبذة',
       'about.title': 'من أنا؟',
       'about.p1': 'أنا عبدالله الغول، طالب علوم حاسوب أؤمن بأن التكنولوجيا من أقوى الأدوات لحل المشكلات الواقعية. أستمتع بالتعلم والتجريب وبناء حلول عملية تجمع بين المنطق والإبداع والابتكار.',
       'about.p2': 'تمتد اهتماماتي عبر هندسة البرمجيات والشبكات والأمن السيبراني والذكاء الاصطناعي. أسعى باستمرار لتحسين مهاراتي واستكشاف مفاهيم جديدة والمساهمة في مشاريع تقنية ذات أثر.',
@@ -385,7 +411,7 @@
       'about.s5': 'التفكير النقدي',
       'about.s6': 'التحدث أمام الجمهور',
 
-      'skills.eyebrow': '02 · المهارات',
+      'skills.eyebrow': '# المهارات',
       'skills.title': 'الحزمة التقنية',
       'skills.prog': 'البرمجة',
       'skills.net': 'الشبكات والبنية التحتية',
@@ -404,7 +430,7 @@
       'skills.l5': 'مبادئ هندسة البرمجيات',
 
 
-      'proj.eyebrow': '03 · المشاريع',
+      'proj.eyebrow': '# المشاريع',
       'proj.title': 'مشاريع مختارة',
       'proj.p1tag': 'مباشر · هذا الموقع',
       'proj.p1t': 'موقع التعريف الشخصي',
@@ -440,14 +466,14 @@
       'proj.p7t': 'SmartTimeCoach',
       'proj.p7d': 'مساعد إنتاجية بلغة Python مع تذكيرات تلقائية يساعد على إدارة المهام وجداول الدراسة بشكل أكثر فعالية.',
 
-      'certs.eyebrow': '04 · الشهادات',
+      'certs.eyebrow': '# الشهادات',
       'certs.title': 'شهادات موثقة',
       'certs.view': 'عرض الشهادة',
       'certs.download': 'تحميل',
       'certs.noimage': 'لم يتم رفع صورة الشهادة بعد.',
       'certs.noimageHint': 'ضع الملف في assets/certs/ ثم أعد تحميل الصفحة.',
 
-      'exp.eyebrow': '05 · الخبرة',
+      'exp.eyebrow': '# الخبرة',
       'exp.title': 'الخبرة والإنجازات',
       'exp.techh': 'خبرة تقنية',
       'exp.milestone': 'الإنجازات',
@@ -470,7 +496,7 @@
       'exp.m4': '2023 · بداية رحلة علوم الحاسوب',
       'exp.m4sub': 'جامعة الأزهر',
 
-      'test.eyebrow': '06 · التوصيات',
+      'test.eyebrow': '# التوصيات',
       'test.title': 'آراء وتوصيات',
       'test.q1': '"عبدالله من أكثر الطلاب شغفًا الذين درّستهم. يُظهر مهارات قوية في التعاون والعرض وإدارة الوقت وحل المشكلات."',
       'test.n1': 'أ. Abdelbaset R. Almasri',
@@ -482,11 +508,13 @@
       'test.n3': 'Yazan W. Abo_Elqomboz',
       'test.r3': 'عضو فريق مشروع',
 
-      'contact.eyebrow': '07 · تواصل',
+      'contact.eyebrow': '# تواصل',
       'contact.title': 'لنبني تواصلًا',
       'contact.desc': 'عندك فرصة أو منحة دراسية أو مشروع تحب تناقشه؟ يسعدني أسمع منك.',
       'contact.avail': 'أرد خلال 24 ساعة',
       'contact.loc': 'غزة، فلسطين',
+
+      'contact.hire': 'وظّفني',
 
       'form.name': 'الاسم',
       'form.email': 'البريد الإلكتروني',
@@ -674,7 +702,15 @@
   function applyTheme(theme) {
     if (!THEME_ORDER.includes(theme)) theme = 'dark';
     state.theme = theme;
+    // §4.3: while the theme variables repaint, suppress every transition and
+    // animation (the [data-theme-switching] rule lives at styles.css's
+    // "Theme switch" block) — otherwise all 5 themes' surfaces animate at once.
+    const root = document.documentElement;
+    root.setAttribute('data-theme-switching', '');
     document.documentElement.setAttribute('data-theme', theme);
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => root.removeAttribute('data-theme-switching'))
+    );
     const meta = $('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', THEME_COLORS[theme] || '#06060e');
     // Matches both the raw <i data-lucide> placeholder and the rendered
@@ -1123,6 +1159,94 @@
       if (window.PFTrack) window.PFTrack('contact_open', 'form');
     }, { passive: true });
   }
+
+  // ============== V3 CTA + section tracking ==============
+  // Events whitelisted in api/track.js that previously had no emitter
+  // (stage-2 handoff item 4): hire_me_click, service_view, service_cta_click,
+  // freelance_profile_view, freelance_profile_click.
+
+  // Primary CTA of the contact column.
+  const hireMeEl = $('#hire-me');
+  if (hireMeEl) {
+    hireMeEl.addEventListener('click', () => {
+      if (window.PFTrack) window.PFTrack('hire_me_click', 'contact');
+    }, { passive: true });
+  }
+
+  // Hero secondary CTA is hire-style only because it targets #contact.
+  document.addEventListener('click', (e) => {
+    const heroHire = e.target.closest && e.target.closest('.hero-cta a[href="#contact"]');
+    if (heroHire && window.PFTrack) window.PFTrack('hire_me_click', 'hero');
+  }, { passive: true });
+
+  // Service CTAs and profile cards are rendered by cms.js after boot,
+  // so these fire through delegation.
+  document.addEventListener('click', (e) => {
+    const svcCta = e.target.closest && e.target.closest('[data-service-cta]');
+    if (svcCta) {
+      if (window.PFTrack) {
+        window.PFTrack('service_cta_click', svcCta.getAttribute('data-service-cta') || '');
+        // Service card CTAs link to #contact, so they are hire-style too.
+        if (svcCta.getAttribute('href') === '#contact') window.PFTrack('hire_me_click', 'service-cta');
+      }
+      return;
+    }
+    const profile = e.target.closest && e.target.closest('[data-profile]');
+    if (profile) {
+      if (window.PFTrack) window.PFTrack('freelance_profile_click', profile.getAttribute('data-profile') || '');
+    }
+  }, { passive: true });
+
+  // Section-level views: fire once, when the section first intersects.
+  // Both sections start [hidden]; the observer fires only after cms.js
+  // unhides them and they enter the viewport.
+  // freelance_profile_view: fires once when the freelance section first
+  // becomes visible AND at least one profile card actually rendered
+  // (the section stays [hidden] while its data array is empty).
+  const freelanceSection = document.getElementById('freelance');
+  if (freelanceSection && 'IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      if (entries.some((en) => en.isIntersecting)) {
+        obs.disconnect();
+        if (freelanceSection.querySelector('.profile-card[data-profile]')) {
+          if (window.PFTrack) window.PFTrack('freelance_profile_view', 'freelance');
+        }
+      }
+    }, { threshold: 0.25 });
+    obs.observe(freelanceSection);
+  }
+
+  // service_view: once per service slug, when that card becomes visible.
+  // Cards are rendered by cms.js (and rebuilt on language change), so the
+  // observer is repopulated through a hook cms.js calls after every render;
+  // the fired set keeps each slug to a single event across rebuilds.
+  const serviceViewed = new Set();
+  let serviceObserver = null;
+  function observeServiceCards() {
+    if (!('IntersectionObserver' in window)) return;
+    const section = document.getElementById('services');
+    if (!section) return;
+    if (!serviceObserver) {
+      serviceObserver = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          const slug = en.target.getAttribute('data-service') || '';
+          serviceObserver.unobserve(en.target);
+          if (!slug || serviceViewed.has(slug)) return;
+          serviceViewed.add(slug);
+          if (window.PFTrack) window.PFTrack('service_view', slug);
+        });
+      }, { threshold: 0.25 });
+    }
+    section.querySelectorAll('.service-card[data-service]').forEach((card) => {
+      if (!card.dataset.svcViewTracked) {
+        card.dataset.svcViewTracked = '1';
+        serviceObserver.observe(card);
+      }
+    });
+  }
+  observeServiceCards();
+  window.PFServiceTracking = { observe: observeServiceCards };
 
   // ============== Footer year ==============
 
