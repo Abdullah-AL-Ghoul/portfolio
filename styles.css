@@ -928,6 +928,8 @@ button {
   font-weight: 500;
   color: var(--text-dim);
   margin-top: 0.5rem;
+  letter-spacing: normal;
+  line-height: 1.4;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
