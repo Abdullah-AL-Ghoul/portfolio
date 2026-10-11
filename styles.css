@@ -6160,3 +6160,183 @@ body::after {
     transition: none;
   }
 }
+
+/* ========================================================
+   V4.0 — Ultra-Contemporary Engineering Experience
+   ======================================================== */
+
+/* Infinite Tech Stack Ribbon (Marquee) */
+.techstack-marquee {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-block: 1.1rem;
+  border-block: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-elev) 65%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+.techstack-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.techstack-group {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  padding-inline-end: 1.75rem;
+  animation: techMarqueeScroll 28s linear infinite;
+}
+@keyframes techMarqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+[dir='rtl'] .techstack-group {
+  animation: techMarqueeScrollRtl 28s linear infinite;
+}
+@keyframes techMarqueeScrollRtl {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+.techstack-group span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  white-space: nowrap;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 75%, transparent);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), background var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+}
+.techstack-group span i {
+  width: 15px;
+  height: 15px;
+  color: var(--accent);
+}
+
+/* Browser Mockup Chrome on Project Covers */
+.browser-chrome {
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  height: 28px;
+  background: color-mix(in srgb, var(--bg-elev) 88%, transparent);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding-inline: 0.8rem;
+  gap: 0.35rem;
+  z-index: 2;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.browser-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.browser-dot.red { background: #ff5f56; }
+.browser-dot.yellow { background: #ffbd2e; }
+.browser-dot.green { background: #27c93f; }
+.browser-address {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  margin-inline-start: auto;
+  opacity: 0.75;
+  letter-spacing: 0.02em;
+}
+
+/* Hero Avatar Status Chip */
+.avatar-status-chip {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: color-mix(in srgb, var(--bg-elev) 85%, transparent);
+  border: 1px solid var(--border-strong);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  z-index: 3;
+}
+[dir='rtl'] .avatar-status-chip {
+  transform: translateX(50%);
+}
+.avatar-status-chip span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.avatar-status-chip .chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 6px var(--success);
+}
+
+/* Quick Selection Topic Chips in Contact Form */
+.quick-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: var(--space-4);
+}
+.topic-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--bg-elev) 85%, transparent);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), background var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+}
+
+/* Hover-gated rules for V4.0 pieces */
+@media (hover: hover) and (pointer: fine) {
+  .techstack-marquee:hover .techstack-group {
+    animation-play-state: paused;
+  }
+  .techstack-group span:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    transform: translateY(-2px);
+  }
+  .topic-chip:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    transform: translateY(-1px);
+  }
+}
+
+/* Reduced motion accessibility for V4.0 */
+@media (prefers-reduced-motion: reduce) {
+  .techstack-group {
+    animation: none;
+  }
+}

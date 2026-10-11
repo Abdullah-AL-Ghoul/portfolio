@@ -320,6 +320,10 @@
 
       'form.name': 'Name',
       'form.email': 'Email',
+      'form.topic': 'Quick Topic',
+      'topic.app': 'Web App',
+      'topic.role': 'Job Role',
+      'topic.consult': 'Consultation',
       'form.subject': 'Subject',
       'form.message': 'Message',
       'form.send': 'Send Message',
@@ -531,6 +535,10 @@
 
       'form.name': 'الاسم',
       'form.email': 'البريد الإلكتروني',
+      'form.topic': 'موضوع سريع',
+      'topic.app': 'تطبيق ويب',
+      'topic.role': 'فرصة عمل',
+      'topic.consult': 'استشارة',
       'form.subject': 'الموضوع',
       'form.message': 'الرسالة',
       'form.send': 'إرسال الرسالة',
@@ -1218,6 +1226,20 @@
       if (window.PFTrack) window.PFTrack('freelance_profile_click', profile.getAttribute('data-profile') || '');
     }
   }, { passive: true });
+
+  // Quick topic selection chips in contact form
+  document.addEventListener('click', (e) => {
+    const chip = e.target.closest && e.target.closest('.topic-chip');
+    if (chip) {
+      const subjectInput = document.getElementById('subject');
+      if (subjectInput) {
+        const lang = state.lang || 'en';
+        const topic = lang === 'ar' ? (chip.getAttribute('data-topic-ar') || chip.getAttribute('data-topic-en')) : chip.getAttribute('data-topic-en');
+        subjectInput.value = topic || '';
+        subjectInput.focus();
+      }
+    }
+  });
 
   // Section-level views: fire once, when the section first intersects.
   // Both sections start [hidden]; the observer fires only after cms.js
