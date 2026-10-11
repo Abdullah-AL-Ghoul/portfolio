@@ -7,7 +7,7 @@
  * and the frontend falls back to mailto.
  */
 
-const { json, readClientIp, coarseGeo, rateLimit, sb, isUuid, clampStr } = require('./_lib');
+const { json, readClientIp, coarseGeo, rateLimit, sb, isUuid, clampStr, serviceConfigured } = require('./_lib');
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -50,8 +50,11 @@ module.exports = async function handler(req, res) {
     return json(res, 422, { ok: false, error: 'validation', errors });
   }
 
-  if (!require('./_lib').configured()) {
-    return json(res, 200, { ok: false, fallback: 'mailto' });
+  // Contact rows insert as the service role — a publishable/anon key alone is
+  // not enough to write. Distinguish "server not configured to store" (503,
+  // explicit) from "storage failed at runtime" (mailto fallback below).
+  if (!serviceConfigured()) {
+    return json(res, 503, { ok: false, reason: 'server-not-configured' });
   }
 
   try {

@@ -66,6 +66,14 @@
   const FORMSPREE_ENDPOINT = '';
   const CONTACT_EMAIL = 'abdallhalghoul200@gmail.com';
 
+  // Floating WhatsApp action — international number without '+' or spaces, plus the
+  // pre-filled message per language (editable here; re-applied on every lang switch).
+  const WHATSAPP_NUMBER = '970592127061';
+  const WHATSAPP_MESSAGES = {
+    en: "Hi Abdullah, I found your portfolio and I'd like to talk about a project.",
+    ar: 'مرحباً عبدالله، شاهدت موقعك وأودّ التحدث معك حول مشروع.'
+  };
+
   // Maps each certificate asset to its i18n key prefix ('certs.c1' etc.) so the
   // cert modal can show localized titles/orgs.
   const CERT_INDEX = {
@@ -85,14 +93,14 @@
   // Phrases the hero rotating-typed animation cycles through, per language.
   const TYPED_PHRASES = {
     en: [
-      'Aspiring Software Engineer',
+      'Full-Stack Web Developer',
       'Network & Infrastructure',
       'AI Enthusiast',
       'Cybersecurity Curious',
       'Lifelong Learner'
     ],
     ar: [
-      'مهندس برمجيات طموح',
+      'مطوّر ويب متكامل',
       'شبكات وبنية تحتية',
       'شغوف بالذكاء الاصطناعي',
       'مهتم بالأمن السيبراني',
@@ -246,7 +254,7 @@
       'exp.m1sub': 'Generative AI · NVIDIA Academy',
 'exp.m1b': '2026 · OpenAI & Anthropic AI Tracks',
 'exp.m1bsub': 'AI Foundations · Claude 101 · Claude Code 101 · Claude Code in Action',
-      'exp.m2': '2025 · ICDL Certification',
+      'exp.m2': '2026 · ICDL Certification',
       'exp.m2sub': 'Edraak · Word, Excel, Internet Security',
       'exp.m3': '2024 · Networking Projects',
       'exp.m3sub': 'VLAN, DHCP/NAT segments',
@@ -270,6 +278,8 @@
       'contact.desc': 'Have an opportunity, scholarship, or a project to discuss? I would love to hear from you.',
       'contact.avail': 'Replies within 24 hours',
       'contact.loc': 'Gaza, Palestine',
+      'whatsapp.aria': 'Chat with me on WhatsApp',
+      'whatsapp.label': "Let's Talk",
 
       'contact.hire': 'Hire me',
 
@@ -328,6 +338,7 @@
 
       'theme.label': 'Theme',
       'theme.dark': 'Dark',
+      'theme.gold': 'Gold',
       'theme.light': 'Light',
       'theme.cyberpunk': 'Cyberpunk',
       'theme.forest': 'Forest',
@@ -434,7 +445,7 @@
       'proj.title': 'مشاريع مختارة',
       'proj.p1tag': 'مباشر · هذا الموقع',
       'proj.p1t': 'موقع التعريف الشخصي',
-      'proj.p1d': 'موقع شخصي متجاوب وحديث وثنائي اللغة يعرض مهاراتي ومشاريعي وإنجازاتي التعليمية. مبني بـ HTML دلالي وCSS حديث وJavaScript نقي — بدون أي تبعيات خارجية. يتضمن وضع داكن/فاتح ودعم كامل للعربية.',
+      'proj.p1d': 'موقع شخصي متجاوب وحديث وثنائي اللغة يعرض مهاراتي ومشاريعي وإنجازاتي التعليمية. مبني بـ HTML دلالي وCSS حديث وJavaScript نقي. يتضمن وضع داكن/فاتح ودعم كامل للعربية.',
       'proj.live': 'الموقع مباشر',
       'proj.case': 'دراسة الحالة',
       'proj.problem': 'المشكلة',
@@ -489,7 +500,7 @@
       'exp.m1sub': 'الذكاء الاصطناعي التوليدي · NVIDIA Academy',
 'exp.m1b': '2026 · مسارات OpenAI و Anthropic للذكاء الاصطناعي',
 'exp.m1bsub': 'أساسيات الذكاء الاصطناعي · Claude 101 · Claude Code 101 · Claude Code in Action',
-      'exp.m2': '2025 · شهادة ICDL',
+      'exp.m2': '2026 · شهادة ICDL',
       'exp.m2sub': 'Edraak · Word, Excel, أمن الإنترنت',
       'exp.m3': '2024 · مشاريع الشبكات',
       'exp.m3sub': 'VLAN, DHCP/NAT segments',
@@ -501,7 +512,7 @@
       'test.q1': '"عبدالله من أكثر الطلاب شغفًا الذين درّستهم. يُظهر مهارات قوية في التعاون والعرض وإدارة الوقت وحل المشكلات."',
       'test.n1': 'أ. Abdelbaset R. Almasri',
       'test.r1': 'محاضر علوم الحاسوب · جامعة الأزهر',
-      'test.q2': '"عبدالله طالب استثنائي وأصل ثمين لجامعةنا. مجتهد وموثوق ويعمل بشكل ممتاز في الفرق."',
+      'test.q2': '"عبدالله طالب استثنائي وأصل ثمين لجامعتنا. مجتهد وموثوق ويعمل بشكل ممتاز في الفرق."',
       'test.n2': 'د. Adel A. Ahmed',
       'test.r2': 'محاضر علوم الحاسوب · جامعة الأزهر',
       'test.q3': '"عبدالله عضو فريق استثنائي، متعاون وموثوق، ومحل طبيعي للمشكلات. متعلم ذاتي مخلص ومتواصل قوي يرتقي دائمًا بجودة مشاريعنا."',
@@ -510,9 +521,11 @@
 
       'contact.eyebrow': '# تواصل',
       'contact.title': 'لنبني تواصلًا',
-      'contact.desc': 'عندك فرصة أو منحة دراسية أو مشروع تحب تناقشه؟ يسعدني أسمع منك.',
+      'contact.desc': 'عندك فرصة أو منحة دراسية أو مشروع تحب تناقشه؟ يسعدني أن أسمع منك.',
       'contact.avail': 'أرد خلال 24 ساعة',
       'contact.loc': 'غزة، فلسطين',
+      'whatsapp.aria': 'تواصل معي عبر واتساب',
+      'whatsapp.label': 'لنتواصل',
 
       'contact.hire': 'وظّفني',
 
@@ -571,6 +584,7 @@
 
       'theme.label': 'المظهر',
       'theme.dark': 'داكن',
+      'theme.gold': 'ذهبي',
       'theme.light': 'فاتح',
       'theme.cyberpunk': 'سايبربانك',
       'theme.forest': 'غابة',
@@ -669,6 +683,14 @@
       if (val !== undefined) el.setAttribute('placeholder', val);
     });
 
+    // WhatsApp floating button — keep the wa.me destination and pre-filled
+    // message in sync with the active language.
+    const wfab = $('#whatsapp-fab');
+    if (wfab) {
+      const msg = WHATSAPP_MESSAGES[lang] || WHATSAPP_MESSAGES.en;
+      wfab.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+    }
+
     // Update lang toggle label
     const langLabel = $('#lang-label');
     if (langLabel) langLabel.textContent = lang === 'en' ? 'AR' : 'EN';
@@ -696,9 +718,9 @@
    * @param {string} theme - Theme name ('dark' | 'light' | 'cyberpunk' | 'forest' | 'sunset')
    * @returns {void}
    */
-  const THEME_ICONS = { dark: 'moon', light: 'sun', cyberpunk: 'zap', forest: 'tree-pine', sunset: 'sunset' };
-  const THEME_COLORS = { dark: '#06060e', light: '#f0f0f8', cyberpunk: '#0a0014', forest: '#0b1410', sunset: '#160c08' };
-  const THEME_ORDER = ['dark', 'light', 'cyberpunk', 'forest', 'sunset'];
+  const THEME_ICONS = { dark: 'moon', gold: 'sparkles', light: 'sun', cyberpunk: 'zap', forest: 'tree-pine', sunset: 'sunset' };
+  const THEME_COLORS = { dark: '#08090a', gold: '#101318', light: '#f4f5f9', cyberpunk: '#0a0014', forest: '#0b1410', sunset: '#160c08' };
+  const THEME_ORDER = ['dark', 'gold', 'light', 'cyberpunk', 'forest', 'sunset'];
   function applyTheme(theme) {
     if (!THEME_ORDER.includes(theme)) theme = 'dark';
     state.theme = theme;
@@ -2001,7 +2023,7 @@
       en: {
         who: {
           name: 'Abdullah Ayman AL-Ghoul',
-          role: 'Computer Science student · Aspiring Software Engineer',
+          role: 'Full-Stack Web Application Developer · Computer Science student at Al-Azhar University',
           uni: 'Al-Azhar University',
           city: 'Gaza, Palestine',
           email: 'abdallhalghoul200@gmail.com',
@@ -2010,7 +2032,7 @@
         },
         skills: {
           programming: [
-            { name: 'Java', tier: 4, label: 'Expert' },
+            { name: 'Java', tier: 3, label: 'Advanced' },
             { name: 'JavaScript', tier: 3, label: 'Advanced' },
             { name: 'HTML5 / CSS3', tier: 4, label: 'Expert' },
             { name: 'C', tier: 3, label: 'Advanced' }
@@ -2056,7 +2078,7 @@
           milestones: [
             '2026 · NVIDIA AI Certification (Generative AI)',
             '2026 · OpenAI & Anthropic AI Tracks (AI Foundations, Claude 101, Claude Code)',
-            '2025 · ICDL Certification (Edraak)',
+            '2026 · ICDL Certification (Edraak)',
             '2024 · Networking Projects (VLAN, DHCP/NAT segments)',
             '2023 · CS Journey Begins (Al-Azhar University)'
           ]
@@ -2070,7 +2092,7 @@
       ar: {
         who: {
           name: 'عبدالله أيمن الغول',
-          role: 'طالب علوم حاسوب · مهندس برمجيات طموح',
+          role: 'مطوّر تطبيقات ويب متكامل · طالب علوم الحاسوب في جامعة الأزهر',
           uni: 'جامعة الأزهر',
           city: 'غزة، فلسطين',
           email: 'abdallhalghoul200@gmail.com',
@@ -2079,7 +2101,7 @@
         },
         skills: {
           programming: [
-            { name: 'Java', tier: 4, label: 'خبير' },
+            { name: 'Java', tier: 3, label: 'متقدم' },
             { name: 'JavaScript', tier: 3, label: 'متقدم' },
             { name: 'HTML5 / CSS3', tier: 4, label: 'خبير' },
             { name: 'C', tier: 3, label: 'متقدم' }
@@ -2125,7 +2147,7 @@
           milestones: [
             '2026 · شهادة NVIDIA للذكاء الاصطناعي',
             '2026 · مسارات OpenAI و Anthropic (AI Foundations, Claude 101, Claude Code)',
-            '2025 · شهادة ICDL (إدراك)',
+            '2026 · شهادة ICDL (إدراك)',
             '2024 · مشاريع الشبكات (VLAN, DHCP/NAT)',
             '2023 · بداية رحلة علوم الحاسوب (جامعة الأزهر)'
           ]
@@ -2837,22 +2859,31 @@
         removeTyping(typing);
         // Try the optional LLM endpoint (same-origin /api/chat) first.
         // If it's missing, unconfigured, or fails, fall back to the built-in rules.
+        // Once the endpoint has proven unavailable, skip the fetch entirely until it
+        // returns a real answer (lazy feature-flag — see chatApiDown above).
         let r = null;
-        try {
-          const ctrl = new AbortController();
-          const timer = setTimeout(() => ctrl.abort(), 6000);
-          const resp = await fetch('/api/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: userText, lang }),
-            signal: ctrl.signal
-          });
-          clearTimeout(timer);
-          const data = await resp.json();
-          if (data && !data.fallback && typeof data.text === 'string' && data.text.trim()) {
-            r = { text: data.text.trim(), chips: [] };
+        if (!chatApiDown) {
+          try {
+            const ctrl = new AbortController();
+            const timer = setTimeout(() => ctrl.abort(), 6000);
+            const resp = await fetch('/api/chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ message: userText, lang }),
+              signal: ctrl.signal
+            });
+            clearTimeout(timer);
+            const data = await resp.json();
+            if (data && typeof data.text === 'string' && data.text.trim()) {
+              if (data.fallback) chatApiDown = true;
+              else r = { text: data.text.trim(), chips: [] };
+            } else {
+              chatApiDown = true;
+            }
+          } catch (e) {
+            chatApiDown = true; // network / missing endpoint → skip future calls
           }
-        } catch (e) { /* network / missing endpoint → rules */ }
+        }
         if (!r) r = AI.respond(userText, lang);
 
         const html = renderInlineMd(r.text) + renderChips(r.chips);
@@ -2965,6 +2996,11 @@
    */
   const AI_MEMORY_KEY = 'portfolio_ai_memory_v1';
   const AI_MEMORY_MAX = 5;
+
+  // Lazy /api/chat feature flag: once the LLM endpoint proves unavailable (timeout,
+  // non-200, or fallback:true), skip the round trip and go straight to the local
+  // rules engine; a real text reply resets it, so configuring the LLM recovers.
+  let chatApiDown = false;
 
   function loadAIMemory() {
     try {
@@ -3330,7 +3366,7 @@
         link: { label: 'View certificate', href: 'assets/certs/openai-ai-foundations.jpg' }
       },
       m2: {
-        title: '2025 · ICDL Certification',
+        title: '2026 · ICDL Certification',
         date: 'Edraak · Word, Excel, Internet Security',
         points: [
           'Earned ICDL Base certification through Edraak.',
@@ -3383,7 +3419,7 @@
         link: { label: 'عرض الشهادة', href: 'assets/certs/openai-ai-foundations.jpg' }
       },
       m2: {
-        title: '2025 · شهادة ICDL',
+        title: '2026 · شهادة ICDL',
         date: 'Edraak · Word, Excel, أمن الإنترنت',
         points: [
           'حصلت على شهادة ICDL الأساسية عبر إدراك.',

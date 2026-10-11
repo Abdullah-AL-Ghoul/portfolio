@@ -9,7 +9,7 @@
  * - Analytics must never break the site: every failure returns ok.
  */
 
-const { json, readClientIp, coarseGeo, rateLimit, sb, isUuid, clampStr, configured } = require('./_lib');
+const { json, readClientIp, coarseGeo, rateLimit, sb, isUuid, clampStr, serviceConfigured } = require('./_lib');
 
 const EVENTS = new Set([
   'page_view', 'session_start', 'session_end',
@@ -80,7 +80,9 @@ module.exports = async function handler(req, res) {
   const events = Array.isArray(body.events) ? body.events.slice(0, 20) : [];
   if (!visitorId || !sessionId || !events.length) return json(res, 422, { ok: false });
 
-  if (!configured()) return json(res, 200, { ok: true, enabled: false });
+  // Analytics tables are closed to anon (RLS) — writes need the service role,
+  // so a publishable key alone must not pass this gate.
+  if (!serviceConfigured()) return json(res, 200, { ok: true, enabled: false });
 
   const ua = parseUA(req.headers['user-agent']);
   const geo = coarseGeo(req);

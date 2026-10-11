@@ -10,7 +10,7 @@
  * - Never exposes storage credentials; only the signed URL leaves.
  */
 
-const { json, readClientIp, rateLimit, sb, configured, SUPABASE_URL, SERVICE_KEY } = require('./_lib');
+const { json, readClientIp, rateLimit, sb, serviceConfigured, SUPABASE_URL, SERVICE_KEY } = require('./_lib');
 
 const FALLBACK_CV = '/assets/Abdullah_ALGhoul_CV.pdf';
 
@@ -22,7 +22,9 @@ module.exports = async function handler(req, res) {
     return json(res, 429, { ok: false, error: 'rate_limited' });
   }
 
-  if (!configured()) return res.redirect(302, FALLBACK_CV);
+  // Reads cv_versions as the service role — a publishable key alone cannot. When
+  // the service key is absent we fall straight through to the bundled static CV.
+  if (!serviceConfigured()) return res.redirect(302, FALLBACK_CV);
 
   try {
     const rows = await sb('cv_versions?select=*&is_active=eq.true&is_published=eq.true&order=uploaded_at.desc&limit=1', { role: 'service' });

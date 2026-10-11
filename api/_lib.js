@@ -12,6 +12,15 @@ const ANON_KEY = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_AN
 const configured = () => Boolean(SUPABASE_URL && (SERVICE_KEY || ANON_KEY));
 
 /**
+ * Service-role configuration check.
+ * Write-endpoints (contact, track, cv-download) insert as the service role,
+ * which an anon/publishable key cannot do — so a published public key alone
+ * must NOT pass this gate (it would only produce silent service-role write
+ * failures). content.js keeps using configured() (anon reads are fine).
+ */
+const serviceConfigured = () => Boolean(SUPABASE_URL && SERVICE_KEY);
+
+/**
  * Minimal JSON response helper with security headers.
  */
 function json(res, status, body) {
@@ -95,4 +104,4 @@ const isUuid = (v) => typeof v === 'string' && UUID_RE.test(v);
 
 const clampStr = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 
-module.exports = { SUPABASE_URL, SERVICE_KEY, ANON_KEY, configured, json, readClientIp, coarseGeo, rateLimit, sb, isUuid, clampStr };
+module.exports = { SUPABASE_URL, SERVICE_KEY, ANON_KEY, configured, serviceConfigured, json, readClientIp, coarseGeo, rateLimit, sb, isUuid, clampStr };
