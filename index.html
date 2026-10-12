@@ -15,18 +15,20 @@
         document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
       } catch (e) {}
       try {
-        var theme = localStorage.getItem('theme') || 'dark';
+        var savedTheme = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
         var colors = { dark: '#08090a', gold: '#101318', light: '#f4f5f9', cyberpunk: '#0a0014', forest: '#0b1410', sunset: '#160c08' };
-        document.documentElement.setAttribute('data-theme', colors[theme] ? theme : 'dark');
+        document.documentElement.setAttribute('data-theme', colors[theme] ? theme : (prefersDark ? 'dark' : 'light'));
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', colors[theme] || '#08090a');
       } catch (e) {}
     })();
   </script>
 
-  <title>Abdullah Ayman AL-Ghoul · Full-Stack Web Application Developer</title>
-  <meta name="description" content="Portfolio of Abdullah Ayman AL-Ghoul — full-stack web application developer at Al-Azhar University building web apps, APIs, and practical AI integrations." />
-  <meta name="author" content="Abdullah Ayman AL-Ghoul" />
+  <title>Abdullah AL-Ghoul · Full-Stack Web Application Developer</title>
+  <meta name="description" content="Portfolio of Abdullah AL-Ghoul — full-stack web application developer at Al-Azhar University building web apps, APIs, and practical AI integrations." />
+  <meta name="author" content="Abdullah AL-Ghoul" />
   <meta name="keywords" content="Abdullah Al-Ghoul, Computer Science, Portfolio, Software Engineering, Networking, Gaza, Palestine" />
   <link rel="alternate" hreflang="en" href="https://abdullah-portfolio26.vercel.app/" />
   <link rel="alternate" hreflang="ar" href="https://abdullah-portfolio26.vercel.app/?lang=ar" />
@@ -303,7 +305,7 @@
 
           <h1 class="hero-title">
             <span class="hero-greet" data-i18n="hero.greet">Hi, I'm</span>
-            <span class="accent">Abdullah Ayman AL-Ghoul</span>
+            <span class="accent">Abdullah AL-Ghoul</span>
             <span class="hero-subtitle">
               <span data-i18n="hero.role">Full-Stack Web Application Developer</span>
               <span class="hero-divider">·</span>
@@ -358,25 +360,10 @@
         <div class="hero-visual" aria-hidden="true">
           <div class="avatar-wrap">
             <div class="avatar-ring"></div>
-            <img src="assets/profile-600.jpg" alt="Abdullah Ayman AL-Ghoul" class="avatar" width="296" height="296" loading="eager" decoding="async" fetchpriority="high" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <img src="assets/profile-600.jpg" alt="Abdullah AL-Ghoul" class="avatar" width="296" height="296" loading="eager" decoding="async" fetchpriority="high" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="avatar-fallback" style="display:none;">
               <span>&gt;_</span>
             </div>
-            <div class="avatar-status-chip">
-              <span><span class="chip-dot"></span> Online · Active 2026</span>
-            </div>
-          </div>
-          <div class="floating-card top">
-            <i data-lucide="code-2"></i>
-            <span>Java · C · JS</span>
-          </div>
-          <div class="floating-card bottom">
-            <i data-lucide="network"></i>
-            <span>Networking</span>
-          </div>
-          <div class="floating-card left">
-            <i data-lucide="brain"></i>
-            <span>AI</span>
           </div>
         </div>
       </div>
@@ -663,24 +650,6 @@
             </ul>
           </article>
         </div>
-
-        <div class="skills-visual reveal-up">
-          <div class="skills-radar-wrap">
-            <svg id="skills-radar" viewBox="0 0 340 340" role="img" aria-label="Skills radar chart"></svg>
-          </div>
-          <div class="skills-radar-legend" id="skills-radar-legend"></div>
-        </div>
-
-        <div class="learning reveal-up">
-          <h3 data-i18n="skills.cur">Currently Learning</h3>
-          <div class="learning-tags">
-            <span data-i18n="skills.l1">Frontend Development</span>
-            <span data-i18n="skills.l2">Java OOP</span>
-            <span data-i18n="skills.l3">Data Structures</span>
-            <span data-i18n="skills.l4">Algorithms</span>
-            <span data-i18n="skills.l5">Software Engineering Principles</span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -700,7 +669,7 @@
                 <span class="browser-dot green"></span>
                 <span class="browser-address">al-azher-it-hub.vercel.app</span>
               </div>
-              <div class="project-cover-edu"></div>
+              <img src="assets/project-alazher.jpg" alt="AL-Azher IT Hub preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
               <div class="project-tag" data-i18n="proj.p4tag">Live</div>
@@ -731,8 +700,7 @@
                 <span class="browser-dot green"></span>
                 <span class="browser-address">abdullah.dev</span>
               </div>
-              <div class="project-cover-grid"></div>
-              <div class="project-cover-glow"></div>
+              <img src="assets/project-portfolio.jpg" alt="Personal Portfolio Website preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
               <div class="project-tag" data-i18n="proj.p1tag">Live · This Site</div>
@@ -763,9 +731,7 @@
                 <span class="browser-dot green"></span>
                 <span class="browser-address">cisco.enterprise.lan</span>
               </div>
-              <div class="project-cover-nodes">
-                <span></span><span></span><span></span><span></span><span></span><span></span>
-              </div>
+              <img src="assets/project-network.jpg" alt="Enterprise Network Design topology" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
               <div class="project-tag" data-i18n="proj.p2tag">Completed</div>
@@ -796,7 +762,7 @@
                 <span class="browser-dot green"></span>
                 <span class="browser-address">smart-virtual-lab.io</span>
               </div>
-              <div class="project-cover-cloud"></div>
+              <img src="assets/project-virtuallab.jpg" alt="Smart University Virtual Lab preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
               <div class="project-tag" data-i18n="proj.p3tag">Concept Proposal</div>
@@ -827,9 +793,7 @@
                 <span class="browser-dot green"></span>
                 <span class="browser-address">task-manager.app</span>
               </div>
-              <div class="project-cover-tasks">
-                <span></span><span></span><span></span><span></span>
-              </div>
+              <img src="assets/project-taskmanager.jpg" alt="Task Manager sprint board preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
               <div class="project-tag" data-i18n="proj.p5tag">Team Project</div>
@@ -857,9 +821,7 @@
                 <span class="browser-dot green"></span>
                 <span class="browser-address">library-system.internal</span>
               </div>
-              <div class="project-cover-library">
-                <span></span><span></span><span></span><span></span><span></span><span></span>
-              </div>
+              <img src="assets/project-library.jpg" alt="Library Management System terminal preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
               <div class="project-tag" data-i18n="proj.p6tag">Completed</div>
@@ -887,9 +849,7 @@
                 <span class="browser-dot green"></span>
                 <span class="browser-address">smart-time-coach.py</span>
               </div>
-              <div class="project-cover-timer">
-                <span class="timer-dial"></span>
-              </div>
+              <img src="assets/project-timecoach.jpg" alt="SmartTimeCoach productivity preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
               <div class="project-tag" data-i18n="proj.p7tag">Personal Project</div>
@@ -1370,75 +1330,5 @@
     <i data-lucide="arrow-up"></i>
   </button>
 
-  <!-- ====== AI Portfolio Assistant ====== -->
-  <div class="ai-assistant" id="ai-assistant" data-open="false">
-    <button class="ai-fab" id="ai-fab" type="button" aria-label="Open portfolio assistant" aria-expanded="false" aria-controls="ai-panel">
-      <span class="ai-fab-icon" data-icon="closed">
-        <i data-lucide="message-circle-more"></i>
-      </span>
-      <span class="ai-fab-icon" data-icon="open" hidden>
-        <i data-lucide="x"></i>
-      </span>
-      <span class="ai-fab-pulse" aria-hidden="true"></span>
-    </button>
-
-    <section class="ai-panel" id="ai-panel" role="dialog" aria-modal="false" aria-labelledby="ai-title" hidden>
-      <header class="ai-head">
-        <div class="ai-head-left">
-          <div class="ai-avatar" aria-hidden="true">
-            <i data-lucide="bot"></i>
-          </div>
-          <div>
-            <h2 class="ai-title" id="ai-title" data-i18n="ai.title">Portfolio Assistant</h2>
-            <p class="ai-status">
-              <span class="ai-status-dot" aria-hidden="true"></span>
-              <span data-ai-status-text data-i18n="ai.status">Online · ready to help</span>
-            </p>
-          </div>
-        </div>
-        <div class="ai-head-actions">
-          <button class="ai-icon-btn" id="ai-speak-btn" type="button" aria-label="Read reply aloud" title="Read reply aloud" data-i18n-aria="ai.speak" data-i18n-title="ai.speak">
-            <i data-lucide="volume-2"></i>
-          </button>
-          <button class="ai-icon-btn" id="ai-clear" type="button" aria-label="Clear conversation" title="Clear conversation" data-i18n-aria="ai.clear" data-i18n-title="ai.clear">
-            <i data-lucide="trash-2"></i>
-          </button>
-          <button class="ai-icon-btn" id="ai-minimize" type="button" aria-label="Minimize" title="Minimize" data-i18n-aria="ai.minimize" data-i18n-title="ai.minimize">
-            <i data-lucide="minus"></i>
-          </button>
-        </div>
-      </header>
-
-      <div class="ai-messages" id="ai-messages" role="log" aria-live="polite" aria-atomic="false">
-        <!-- Messages injected by script.js -->
-      </div>
-
-      <div class="ai-suggestions" id="ai-suggestions" aria-label="Suggested questions" data-i18n-aria="ai.suggest">
-        <!-- Suggestion chips injected by script.js -->
-      </div>
-
-      <form class="ai-form" id="ai-form" autocomplete="off">
-        <label class="visually-hidden" for="ai-input" data-i18n="ai.input">Ask the assistant</label>
-        <input
-          class="ai-input"
-          id="ai-input"
-          type="text"
-          inputmode="text"
-          enterkeyhint="send"
-          maxlength="500"
-          placeholder="Ask me anything about Abdullah’s work…"
-          aria-label="Ask the assistant"
-          data-i18n-aria="ai.input"
-          data-i18n-placeholder="ai.placeholder"
-        />
-        <button class="ai-mic" id="ai-voice-btn" type="button" aria-label="Use voice input" title="Use voice input" data-i18n-aria="ai.voice" data-i18n-title="ai.voice" disabled>
-          <i data-lucide="mic"></i>
-        </button>
-        <button class="ai-send" id="ai-send" type="submit" aria-label="Send message" data-i18n-aria="ai.send">
-          <i data-lucide="send-horizontal"></i>
-        </button>
-      </form>
-    </section>
-  </div>
 </body>
 </html>

@@ -53,6 +53,9 @@
   'use strict';
 
   // ============== Constants ==============
+  const THEME_ICONS = { dark: 'moon', gold: 'sparkles', light: 'sun', cyberpunk: 'zap', forest: 'tree-pine', sunset: 'sunset' };
+  const THEME_COLORS = { dark: '#08090a', gold: '#101318', light: '#f4f5f9', cyberpunk: '#0a0014', forest: '#0b1410', sunset: '#160c08' };
+  const THEME_ORDER = ['dark', 'gold', 'light', 'cyberpunk', 'forest', 'sunset'];
   const SCROLL_THRESHOLD = 600;
   const NAV_SCROLL_THRESHOLD = 10;
   const STAGGER_DELAY_MS = 150;
@@ -111,8 +114,8 @@
   // ============== Translations ==============
   const i18n = {
     en: {
-      'meta.title': "Abdullah Ayman AL-Ghoul · Full-Stack Web Application Developer",
-      'meta.desc': "Portfolio of Abdullah Ayman AL-Ghoul — full-stack web application developer at Al-Azhar University building web apps, APIs, and practical AI integrations.",
+      'meta.title': "Abdullah AL-Ghoul · Full-Stack Web Application Developer",
+      'meta.desc': "Portfolio of Abdullah AL-Ghoul — full-stack web application developer at Al-Azhar University building web apps, APIs, and practical AI integrations.",
 
       'brand': 'Abdullah',
 
@@ -361,8 +364,8 @@
     },
 
     ar: {
-      'meta.title': 'عبدالله أيمن الغول · مطوّر تطبيقات ويب متكامل',
-      'meta.desc': "موقع عبدالله أيمن الغول — مطوّر تطبيقات ويب متكامل في جامعة الأزهر، يبني تطبيقات ويب وواجهات برمجية وتكاملات ذكاء اصطناعي عملية.",
+      'meta.title': 'عبدالله الغول · مطوّر تطبيقات ويب متكامل',
+      'meta.desc': "موقع عبدالله الغول — مطوّر تطبيقات ويب متكامل في جامعة الأزهر، يبني تطبيقات ويب وواجهات برمجية وتكاملات ذكاء اصطناعي عملية.",
 
       'brand': 'عبدالله',
 
@@ -612,12 +615,30 @@
   };
 
   // ============== State ==============
+  const getInitialTheme = () => {
+    const saved = localStorage.getItem('theme');
+    if (saved && THEME_ORDER.includes(saved)) return saved;
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
+  };
+
   const state = {
     lang: new URLSearchParams(location.search).get('lang') ||
       localStorage.getItem('lang') ||
       (navigator.language?.startsWith('ar') ? 'ar' : 'en'),
-    theme: localStorage.getItem('theme') || 'dark'
+    theme: getInitialTheme()
   };
+
+  // Listen to system theme changes if user hasn't explicitly chosen a theme
+  if (window.matchMedia) {
+    try {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    } catch (e) {}
+  }
 
   // ============== Lifecycle hooks ==============
   // Language-aware UI effects (typed animation, radar chart, assistant chips,
@@ -726,9 +747,6 @@
    * @param {string} theme - Theme name ('dark' | 'light' | 'cyberpunk' | 'forest' | 'sunset')
    * @returns {void}
    */
-  const THEME_ICONS = { dark: 'moon', gold: 'sparkles', light: 'sun', cyberpunk: 'zap', forest: 'tree-pine', sunset: 'sunset' };
-  const THEME_COLORS = { dark: '#08090a', gold: '#101318', light: '#f4f5f9', cyberpunk: '#0a0014', forest: '#0b1410', sunset: '#160c08' };
-  const THEME_ORDER = ['dark', 'gold', 'light', 'cyberpunk', 'forest', 'sunset'];
   function applyTheme(theme) {
     if (!THEME_ORDER.includes(theme)) theme = 'dark';
     state.theme = theme;
@@ -2618,7 +2636,7 @@
   // ============== Navigation Dots ==============
 
   function setupNavDots() {
-    const sections = ['home', 'about', 'skills', 'projects', 'certs', 'experience', 'feedback', 'contact'];
+    return; // Removed per user request
     const dotsContainer = document.createElement('div');
     dotsContainer.className = 'nav-dots';
     dotsContainer.setAttribute('aria-label', 'Section navigation');

@@ -896,12 +896,11 @@ button {
   50% { opacity: 0.5; }
 }
 .hero-title {
-  /* V3.1 elevation: display voice dialed up — bigger clamp, heavier weight,
-     same tight tracking. Role of §1.1 unchanged. */
-  font-size: clamp(2.7rem, 6.6vw, 4.8rem);
+  /* Slightly more compact clamp for refined editorial balance */
+  font-size: clamp(2.2rem, 5.2vw, 3.8rem);
   font-weight: 700;
-  line-height: 1.03;
-  letter-spacing: -0.035em;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -6258,37 +6257,88 @@ body::after {
 }
 
 /* Hero Avatar Status Chip */
+/* Navigation dots and floating badges completely removed as requested */
+.nav-dots,
+.floating-card,
 .avatar-status-chip {
-  position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: color-mix(in srgb, var(--bg-elev) 85%, transparent);
-  border: 1px solid var(--border-strong);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 0.3rem 0.85rem;
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  display: none !important;
+}
+
+/* Enhanced Project Thumbnail Images */
+.project-cover {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  background: var(--bg-elev-2);
+  border-bottom: 1px solid var(--border);
+}
+.project-card.tier-3 .project-cover {
+  height: 160px;
+}
+@media (min-width: 720px) {
+  .project-card.featured.featured-primary .project-cover {
+    height: 100%;
+    min-height: 280px;
+  }
+}
+.project-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Enhanced Certifications Presentation */
+.cert-card {
+  position: relative;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.35rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+}
+.cert-card .cert-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+}
+.cert-card .cert-title {
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text);
-  white-space: nowrap;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-  z-index: 3;
-  pointer-events: none;
+  line-height: 1.35;
 }
-.avatar-status-chip span {
+.cert-card .cert-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--success);
+  margin-top: auto;
+  padding-top: 0.4rem;
 }
-.avatar-status-chip .chip-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--success);
-  box-shadow: 0 0 6px var(--success);
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .project-thumb-img {
+    transform: scale(1.04);
+  }
+  .cert-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 16px var(--accent-glow);
+    transform: translateY(-2px);
+  }
 }
 
 /* Quick Selection Topic Chips in Contact Form */
