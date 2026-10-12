@@ -6260,7 +6260,7 @@ body::after {
 /* Hero Avatar Status Chip */
 .avatar-status-chip {
   position: absolute;
-  bottom: -10px;
+  bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
   background: color-mix(in srgb, var(--bg-elev) 85%, transparent);
@@ -6276,9 +6276,7 @@ body::after {
   white-space: nowrap;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   z-index: 3;
-}
-[dir='rtl'] .avatar-status-chip {
-  transform: translateX(50%);
+  pointer-events: none;
 }
 .avatar-status-chip span {
   display: inline-flex;
