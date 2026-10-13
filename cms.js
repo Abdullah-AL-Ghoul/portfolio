@@ -12,7 +12,7 @@
   'use strict';
 
   var CACHE_KEY = 'pf_cms_cache';
-  var CACHE_TTL = 5 * 60 * 1000;
+  var CACHE_TTL = 30 * 1000; // 30s TTL so dashboard updates reflect quickly
 
   var state = { data: null, lang: document.documentElement.lang === 'ar' ? 'ar' : 'en' };
 
@@ -413,24 +413,44 @@
     return card;
   }
 
-  function buildCertCard(c, lang) {
+  function guessCertCategory(c) {
+    var text = ((c.title_en || '') + ' ' + (c.issuer_en || '') + ' ' + (c.relevance_en || '')).toLowerCase();
+    var cats = [];
+    if (/ai|artificial|intelligence|machine|learning|gpt|claude|generative|deep|model|prompt|python|data/.test(text)) {
+      cats.push('ai');
+    }
+    if (/software|programming|code|cs|developer|java|python|git|algorithm|c\+\+|c#|front|web/.test(text)) {
+      cats.push('software');
+    }
+    if (/tool|github|git|icdl|office|cloud|infra|network|foundations|critical|analytics/.test(text)) {
+      cats.push('tools');
+    }
+    if (!cats.length) cats.push('ai', 'software', 'tools');
+    return cats.join(' ');
+  }
+
+  function buildCertCard(c, lang, data) {
     var btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'cert-card reveal-scale';
+    btn.className = 'cert-card revealed';
     btn.setAttribute('data-dynamic', 'true');
+    btn.setAttribute('data-category', guessCertCategory(c));
+
     var certImg = c.image_path || '';
     if (certImg && !certImg.startsWith('http') && !certImg.startsWith('assets/')) {
-      certImg = 'https://yemabwylsioemgqvyqag.supabase.co/storage/v1/object/public/media/' + certImg;
+      var baseUrl = (data && data.media_base_url) || 'https://ihfwldtovqrntuqhrhev.supabase.co/storage/v1/object/public/media/';
+      if (!baseUrl.endsWith('/')) baseUrl += '/';
+      certImg = baseUrl + certImg.replace(/^media\//, '');
     }
     btn.setAttribute('data-cert', certImg);
-    btn.setAttribute('data-cert-title', c.title_en || c.title_ar || '');
-    btn.setAttribute('data-cert-org', c.issuer_en || c.issuer_ar || '');
+    btn.setAttribute('data-cert-title', (c.title_en || c.title_ar || '').trim());
+    btn.setAttribute('data-cert-org', ((lang === 'ar' ? (c.issuer_ar || c.issuer_en) : c.issuer_en) || '').trim());
 
     var iconSpan = document.createElement('span');
     iconSpan.className = 'cert-icon';
     iconSpan.setAttribute('aria-hidden', 'true');
     var icon = document.createElement('i');
-    icon.setAttribute('data-lucide', 'award');
+    icon.setAttribute('data-lucide', c.icon || 'badge-check');
     iconSpan.appendChild(icon);
     btn.appendChild(iconSpan);
 
@@ -441,12 +461,12 @@
 
     var orgDiv = document.createElement('div');
     orgDiv.className = 'cert-org';
-    orgDiv.textContent = lang === 'ar' ? (c.issuer_ar || c.issuer_en) : c.issuer_en;
+    orgDiv.textContent = (lang === 'ar' ? (c.issuer_ar || c.issuer_en) : c.issuer_en) || '';
     btn.appendChild(orgDiv);
 
     var titleSpan = document.createElement('span');
     titleSpan.className = 'cert-title';
-    titleSpan.textContent = lang === 'ar' ? (c.title_ar || c.title_en) : c.title_en;
+    titleSpan.textContent = (lang === 'ar' ? (c.title_ar || c.title_en) : c.title_en) || '';
     btn.appendChild(titleSpan);
 
     var badgeSpan = document.createElement('span');
@@ -476,35 +496,80 @@
     var grid = document.querySelector('.certs-grid');
     if (!grid) return;
 
-    // Clear previously rendered dynamic certs
-    Array.prototype.slice.call(grid.querySelectorAll('.cert-card[data-dynamic]')).forEach(function (c) {
-      c.remove();
+    var certs = (data.certifications || []).filter(function (c) {
+      return c && c.status === 'published' && !c.deleted_at;
+    });
+    if (!certs.length) return;
+
+    // Clear and render all published certs in exact sort_order
+    grid.innerHTML = '';
+    certs.forEach(function (c) {
+      grid.appendChild(buildCertCard(c, lang, data));
     });
 
-    var present = {};
-    document.querySelectorAll('.cert-card[data-cert-title]').forEach(function (card) {
-      var title = card.getAttribute('data-cert-title');
-      present[title] = true;
-      var match = (data.certifications || []).find(function (c) {
-        return c.title_en === title;
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  function applySkills(data, lang) {
+    if (!Array.isArray(data.skills) || !data.skills.length) return;
+    var cards = document.querySelectorAll('.skills-grid .skill-card');
+    if (!cards.length) return;
+
+    var byCat = {};
+    data.skills.forEach(function (s) {
+      if (!s || s.enabled === false || s.deleted_at) return;
+      var cat = s.category || 'programming';
+      if (!byCat[cat]) byCat[cat] = [];
+      byCat[cat].push(s);
+    });
+
+    var catMap = {
+      0: 'programming',
+      1: 'networking',
+      2: 'tools'
+    };
+
+    cards.forEach(function (card, idx) {
+      var catKey = catMap[idx];
+      if (!catKey || !byCat[catKey]) return;
+      var list = card.querySelector('.skill-list');
+      if (!list) return;
+
+      var tierLabels = {
+        1: { en: 'Beginner', ar: 'مبتدئ' },
+        2: { en: 'Intermediate', ar: 'متوسط' },
+        3: { en: 'Advanced', ar: 'متقدم' },
+        4: { en: 'Expert', ar: 'خبير' }
+      };
+
+      list.innerHTML = '';
+      byCat[catKey].forEach(function (s) {
+        var li = document.createElement('li');
+        li.className = 'skill-row';
+        var tier = s.tier || 3;
+        li.setAttribute('data-tier', tier);
+
+        var nameSpan = document.createElement('span');
+        nameSpan.className = 'skill-name';
+        nameSpan.textContent = lang === 'ar' ? (s.name_ar || s.name) : s.name;
+        li.appendChild(nameSpan);
+
+        var tierSpan = document.createElement('span');
+        tierSpan.className = 'skill-tier';
+        var tInfo = tierLabels[tier] || tierLabels[3];
+        tierSpan.setAttribute('aria-label', lang === 'ar' ? tInfo.ar : tInfo.en);
+        for (var i = 0; i < 4; i++) tierSpan.appendChild(document.createElement('i'));
+        li.appendChild(tierSpan);
+
+        list.appendChild(li);
       });
-      if (!match) return;
-      setText(card.querySelector('.cert-org'), lang === 'ar' ? (match.issuer_ar || match.issuer_en) : match.issuer_en);
-      setText(card.querySelector('.cert-title'), lang === 'ar' ? (match.title_ar || match.title_en) : match.title_en);
-      setText(card.querySelector('.cert-date'), translateDate(match.issued_on, lang));
-      if (match.image_path) card.setAttribute('data-cert', match.image_path);
-    });
 
-    var added = 0;
-    (data.certifications || []).forEach(function (c) {
-      var title = c.title_en || c.title_ar;
-      if (!title || present[title]) return;
-      present[title] = true;
-      grid.appendChild(buildCertCard(c, lang));
-      added++;
+      var meta = card.querySelector('.skill-meta');
+      if (meta) {
+        var count = byCat[catKey].length;
+        meta.textContent = lang === 'ar' ? (count + ' مهارات') : (count + (catKey === 'networking' ? ' areas' : ' technologies'));
+      }
     });
-
-    if (added && window.lucide) window.lucide.createIcons();
   }
 
   function applyRecommendations(data, lang) {
@@ -573,6 +638,7 @@
     var lang = document.documentElement.lang === 'ar' ? 'ar' : 'en';
     applyProjects(data, lang);
     applyServices(data, lang);
+    applySkills(data, lang);
     applyCerts(data, lang);
     applyRecommendations(data, lang);
     applyProfiles(data, lang);

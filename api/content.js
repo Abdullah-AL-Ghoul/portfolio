@@ -6,13 +6,13 @@
  * site keeps its built-in content when Supabase is not configured.
  */
 
-const { json, sb, configured } = require('./_lib');
+const { json, sb, configured, SUPABASE_URL } = require('./_lib');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'GET') return json(res, 405, { enabled: false });
 
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
+  res.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate=30');
 
   if (!configured()) return json(res, 200, { enabled: false });
 
@@ -48,6 +48,7 @@ module.exports = async function handler(req, res) {
 
     return json(res, 200, {
       enabled: true,
+      media_base_url: SUPABASE_URL ? `${SUPABASE_URL}/storage/v1/object/public/media/` : '',
       projects: projects || [],
       certifications: certifications || [],
       experiences: experiences || [],
