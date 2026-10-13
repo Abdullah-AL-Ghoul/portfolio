@@ -28,7 +28,7 @@ module.exports = async function handler(req, res) {
   };
 
   try {
-    const [projects, certifications, experiences, recommendations, social_links, about, services, professional_profiles] = await Promise.all([
+    const [projects, certifications, experiences, recommendations, social_links, about, services, professional_profiles, skills] = await Promise.all([
       sb('projects?select=*&status=eq.published&deleted_at=is.null&order=featured_rank.asc,sort_order.asc', { role: 'anon' }),
       sb('certifications?select=*&status=eq.published&deleted_at=is.null&order=sort_order.asc', { role: 'anon' }),
       sb('experiences?select=*&status=eq.published&deleted_at=is.null&order=sort_order.asc', { role: 'anon' }),
@@ -40,6 +40,9 @@ module.exports = async function handler(req, res) {
       ),
       safeFetch(() =>
         sb('professional_profiles?select=platform,display_name,username,profile_url,title_en,title_ar,description_en,description_ar,icon,is_featured,display_order&is_active=eq.true&deleted_at=is.null&profile_url=neq.&order=display_order.asc', { role: 'anon' })
+      ),
+      safeFetch(() =>
+        sb('skills?select=*&enabled=eq.true&order=category.asc,sort_order.asc', { role: 'anon' })
       )
     ]);
 
@@ -53,6 +56,7 @@ module.exports = async function handler(req, res) {
       about: (about && about[0]) || null,
       services: services || [],
       professional_profiles: professional_profiles || [],
+      skills: skills || [],
       fetched_at: new Date().toISOString()
     });
   } catch (e) {

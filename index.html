@@ -882,10 +882,16 @@
         <div class="section-head reveal-up">
           <span class="eyebrow" data-index="05" data-i18n="certs.eyebrow">// Certifications</span>
           <h2 class="section-title" data-i18n="certs.title">Verified Credentials</h2>
+          <div class="certs-filters" role="tablist" aria-label="Certifications filters">
+            <button type="button" class="cert-filter-btn active" data-filter="all" data-i18n="certs.f_all">All Credentials</button>
+            <button type="button" class="cert-filter-btn" data-filter="ai" data-i18n="certs.f_ai">AI &amp; Generative AI</button>
+            <button type="button" class="cert-filter-btn" data-filter="software" data-i18n="certs.f_sw">Software Engineering</button>
+            <button type="button" class="cert-filter-btn" data-filter="tools" data-i18n="certs.f_tools">Tools &amp; Foundations</button>
+          </div>
         </div>
 
         <div class="certs-grid">
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/google-ai-fundamentals.jpg" data-cert-title="AI Fundamentals" data-cert-org="Google · Coursera">
+          <button type="button" class="cert-card reveal-scale" data-category="ai" data-cert="assets/certs/google-ai-fundamentals.jpg" data-cert-title="AI Fundamentals" data-cert-org="Google · Coursera">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="brain"></i></span>
             <div class="cert-date" data-i18n="certs.c10d">Aug 2026</div>
             <div class="cert-org" data-i18n="certs.c10o">Google · Coursera</div>
@@ -893,7 +899,7 @@
             <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
             <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
           </button>
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/fa03448a.jpg" data-cert-title="Learn Git & GitHub" data-cert-org="M3aarf Platform">
+          <button type="button" class="cert-card reveal-scale" data-category="tools software" data-cert="assets/certs/fa03448a.jpg" data-cert-title="Learn Git & GitHub" data-cert-org="M3aarf Platform">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="folder-git-2"></i></span>
             <div class="cert-date" data-i18n="certs.c11d">Aug 2026</div>
             <div class="cert-org" data-i18n="certs.c11o">M3aarf Platform</div>
@@ -901,7 +907,7 @@
             <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
             <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
           </button>
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/nvidia-ai.jpg" data-cert-title="AI for All: From Basics to GenAI Practice" data-cert-org="NVIDIA Academy">
+          <button type="button" class="cert-card reveal-scale" data-category="ai" data-cert="assets/certs/nvidia-ai.jpg" data-cert-title="AI for All: From Basics to GenAI Practice" data-cert-org="NVIDIA Academy">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="cpu"></i></span>
             <div class="cert-date" data-i18n="certs.c1d">Mar 2026</div>
             <div class="cert-org" data-i18n="certs.c1o">NVIDIA Academy</div>
@@ -909,7 +915,7 @@
             <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
             <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
           </button>
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/openai-ai-foundations.jpg" data-cert-title="AI Foundations" data-cert-org="OpenAI Academy">
+          <button type="button" class="cert-card reveal-scale" data-category="ai" data-cert="assets/certs/openai-ai-foundations.jpg" data-cert-title="AI Foundations" data-cert-org="OpenAI Academy">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="sparkles"></i></span>
             <div class="cert-date" data-i18n="certs.c2d">Jul 2026</div>
             <div class="cert-org" data-i18n="certs.c2o">OpenAI Academy</div>
@@ -917,7 +923,7 @@
             <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
             <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
           </button>
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/claude-code-in-action.jpg" data-cert-title="Claude Code in Action" data-cert-org="Anthropic · Coursera">
+          <button type="button" class="cert-card reveal-scale" data-category="ai software" data-cert="assets/certs/claude-code-in-action.jpg" data-cert-title="Claude Code in Action" data-cert-org="Anthropic · Coursera">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="brain-circuit"></i></span>
             <div class="cert-date" data-i18n="certs.c9d">Aug 2026</div>
             <div class="cert-org" data-i18n="certs.c9o">Anthropic · Coursera</div>
@@ -925,7 +931,7 @@
             <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
             <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
           </button>
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/anthropic-claude-code-101.png" data-cert-title="Claude Code 101" data-cert-org="Anthropic">
+          <button type="button" class="cert-card reveal-scale" data-category="ai" data-cert="assets/certs/anthropic-claude-code-101.png" data-cert-title="Claude Code 101" data-cert-org="Anthropic">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="brain-circuit"></i></span>
             <div class="cert-date" data-i18n="certs.c8d">Aug 2026</div>
             <div class="cert-org" data-i18n="certs.c8o">Anthropic</div>
@@ -933,7 +939,7 @@
             <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
             <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
           </button>
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/anthropic-claude101.png" data-cert-title="Claude 101" data-cert-org="Anthropic">
+          <button type="button" class="cert-card reveal-scale" data-category="ai" data-cert="assets/certs/anthropic-claude101.png" data-cert-title="Claude 101" data-cert-org="Anthropic">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="brain-circuit"></i></span>
             <div class="cert-date" data-i18n="certs.c3d">Jul 2026</div>
             <div class="cert-org" data-i18n="certs.c3o">Anthropic</div>
@@ -941,7 +947,7 @@
             <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
             <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
           </button>
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/saylor-cs101.jpg" data-cert-title="CS101: Introduction to Programming I" data-cert-org="Saylor Academy">
+          <button type="button" class="cert-card reveal-scale" data-category="software" data-cert="assets/certs/saylor-cs101.jpg" data-cert-title="CS101: Introduction to Programming I" data-cert-org="Saylor Academy">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="graduation-cap"></i></span>
             <div class="cert-date" data-i18n="certs.c4d">Jan 2026</div>
             <div class="cert-org" data-i18n="certs.c4o">Saylor Academy</div>
@@ -949,7 +955,7 @@
             <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
             <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
           </button>
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/icdl.jpg" data-cert-title="ICDL Base Certification" data-cert-org="Edraak">
+          <button type="button" class="cert-card reveal-scale" data-category="tools" data-cert="assets/certs/icdl.jpg" data-cert-title="ICDL Base Certification" data-cert-org="Edraak">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="monitor-check"></i></span>
             <div class="cert-date" data-i18n="certs.c5d">Jan 2026</div>
             <div class="cert-org" data-i18n="certs.c5o">Edraak</div>
@@ -957,7 +963,7 @@
             <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
             <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
           </button>
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/hp-data-science.jpg" data-cert-title="Data Science & Analytics" data-cert-org="HP LIFE">
+          <button type="button" class="cert-card reveal-scale" data-category="ai" data-cert="assets/certs/hp-data-science.jpg" data-cert-title="Data Science & Analytics" data-cert-org="HP LIFE">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="bar-chart-3"></i></span>
             <div class="cert-date" data-i18n="certs.c7d">2025</div>
             <div class="cert-org" data-i18n="certs.c7o">HP LIFE</div>
@@ -965,7 +971,7 @@
             <span class="cert-badge"><i data-lucide="badge-check"></i> <span data-i18n="certs.badge">Verified</span></span>
             <span class="cert-view-hint"><i data-lucide="maximize-2"></i> <span data-i18n="certs.view">View certificate</span></span>
           </button>
-          <button type="button" class="cert-card reveal-scale" data-cert="assets/certs/hp-critical-thinking.jpg" data-cert-title="Critical Thinking in the Age of AI" data-cert-org="HP LIFE">
+          <button type="button" class="cert-card reveal-scale" data-category="ai tools" data-cert="assets/certs/hp-critical-thinking.jpg" data-cert-title="Critical Thinking in the Age of AI" data-cert-org="HP LIFE">
             <span class="cert-icon" aria-hidden="true"><i data-lucide="lightbulb"></i></span>
             <div class="cert-date" data-i18n="certs.c6d">2025</div>
             <div class="cert-org" data-i18n="certs.c6o">HP LIFE</div>
@@ -1125,15 +1131,126 @@
 
     <!-- Work with me — profile cards rendered by cms.js from /api/content
          ("professional_profiles"). Hidden while the profiles array is empty. -->
+    <!-- Work with me — Conversion-focused value proposition & client engagement -->
     <section class="section alt" id="freelance" hidden>
       <div class="container">
-        <div class="section-head">
-          <span class="eyebrow" data-index="08" data-i18n="freelance.eyebrow">// Freelance</span>
-          <h2 class="section-title" data-i18n="freelance.title">Work with me</h2>
+        <div class="section-head reveal-up">
+          <span class="eyebrow" data-index="08" data-i18n="freelance.eyebrow">// Work with me</span>
+          <h2 class="section-title" data-i18n="freelance.title">Solving Real Engineering Challenges</h2>
           <p class="section-intro" data-i18n="freelance.intro">
-            Verified professional profiles — hire me through the platform you prefer.
+            From technical bottlenecks to scalable production systems — I build dependable web applications, custom APIs, and practical AI integrations tailored to your goals.
           </p>
         </div>
+
+        <!-- Problem-Solving Capabilities (3 Pillars) -->
+        <div class="freelance-pillars reveal-up">
+          <article class="freelance-pillar">
+            <div class="pillar-icon">
+              <i data-lucide="shield-check" aria-hidden="true"></i>
+            </div>
+            <div class="pillar-content">
+              <span class="pillar-num">01</span>
+              <h3 data-i18n="freelance.p1_t">Clean Architecture &amp; Scale</h3>
+              <p data-i18n="freelance.p1_d">
+                Structured database design, resilient API endpoints, and clean modular code built to grow with your users without accumulating technical debt.
+              </p>
+            </div>
+          </article>
+
+          <article class="freelance-pillar">
+            <div class="pillar-icon">
+              <i data-lucide="sparkles" aria-hidden="true"></i>
+            </div>
+            <div class="pillar-content">
+              <span class="pillar-num">02</span>
+              <h3 data-i18n="freelance.p2_t">Modern Web &amp; Practical AI</h3>
+              <p data-i18n="freelance.p2_d">
+                Fast, responsive bilingual user experiences (LTR &amp; RTL) integrated with cutting-edge AI models to automate workflows and drive real business outcomes.
+              </p>
+            </div>
+          </article>
+
+          <article class="freelance-pillar">
+            <div class="pillar-icon">
+              <i data-lucide="zap" aria-hidden="true"></i>
+            </div>
+            <div class="pillar-content">
+              <span class="pillar-num">03</span>
+              <h3 data-i18n="freelance.p3_t">Direct Delivery &amp; Reliability</h3>
+              <p data-i18n="freelance.p3_d">
+                Clear milestone updates, rigorously tested deliverables, proactive communication, and dedicated post-launch support with zero guesswork.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- 4-Step Working Process -->
+        <div class="freelance-process reveal-up">
+          <div class="process-head">
+            <span class="process-kicker" data-i18n="freelance.proc_kicker">Process</span>
+            <h3 data-i18n="freelance.proc_title">How We Turn Your Idea Into Reality</h3>
+          </div>
+          <div class="process-steps">
+            <div class="process-step">
+              <span class="step-num">01</span>
+              <h4 data-i18n="freelance.s1_t">Scope &amp; Architecture</h4>
+              <p data-i18n="freelance.s1_d">We analyze requirements, identify technical challenges, and define a clear milestone roadmap.</p>
+            </div>
+            <div class="process-step">
+              <span class="step-num">02</span>
+              <h4 data-i18n="freelance.s2_t">Interactive Prototype</h4>
+              <p data-i18n="freelance.s2_d">Rapid UI scaffolding and data contract alignment so you see and test the vision early.</p>
+            </div>
+            <div class="process-step">
+              <span class="step-num">03</span>
+              <h4 data-i18n="freelance.s3_t">Sprint Build &amp; Testing</h4>
+              <p data-i18n="freelance.s3_d">Production-grade implementation with automated checks, security rules, and performance audits.</p>
+            </div>
+            <div class="process-step">
+              <span class="step-num">04</span>
+              <h4 data-i18n="freelance.s4_t">Deploy &amp; Handover</h4>
+              <p data-i18n="freelance.s4_d">Seamless cloud deployment, documentation, 100% code ownership, and continued support.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Direct CTA & Guarantees Box -->
+        <div class="freelance-cta-banner reveal-up">
+          <div class="cta-banner-content">
+            <h3 data-i18n="freelance.cta_h">Have a project or problem to solve?</h3>
+            <p data-i18n="freelance.cta_p">Let's discuss how we can build it together with high precision and fast turnaround.</p>
+            <div class="cta-banner-actions">
+              <a href="#contact" class="btn btn-primary" data-i18n="freelance.cta_btn">
+                <i data-lucide="message-square" aria-hidden="true"></i>
+                <span>Discuss Your Project</span>
+              </a>
+              <a href="https://wa.me/972594165609?text=Hello%20Abdullah%2C%20I%20have%20a%20project%20inquiry" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="freelance.cta_wa">
+                <i data-lucide="message-circle" aria-hidden="true"></i>
+                <span>WhatsApp Message</span>
+              </a>
+            </div>
+          </div>
+          <div class="cta-banner-badges">
+            <div class="guarantee-badge">
+              <i data-lucide="check-circle-2" aria-hidden="true"></i>
+              <span data-i18n="freelance.g1">100% Code Ownership</span>
+            </div>
+            <div class="guarantee-badge">
+              <i data-lucide="check-circle-2" aria-hidden="true"></i>
+              <span data-i18n="freelance.g2">Clean Architecture &amp; Tests</span>
+            </div>
+            <div class="guarantee-badge">
+              <i data-lucide="check-circle-2" aria-hidden="true"></i>
+              <span data-i18n="freelance.g3">Responsive &amp; Bilingual (AR/EN)</span>
+            </div>
+            <div class="guarantee-badge">
+              <i data-lucide="check-circle-2" aria-hidden="true"></i>
+              <span data-i18n="freelance.g4">Post-Launch Support</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional Platform Profiles (dynamic from CMS) -->
         <div class="profiles-grid" id="profiles-grid"></div>
       </div>
     </section>

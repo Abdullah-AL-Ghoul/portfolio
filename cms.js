@@ -413,8 +413,78 @@
     return card;
   }
 
-  function applyCerts(data, lang) {    document.querySelectorAll('.cert-card').forEach(function (card) {
+  function buildCertCard(c, lang) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cert-card reveal-scale';
+    btn.setAttribute('data-dynamic', 'true');
+    var certImg = c.image_path || '';
+    if (certImg && !certImg.startsWith('http') && !certImg.startsWith('assets/')) {
+      certImg = 'https://yemabwylsioemgqvyqag.supabase.co/storage/v1/object/public/media/' + certImg;
+    }
+    btn.setAttribute('data-cert', certImg);
+    btn.setAttribute('data-cert-title', c.title_en || c.title_ar || '');
+    btn.setAttribute('data-cert-org', c.issuer_en || c.issuer_ar || '');
+
+    var iconSpan = document.createElement('span');
+    iconSpan.className = 'cert-icon';
+    iconSpan.setAttribute('aria-hidden', 'true');
+    var icon = document.createElement('i');
+    icon.setAttribute('data-lucide', 'award');
+    iconSpan.appendChild(icon);
+    btn.appendChild(iconSpan);
+
+    var dateDiv = document.createElement('div');
+    dateDiv.className = 'cert-date';
+    dateDiv.textContent = translateDate(c.issued_on, lang);
+    btn.appendChild(dateDiv);
+
+    var orgDiv = document.createElement('div');
+    orgDiv.className = 'cert-org';
+    orgDiv.textContent = lang === 'ar' ? (c.issuer_ar || c.issuer_en) : c.issuer_en;
+    btn.appendChild(orgDiv);
+
+    var titleSpan = document.createElement('span');
+    titleSpan.className = 'cert-title';
+    titleSpan.textContent = lang === 'ar' ? (c.title_ar || c.title_en) : c.title_en;
+    btn.appendChild(titleSpan);
+
+    var badgeSpan = document.createElement('span');
+    badgeSpan.className = 'cert-badge';
+    var badgeIcon = document.createElement('i');
+    badgeIcon.setAttribute('data-lucide', 'badge-check');
+    badgeSpan.appendChild(badgeIcon);
+    var badgeText = document.createElement('span');
+    badgeText.textContent = lang === 'ar' ? 'معتمدة' : 'Verified';
+    badgeSpan.appendChild(badgeText);
+    btn.appendChild(badgeSpan);
+
+    var viewHint = document.createElement('span');
+    viewHint.className = 'cert-view-hint';
+    var viewIcon = document.createElement('i');
+    viewIcon.setAttribute('data-lucide', 'maximize-2');
+    viewHint.appendChild(viewIcon);
+    var viewText = document.createElement('span');
+    viewText.textContent = lang === 'ar' ? 'عرض الشهادة' : 'View certificate';
+    viewHint.appendChild(viewText);
+    btn.appendChild(viewHint);
+
+    return btn;
+  }
+
+  function applyCerts(data, lang) {
+    var grid = document.querySelector('.certs-grid');
+    if (!grid) return;
+
+    // Clear previously rendered dynamic certs
+    Array.prototype.slice.call(grid.querySelectorAll('.cert-card[data-dynamic]')).forEach(function (c) {
+      c.remove();
+    });
+
+    var present = {};
+    document.querySelectorAll('.cert-card[data-cert-title]').forEach(function (card) {
       var title = card.getAttribute('data-cert-title');
+      present[title] = true;
       var match = (data.certifications || []).find(function (c) {
         return c.title_en === title;
       });
@@ -424,6 +494,17 @@
       setText(card.querySelector('.cert-date'), translateDate(match.issued_on, lang));
       if (match.image_path) card.setAttribute('data-cert', match.image_path);
     });
+
+    var added = 0;
+    (data.certifications || []).forEach(function (c) {
+      var title = c.title_en || c.title_ar;
+      if (!title || present[title]) return;
+      present[title] = true;
+      grid.appendChild(buildCertCard(c, lang));
+      added++;
+    });
+
+    if (added && window.lucide) window.lucide.createIcons();
   }
 
   function applyRecommendations(data, lang) {

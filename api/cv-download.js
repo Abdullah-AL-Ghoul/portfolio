@@ -59,6 +59,14 @@ module.exports = async function handler(req, res) {
       return res.redirect(302, FALLBACK_CV);
     }
 
+    if (cv.storage_path && cv.storage_path.startsWith('media/')) {
+      return res.redirect(302, `${SUPABASE_URL}/storage/v1/object/public/${cv.storage_path}`);
+    }
+
+    if (cv.storage_path && (cv.storage_path.startsWith('http://') || cv.storage_path.startsWith('https://'))) {
+      return res.redirect(302, cv.storage_path);
+    }
+
     return res.redirect(302, cv.storage_path || FALLBACK_CV);
   } catch (e) {
     return res.redirect(302, FALLBACK_CV);

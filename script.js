@@ -153,9 +153,39 @@
       'services.cta': 'Discuss a project',
       'services.related': 'Related project',
 
-      'freelance.eyebrow': '// Freelance',
-      'freelance.title': 'Work with me',
-      'freelance.intro': 'Verified professional profiles — hire me through the platform you prefer.',
+      'nav.freelance': 'Work with me',
+      'certs.f_all': 'All Credentials',
+      'certs.f_ai': 'AI & Generative AI',
+      'certs.f_sw': 'Software Engineering',
+      'certs.f_tools': 'Tools & Foundations',
+
+      'freelance.eyebrow': '// Work with me',
+      'freelance.title': 'Solving Real Engineering Challenges',
+      'freelance.intro': 'From technical bottlenecks to scalable production systems — I build dependable web applications, custom APIs, and practical AI integrations tailored to your goals.',
+      'freelance.p1_t': 'Clean Architecture & Scale',
+      'freelance.p1_d': 'Structured database design, resilient API endpoints, and clean modular code built to grow with your users without accumulating technical debt.',
+      'freelance.p2_t': 'Modern Web & Practical AI',
+      'freelance.p2_d': 'Fast, responsive bilingual user experiences (LTR & RTL) integrated with cutting-edge AI models to automate workflows and drive real business outcomes.',
+      'freelance.p3_t': 'Direct Delivery & Reliability',
+      'freelance.p3_d': 'Clear milestone updates, rigorously tested deliverables, proactive communication, and dedicated post-launch support with zero guesswork.',
+      'freelance.proc_kicker': 'Process',
+      'freelance.proc_title': 'How We Turn Your Idea Into Reality',
+      'freelance.s1_t': 'Scope & Architecture',
+      'freelance.s1_d': 'We analyze requirements, identify technical challenges, and define a clear milestone roadmap.',
+      'freelance.s2_t': 'Interactive Prototype',
+      'freelance.s2_d': 'Rapid UI scaffolding and data contract alignment so you see and test the vision early.',
+      'freelance.s3_t': 'Sprint Build & Testing',
+      'freelance.s3_d': 'Production-grade implementation with automated checks, security rules, and performance audits.',
+      'freelance.s4_t': 'Deploy & Handover',
+      'freelance.s4_d': 'Seamless cloud deployment, documentation, 100% code ownership, and continued support.',
+      'freelance.cta_h': 'Have a project or problem to solve?',
+      'freelance.cta_p': "Let's discuss how we can build it together with high precision and fast turnaround.",
+      'freelance.cta_btn': 'Discuss Your Project',
+      'freelance.cta_wa': 'WhatsApp Message',
+      'freelance.g1': '100% Code Ownership',
+      'freelance.g2': 'Clean Architecture & Tests',
+      'freelance.g3': 'Responsive & Bilingual (AR/EN)',
+      'freelance.g4': 'Post-Launch Support',
       'freelance.view': 'View profile',
 
       'about.eyebrow': '// About',
@@ -404,9 +434,39 @@
       'services.cta': 'اطلب مشروعاً',
       'services.related': 'مشروع مرتبط',
 
-      'freelance.eyebrow': '# العمل الحر',
-      'freelance.title': 'اعمل معي',
-      'freelance.intro': 'ملفات مهنية موثّقة — وظّفني عبر المنصة التي تناسبك.',
+      'nav.freelance': 'اعمل معي',
+      'certs.f_all': 'جميع الشهادات',
+      'certs.f_ai': 'الذكاء الاصطناعي',
+      'certs.f_sw': 'هندسة البرمجيات',
+      'certs.f_tools': 'الأدوات والأساسيات',
+
+      'freelance.eyebrow': '// اعمل معي',
+      'freelance.title': 'حل التحديات الهندسية وبناء أنظمة حقيقية',
+      'freelance.intro': 'من حل المعضلات التقنية إلى إطلاق أنظمة إنتاجية قابلة للتوسع — أقدم حلولاً برمجية متكاملة، واجهات سريعة، وتكاملات ذكاء اصطناعي مخصصة لأهدافك.',
+      'freelance.p1_t': 'معمارية نظيفة وقابلة للتوسع',
+      'freelance.p1_d': 'تصميم مهيكل لقواعد البيانات، واجهات برمجية API مرنة، وكود برمجي نظيف ينمو مع مستخدميك دون تراكم للديون التقنية.',
+      'freelance.p2_t': 'تطوير ويب حديث وذكاء اصطناعي عملي',
+      'freelance.p2_d': 'واجهات فائقة السرعة ثنائية اللغة (RTL & LTR) مدمجة بنماذج الذكاء الاصطناعي لأتمتة العمليات وتحقيق نتائج ملموسة.',
+      'freelance.p3_t': 'تسليم مباشر وموثوقية عالية',
+      'freelance.p3_d': 'تحديثات مرحلية واضحة، تسليمات مختبرة بدقة، تواصل استباقي، ودعم فني مخصص بعد الإطلاق بلا أي غموض.',
+      'freelance.proc_kicker': 'خطوات العمل',
+      'freelance.proc_title': 'كيف نحول فكرتك إلى واقع ملموس؟',
+      'freelance.s1_t': 'تحديد النطاق والمعمارية',
+      'freelance.s1_d': 'نحلل متطلبات المشروع، نحدد التحديات التقنية، ونرسم خارطة طريق واضحة للمراحل.',
+      'freelance.s2_t': 'النموذج الأولي التفاعلي',
+      'freelance.s2_d': 'بناء سريع للهيكل والواجهات مع مطابقة البيانات لتجربة الرؤية والتأكد منها مبكراً.',
+      'freelance.s3_t': 'البناء المرن والاختبار الشامل',
+      'freelance.s3_d': 'تنفيذ برمجي بمعايير إنتاجية، مع فحوصات أمان مؤتمتة وتدقيق صارم للأداء.',
+      'freelance.s4_t': 'الإطلاق والتسليم مع الدعم',
+      'freelance.s4_d': 'نشر سلس على السحابة، توثيق شامل، ملكية تامة للكود 100%، ودعم فني مستمر.',
+      'freelance.cta_h': 'هل لديك فكرة أو تحدٍ تقني ترغب في حله؟',
+      'freelance.cta_p': 'دعنا نناقش كيف يمكننا بناء وتطوير مشروعك بأعلى درجات الدقة والسرعة.',
+      'freelance.cta_btn': 'ناقش مشروعك الآن',
+      'freelance.cta_wa': 'محادثة عبر واتساب',
+      'freelance.g1': 'ملكية الكود 100%',
+      'freelance.g2': 'معمارية نظيفة واختبارات مؤتمتة',
+      'freelance.g3': 'متجاوب وثنائي اللغة (عربي / إنجليزي)',
+      'freelance.g4': 'دعم فني بعد التسليم',
       'freelance.view': 'عرض الملف',
 
       'about.eyebrow': '# نبذة',
@@ -1703,10 +1763,12 @@
       if (lastFocused && lastFocused.focus) lastFocused.focus();
     }
 
-    $$('.cert-card[data-cert]').forEach((card) => {
-      card.addEventListener('click', () => {
+    // Event delegation: covers both static and dynamic CMS cert cards
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('.cert-card[data-cert]');
+      if (card) {
         open(card.dataset.cert, card.dataset.certTitle, card.dataset.certOrg);
-      });
+      }
     });
 
     modal.addEventListener('click', (e) => {
@@ -1717,6 +1779,30 @@
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !modal.hidden) close();
+    });
+  }
+
+  // ============== Cert Filters ==============
+
+  function setupCertFilters() {
+    const filterBtns = $$('.cert-filter-btn');
+    if (!filterBtns.length) return;
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        $$('.certs-grid .cert-card').forEach((card) => {
+          const cat = card.dataset.category || '';
+          if (filter === 'all' || cat.includes(filter)) {
+            card.style.display = '';
+            card.hidden = false;
+          } else {
+            card.style.display = 'none';
+            card.hidden = true;
+          }
+        });
+      });
     });
   }
 
@@ -4099,6 +4185,7 @@
     setupBackToTop();
     setupKeyboardShortcuts();
     setupCertModal();
+    setupCertFilters();
     setupTestimonialModal();
     setupCursor();
     setupSectionTransitions();
