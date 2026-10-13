@@ -225,6 +225,8 @@
     if (!section || !grid) return;
     var rows = Array.isArray(data.services) ? data.services : [];
     section.hidden = rows.length === 0;
+    var navServices = document.getElementById('nav-services');
+    if (navServices) navServices.hidden = rows.length === 0;
 
     // Idempotent rebuild: clear previous render, then re-create every card so
     // removals, unpublish and language switches stay consistent.
