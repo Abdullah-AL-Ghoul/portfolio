@@ -188,6 +188,45 @@
       'freelance.g4': 'Post-Launch Support',
       'freelance.view': 'View profile',
 
+      'planner.kicker': '// Interactive Scope Estimator',
+      'planner.title': 'Calculate Your Project Timeline & Architecture',
+      'planner.desc': 'Select your desired project type, core features, and target schedule to see an estimated sprint roadmap.',
+      'planner.l_type': '1. Project Type',
+      'planner.t_webapp': 'Full-Stack Web App',
+      'planner.t_ai': 'AI Agent / Workflow',
+      'planner.t_landing': 'Modern Landing / Corporate',
+      'planner.t_api': 'Backend API & Database',
+      'planner.l_caps': '2. Key Requirements',
+      'planner.c_bilingual': 'Bilingual AR/EN & RTL',
+      'planner.c_dashboard': 'Custom Admin / CMS',
+      'planner.c_auth': 'Auth & User Roles',
+      'planner.c_speed': '95+ Lighthouse Performance',
+      'planner.l_speed': '3. Target Pace',
+      'planner.p_std': 'Standard Sprints (2–4 wks)',
+      'planner.p_fast': 'Fast-Track MVP (1–2 wks)',
+      'planner.p_flex': 'Phased Roadmap (4+ wks)',
+      'planner.res_est': 'Estimated Sprint',
+      'planner.res_stack': 'Recommended Stack',
+      'planner.deliv1': '100% Code Ownership',
+      'planner.deliv2': 'Automated Tests',
+      'planner.deliv3': 'Live Milestone Demos',
+      'planner.proceed': 'Proceed With This Scope',
+      'planner.reset': 'Reset',
+
+      'faq.kicker': '// Client FAQ',
+      'faq.title': 'Frequently Asked Questions',
+      'faq.desc': 'Straightforward answers about collaboration, code ownership, and delivery guarantees.',
+      'faq.q1': 'How do we communicate and track sprint progress?',
+      'faq.a1': 'We work in agile sprints with scheduled milestone reviews and live staging preview links. Direct communication happens via WhatsApp, Slack, or Email with guaranteed sub-24h response times.',
+      'faq.q2': 'Who owns the code and intellectual property?',
+      'faq.a2': 'You own 100% of all intellectual property, source repositories, documentation, and database configurations. No lock-in, no hidden proprietary licenses.',
+      'faq.q3': 'How do you ensure high quality, security, and performance?',
+      'faq.a3': 'Every deliverable is backed by automated test suites, WCAG AA accessibility compliance, strict input validation, and Lighthouse 95+ performance optimization.',
+      'faq.q4': 'What support is included after the project is launched?',
+      'faq.a4': 'Every launch includes a dedicated warranty period for bug fixes and adjustments, along with full deployment documentation and flexible ongoing maintenance arrangements.',
+
+      'nav.terminal': 'Developer Terminal (>_)',
+
       'about.eyebrow': '// About',
       'about.title': 'Who am I?',
       'about.p1': "I'm Abdullah Al-Ghoul, a Computer Science student who believes technology is one of the most powerful tools for solving real-world problems. I enjoy learning, experimenting, and building practical solutions that combine logic, creativity, and innovation.",
@@ -209,6 +248,17 @@
       'about.s4': 'Self-Learning',
       'about.s5': 'Critical Thinking',
       'about.s6': 'Public Speaking',
+      'about.prin_kicker': '// Core Philosophy',
+      'about.prin_title': 'Engineering Principles I Build By',
+      'about.prin_intro': 'Clean software is not an accident—it comes from deliberate architectural decisions, rigorous testing, and respect for performance.',
+      'about.p1_title': 'Simplicity Over Complexity',
+      'about.p1_desc': 'Minimal moving parts, straightforward folder structures, and self-documenting code over convoluted abstractions.',
+      'about.p2_title': 'Performance by Default',
+      'about.p2_desc': 'Sub-second TTFB, zero bundle waste, and 95+ Lighthouse scores baked in from sprint zero, never patched on later.',
+      'about.p3_title': 'Clean Contracts & Security',
+      'about.p3_desc': 'Strict schema validation, defensive API boundaries, and type safety across every layer of the data stack.',
+      'about.p4_title': 'Zero Technical Debt',
+      'about.p4_desc': 'Modular boundaries, continuous automated test gates, and clear documentation that makes future handovers seamless.',
 
       'skills.eyebrow': '// Skills',
       'skills.title': 'Tech Stack',
@@ -469,6 +519,45 @@
       'freelance.g4': 'دعم فني بعد التسليم',
       'freelance.view': 'عرض الملف',
 
+      'planner.kicker': '// حاسبة نطاق العمل التفاعلية',
+      'planner.title': 'خطط لمشروعك واحسب الجدول الزمني والمعمارية',
+      'planner.desc': 'حدد نوع مشروعك، والمتطلبات الأساسية، والجدول المستهدف للحصول على خارطة زمنية ومعمارية مقترحة.',
+      'planner.l_type': '1. نوع المشروع',
+      'planner.t_webapp': 'تطبيق ويب متكامل (SaaS/Web App)',
+      'planner.t_ai': 'دمج ذكاء اصطناعي وأتمتة',
+      'planner.t_landing': 'موقع تعريفي معاصر عالي التحويل',
+      'planner.t_api': 'واجهات برمجية وقواعد بيانات',
+      'planner.l_caps': '2. المتطلبات والخصائص الأساسية',
+      'planner.c_bilingual': 'ثنائي اللغة (عربي/إنجليزي) وRTL',
+      'planner.c_dashboard': 'لوحة تحكم وإدارة محتوى مخصصة',
+      'planner.c_auth': 'نظام تسجيل دخول وصلاحيات',
+      'planner.c_speed': 'أداء قياسي (Lighthouse 95+)',
+      'planner.l_speed': '3. سرعة التنفيذ المستهدفة',
+      'planner.p_std': 'سبرنت قياسي (2–4 أسابيع)',
+      'planner.p_fast': 'إطلاق سريع MVP (1–2 أسبوع)',
+      'planner.p_flex': 'خطة عمل متدرجة (4+ أسابيع)',
+      'planner.res_est': 'المدة المتوقعة',
+      'planner.res_stack': 'التقنيات المقترحة',
+      'planner.deliv1': 'ملكية كاملة للكود 100%',
+      'planner.deliv2': 'اختبارات جودة آلية',
+      'planner.deliv3': 'عروض حية دورية للتقدم',
+      'planner.proceed': 'ابدأ بهذا النطاق',
+      'planner.reset': 'إعادة ضبط',
+
+      'faq.kicker': '// أسئلة العملاء الشائعة',
+      'faq.title': 'الأسئلة الأكثر شيوعاً',
+      'faq.desc': 'إجابات واضحة ومباشرة حول التعاون، وملكية الكود، وضمانات الجودة والتسليم.',
+      'faq.q1': 'كيف نتواصل ونتابع تقدم العمل أثناء المشروع؟',
+      'faq.a1': 'نعمل وفق دورات رشيقة (Agile Sprints) مع اجتماعات مراجعة دورية وروابط معاينة حية للمشروع. يتم التواصل المباشر عبر واتساب أو سلاك أو الإيميل مع رد سريع خلال 24 ساعة كحد أقصى.',
+      'faq.q2': 'من يمتلك الكود المصدري والملكية الفكرية للمشروع؟',
+      'faq.a2': 'أنت تمتلك 100% من كافة حقوق الملكية الفكرية، والمستودعات البرمجية، وقواعد البيانات، والتوثيق من اليوم الأول، بدون أي قيود أو تراخيص مغلقة.',
+      'faq.q3': 'كيف تضمن الجودة العالية والأمان والأداء القياسي؟',
+      'faq.a3': 'كل تسليم مدعوم باختبارات برمجية آلية، وتوافق تام مع معايير إمكانية الوصول WCAG AA، وحماية للمدخلات، وضبط سرعة التحميل لتتجاوز 95 على مقياس Lighthouse.',
+      'faq.q4': 'ما هو الدعم المقدم بعد إطلاق المشروع؟',
+      'faq.a4': 'يشمل كل مشروع فترة ضمان مخصصة بعد الإطلاق لمعالجة أي ملاحظات أو أخطاء، مع توثيق شامل للنشر وإمكانية المتابعة والصيانة المستمرة.',
+
+      'nav.terminal': 'طرفية المطور (>_)',
+
       'about.eyebrow': '# نبذة',
       'about.title': 'من أنا؟',
       'about.p1': 'أنا عبدالله الغول، طالب علوم حاسوب أؤمن بأن التكنولوجيا من أقوى الأدوات لحل المشكلات الواقعية. أستمتع بالتعلم والتجريب وبناء حلول عملية تجمع بين المنطق والإبداع والابتكار.',
@@ -490,6 +579,17 @@
       'about.s4': 'التعلم الذاتي',
       'about.s5': 'التفكير النقدي',
       'about.s6': 'التحدث أمام الجمهور',
+      'about.prin_kicker': '// فلسفة التطوير',
+      'about.prin_title': 'مبادئ هندسية ألتزم بها في التطوير',
+      'about.prin_intro': 'البرمجيات النظيفة ليست مصادفة—بل تنبع من قرارات معمارية مدروسة، واختبارات صارمة، واحترام فائق للأداء.',
+      'about.p1_title': 'البساطة قبل التعقيد',
+      'about.p1_desc': 'أقل عدد من الأجزاء المتحركة، وهيكلة واضحة للمجلدات، وكود يوثّق نفسه بنفسه بعيداً عن التعقيد الزائد.',
+      'about.p2_title': 'الأداء المعياري كأولوية',
+      'about.p2_desc': 'استجابة تحت الثانية، واستهلاك صفري للموارد غير الضرورية، ودرجة 95+ على Lighthouse من اليوم الأول.',
+      'about.p3_title': 'عقود واضحة وأمان افتراضي',
+      'about.p3_desc': 'التحقق الصارم من المخططات، وحدود دفاعية للـ API، وأمان الأنواع في كافة طبقات البيانات.',
+      'about.p4_title': 'منع تراكم الديون التقنية',
+      'about.p4_desc': 'حدود معيارية مستقلة، وبوابات اختبارات آلية مستمرة، وتوثيق دقيق يجعل تسليم المشاريع سلساً للغاية.',
 
       'skills.eyebrow': '# المهارات',
       'skills.title': 'الحزمة التقنية',
@@ -3222,6 +3322,7 @@
         problem: 'As a CS student, I needed one fast, professional place to present my skills, projects, and certifications.',
         solution: 'Built a dependency-free portfolio with semantic HTML, modern CSS, and vanilla JavaScript — bilingual with full RTL support and PWA offline mode.',
         result: 'A fast, responsive site that loads instantly, works offline, and stays easy to maintain with no build step.',
+        architecture: 'Vanilla web stack (HTML5/CSS3/ES6+), CSS variable design tokens, client-side semantic i18n engine, and automated accessibility test gates.',
         tech: ['HTML5', 'CSS3', 'JavaScript', 'i18n', 'RTL', 'PWA'],
         links: [
           { id: 'live', icon: 'external-link', label: 'Live Site', href: 'https://abdullah-portfolio26.vercel.app/' }
@@ -3233,6 +3334,7 @@
         problem: 'A growing business needed a scalable network with no traffic segmentation between departments and no centralized services.',
         solution: 'Designed a segmented network with per-department VLANs, DHCP/DNS/NAT services, subnetting, and a Router-on-a-Stick architecture in Cisco Packet Tracer.',
         result: 'A scalable, documented topology with isolated broadcast domains and centralized services.',
+        architecture: 'Hierarchical campus topology with 5 isolated VLANs, 802.1Q sub-interfaces for inter-VLAN routing, dynamic DHCP pools, and NAT overload (PAT).',
         tech: ['Cisco Packet Tracer', 'VLAN', 'DHCP', 'DNS', 'NAT', 'Routing'],
         links: [
           { id: 'diagram', icon: 'file-text', label: 'Project Diagram', href: 'https://drive.google.com/drive/folders/18qSsF9Tf5nvHELcvJfpIqqO4rk7ipbp9?usp=sharing' }
@@ -3244,6 +3346,7 @@
         problem: 'Many students without personal computers cannot complete programming assignments or lab work, especially during remote learning.',
         solution: 'Proposed a cloud VDI where students sign in from any mobile device and get a full Windows workstation via RDP, covering Azure VMs, VPN access, and per-session provisioning.',
         result: 'A ready-to-implement blueprint that turns any smartphone into a full computer for university labs.',
+        architecture: 'Azure Cloud Virtual Desktop Infrastructure (VDI) design with Bastion host security, automated session pool scaling, and HTML5 Web RDP client.',
         tech: ['RDP', 'Windows', 'Azure', 'Cloud Infra', 'VPN'],
         links: [
           { id: 'status', icon: 'info', label: 'Proposal / future implementation' }
@@ -3255,6 +3358,7 @@
         problem: 'Students needed a centralized platform to organize lectures, resources, and study materials.',
         solution: 'Developed a bilingual educational platform using React, Tailwind CSS, and Firebase.',
         result: 'Created an accessible digital hub that improves students\' access to academic resources.',
+        architecture: 'React 18 SPA with Tailwind utility styling, Firebase Firestore real-time sync, offline service worker caching, and Lighthouse 98 performance tuning.',
         tech: ['React', 'Tailwind CSS', 'Firebase', 'PWA'],
         links: [
           { id: 'live', icon: 'external-link', label: 'Live Site', href: 'https://al-azher-it-hub.vercel.app/' }
@@ -3266,6 +3370,7 @@
         problem: 'Our team had no reliable way to assign shared tasks, track their status, or respect deadlines.',
         solution: 'Built a Java task management app with OOP design — task creation, assignment, status tracking, and deadline management with file persistence.',
         result: 'A practical tool that kept the team organized and shipped as a graded team project.',
+        architecture: 'Layered Object-Oriented Architecture (Models, Controllers, Services) with robust custom file serialization and exception handling.',
         tech: ['Java', 'OOP', 'File I/O', 'Team Collaboration'],
         links: []
       },
@@ -3275,6 +3380,7 @@
         problem: 'Manual book tracking made searching titles, managing borrowers, and recording loans slow and unreliable.',
         solution: 'Built a Java library system covering add, search, borrow, and return flows, backed by data structures and file persistence.',
         result: 'A dependable system that streamlines cataloging and lending for a small library.',
+        architecture: 'In-memory collection caching with binary search indexing, validated transaction states, and persistent disk store.',
         tech: ['Java', 'OOP', 'Data Structures', 'File I/O'],
         links: []
       },
@@ -3284,6 +3390,7 @@
         problem: 'Students struggle with managing tasks and study schedules.',
         solution: 'Created a Python productivity assistant with automated reminders.',
         result: 'Improved personal task organization and time management.',
+        architecture: 'Python asynchronous task scheduler utilizing non-blocking timers, persistent SQLite state, and modular notification hooks.',
         tech: ['Python', 'Automation', 'Scheduling'],
         links: []
       }
@@ -3295,6 +3402,7 @@
         problem: 'كطالب علوم حاسوب، كنت بحاجة إلى مكان واحد سريع واحترافي أعرض فيه مهاراتي ومشاريعي وشهاداتي.',
         solution: 'بنيت موقعاً بلا تبعيات باستخدام HTML دلالي وCSS حديث وJavaScript نقي — ثنائي اللغة مع دعم RTL كامل وعمل دون اتصال (PWA).',
         result: 'موقع سريع ومتجاوب يُحمّل فوراً ويعمل دون اتصال ويسهل صيانته بلا خطوات بناء.',
+        architecture: 'بنية ويب نقية (HTML5/CSS3/ES6+) بدون مكتبات ثقيلة، مع نظام متغيرات CSS وتدقيق آلي لمعايير إمكانية الوصول وسرعة التحميل.',
         tech: ['HTML5', 'CSS3', 'JavaScript', 'i18n', 'RTL', 'PWA'],
         links: [
           { id: 'live', icon: 'external-link', label: 'الموقع مباشر', href: 'https://abdullah-portfolio26.vercel.app/' }
@@ -3306,6 +3414,7 @@
         problem: 'شركة متنامية تحتاج شبكة قابلة للتوسع، بلا فصل لحركة المرور بين الأقسام وبلا خدمات مركزية.',
         solution: 'صممت شبكة مقسّمة بـ VLAN لكل قسم وخدمات DHCP/DNS/NAT وعنونة فرعية ومعمارية Router-on-a-Stick في Cisco Packet Tracer.',
         result: 'بنية موثقة قابلة للتوسع مع نطاقات بث معزولة وخدمات مركزية.',
+        architecture: 'طوبولوجيا شبكية هرمية مع 5 شبكات VLAN معزولة، ومنافذ 802.1Q للتوجيه بين الشبكات، وحزم DHCP ديناميكية وتحويل عناوين NAT.',
         tech: ['Cisco Packet Tracer', 'VLAN', 'DHCP', 'DNS', 'NAT', 'Routing'],
         links: [
           { id: 'diagram', icon: 'file-text', label: 'مخطط المشروع', href: 'https://drive.google.com/drive/folders/18qSsF9Tf5nvHELcvJfpIqqO4rk7ipbp9?usp=sharing' }
@@ -3317,6 +3426,7 @@
         problem: 'كثير من الطلاب بلا حواسيب شخصية لا يستطيعون إنجاز الواجبات البرمجية والعمل المخبري، خصوصاً أثناء التعلم عن بُعد.',
         solution: 'اقترحت VDI سحابية يدخل منها الطالب من أي جهاز ويحصل على محطة ويندوز كاملة عبر RDP، مع أجهزة Azure الافتراضية والوصول عبر VPN وتجهيز الجلسات.',
         result: 'مخطط جاهز للتنفيذ يحوّل أي هاتف إلى حاسوب كامل للمختبرات الجامعية.',
+        architecture: 'معمارية بنية تحتية سحابية عبر Microsoft Azure VDI مع بوابات Bastion الآمنة، وتوسع تلقائي للجلسات وعميل ويب خفيف بتقنية HTML5.',
         tech: ['RDP', 'Windows', 'Azure', 'Cloud Infra', 'VPN'],
         links: [
           { id: 'status', icon: 'info', label: 'مقترح / تنفيذ مستقبلي' }
@@ -3328,6 +3438,7 @@
         problem: 'احتاج الطلاب منصة مركزية لتنظيم المحاضرات والموارد والمواد الدراسية.',
         solution: 'طوّرت منصة تعليمية ثنائية اللغة باستخدام React وTailwind CSS وFirebase.',
         result: 'أنشأت مركزاً رقمياً سهل الوصول يحسّن وصول الطلاب إلى الموارد الأكاديمية.',
+        architecture: 'تطبيق أحادي الصفحة بـ React 18 مع Tailwind CSS ومزامنة فورية مع Firebase Firestore، مع كاش Service Worker وتجاوز 98 على Lighthouse.',
         tech: ['React', 'Tailwind CSS', 'Firebase', 'PWA'],
         links: [
           { id: 'live', icon: 'external-link', label: 'الموقع مباشر', href: 'https://al-azher-it-hub.vercel.app/' }
@@ -3339,6 +3450,7 @@
         problem: 'لم تكن لدينا وسيلة موثوقة لتعيين المهام المشتركة وتتبع حالتها واحترام المواعيد النهائية.',
         solution: 'طوّرت تطبيق إدارة مهام بلغة Java بتصميم كائني — إنشاء وتعيين وتتبع حالة وإدارة مواعيد مع حفظ البيانات في ملفات.',
         result: 'أداة عملية أبقت الفريق منظماً وسُلّمت كمشروع جماعي مقيّم.',
+        architecture: 'معمارية كائنية متدرجة الطبقات (نماذج، وحدات تحكم، خدمات) مع معالجة استثناءات متينة وحفظ بيانات الملفات محلياً.',
         tech: ['Java', 'OOP', 'File I/O', 'عمل جماعي'],
         links: []
       },
@@ -3348,6 +3460,7 @@
         problem: 'التتبع اليدوي للكتب جعل البحث عن العناوين وإدارة المستعيرين وتسجيل الإعارات بطيئاً وغير موثوق.',
         solution: 'بنيت نظام مكتبة بلغة Java يشمل الإضافة والبحث والاستعارة والإرجاع، مدعوماً بهياكل بيانات وحفظ في ملفات.',
         result: 'نظام موثوق يبسّط الفهرسة والإعارة في مكتبة صغيرة.',
+        architecture: 'هياكل بيانات متقدمة في الذاكرة مع خوارزميات بحث سريع وتحقق من حالات المعاملات وتخزين دائم.',
         tech: ['Java', 'OOP', 'Data Structures', 'File I/O'],
         links: []
       },
@@ -3357,6 +3470,7 @@
         problem: 'يعاني الطلاب من إدارة المهام وجداول الدراسة.',
         solution: 'طوّرت مساعد إنتاجية بلغة Python مع تذكيرات تلقائية.',
         result: 'تحسين تنظيم المهام الشخصية وإدارة الوقت.',
+        architecture: 'جدولة مهام غير متزامنة بـ Python مع مؤقتات خفيفة وحفظ حالات المهام ونظام إشعارات تلقائي.',
         tech: ['Python', 'Automation', 'Scheduling'],
         links: []
       }
@@ -3409,6 +3523,7 @@
         block('alert-circle', dict['proj.problem'], data.problem) +
         block('lightbulb', dict['proj.solution'], data.solution) +
         (data.result ? block('trending-up', dict['proj.result'], data.result, true) : '') +
+        (data.architecture ? block('layers', lang === 'ar' ? 'المعمارية التقنية' : 'System Architecture', data.architecture) : '') +
         // Progressive disclosure: deep implementation details only when present
         // (dashboard-managed case studies), collapsed by default.
         ((data.implementation || (data.challenges && data.challenges.length)) ? `
@@ -4163,6 +4278,405 @@
     }
   }
 
+  // ============== Interactive Project Scope Estimator ==============
+
+  function setupProjectPlanner() {
+    const planner = document.getElementById('project-planner');
+    if (!planner) return;
+
+    let selectedType = 'webapp';
+    const selectedCaps = new Set(['bilingual', 'dashboard']);
+    let selectedPace = 'standard';
+
+    const TYPE_DATA = {
+      webapp: {
+        en: { time: '3–4 Weeks', stack: 'React · Tailwind CSS · Node / Supabase · PostgreSQL' },
+        ar: { time: '3–4 أسابيع', stack: 'React · Tailwind CSS · Node / Supabase · PostgreSQL' }
+      },
+      ai: {
+        en: { time: '2–3 Weeks', stack: 'Python / FastAPI · Gemini/Claude API · Vector DB · Edge Functions' },
+        ar: { time: '2–3 أسابيع', stack: 'Python / FastAPI · Gemini/Claude API · Vector DB · Edge Functions' }
+      },
+      landing: {
+        en: { time: '1–2 Weeks', stack: 'Semantic HTML5 / React · CSS3 Design Tokens · High-Conversion SEO' },
+        ar: { time: '1–2 أسبوع', stack: 'Semantic HTML5 / React · CSS3 Design Tokens · High-Conversion SEO' }
+      },
+      api: {
+        en: { time: '2–3 Weeks', stack: 'PostgreSQL · Node/Express · JWT/RBAC Auth · OpenAPI Specs' },
+        ar: { time: '2–3 أسابيع', stack: 'PostgreSQL · Node/Express · JWT/RBAC Auth · OpenAPI Specs' }
+      }
+    };
+
+    const timeEl = document.getElementById('planner-est-time');
+    const stackEl = document.getElementById('planner-est-stack');
+
+    function update() {
+      const lang = state.lang === 'ar' ? 'ar' : 'en';
+      const typeInfo = TYPE_DATA[selectedType] ? TYPE_DATA[selectedType][lang] : TYPE_DATA.webapp[lang];
+
+      let timeText = typeInfo.time;
+      if (selectedPace === 'fast') {
+        timeText = lang === 'ar' ? '1–2 أسبوع (مكثف)' : '1–2 Weeks (Sprint MVP)';
+      } else if (selectedPace === 'flexible') {
+        timeText = lang === 'ar' ? '4–6 أسابيع (مراحل)' : '4–6 Weeks (Phased)';
+      }
+
+      if (timeEl) timeEl.textContent = timeText;
+      if (stackEl) stackEl.textContent = typeInfo.stack;
+    }
+
+    // Type selection
+    const typeButtons = planner.querySelectorAll('#planner-types .planner-chip');
+    typeButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        typeButtons.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-checked', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-checked', 'true');
+        selectedType = btn.dataset.type || 'webapp';
+        update();
+      });
+    });
+
+    // Requirements toggles
+    const capButtons = planner.querySelectorAll('#planner-caps .planner-chip');
+    capButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cap = btn.dataset.cap;
+        if (selectedCaps.has(cap)) {
+          selectedCaps.delete(cap);
+          btn.classList.remove('active');
+          btn.setAttribute('aria-pressed', 'false');
+        } else {
+          selectedCaps.add(cap);
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
+        }
+        update();
+      });
+    });
+
+    // Pace selection
+    const paceButtons = planner.querySelectorAll('#planner-pace .planner-chip');
+    paceButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        paceButtons.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-checked', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-checked', 'true');
+        selectedPace = btn.dataset.pace || 'standard';
+        update();
+      });
+    });
+
+    // Proceed button
+    const proceedBtn = document.getElementById('planner-proceed-btn');
+    if (proceedBtn) {
+      proceedBtn.addEventListener('click', () => {
+        const lang = state.lang === 'ar' ? 'ar' : 'en';
+        const activeTypeBtn = planner.querySelector('#planner-types .planner-chip.active');
+        const activePaceBtn = planner.querySelector('#planner-pace .planner-chip.active');
+        const typeLabel = activeTypeBtn ? activeTypeBtn.querySelector('span')?.textContent.trim() : selectedType;
+        const paceLabel = activePaceBtn ? activePaceBtn.querySelector('span')?.textContent.trim() : selectedPace;
+        const capsList = Array.from(planner.querySelectorAll('#planner-caps .planner-chip.active'))
+          .map((b) => b.querySelector('span')?.textContent.trim())
+          .filter(Boolean)
+          .join(', ');
+
+        const estTime = timeEl ? timeEl.textContent : '';
+        const estStack = stackEl ? stackEl.textContent : '';
+
+        const msg = lang === 'ar'
+          ? `مرحباً عبدالله، أود مناقشة مشروع محدد النطاق:\n- نوع المشروع: ${typeLabel}\n- المتطلبات: ${capsList || 'حسب التوصية'}\n- الجدول المستهدف: ${paceLabel}\n- المدة التقديرية: ${estTime}\n- الحزمة المقترحة: ${estStack}\n\nدعنا نحدد الخطوة التالية!`
+          : `Hi Abdullah, I'd like to discuss a project with this estimated scope:\n- Project Type: ${typeLabel}\n- Requirements: ${capsList || 'Standard'}\n- Target Pace: ${paceLabel}\n- Est. Timeline: ${estTime}\n- Recommended Stack: ${estStack}\n\nLet's discuss next steps!`;
+
+        const contactMsgInput = document.getElementById('message') || document.querySelector('textarea[name="message"]');
+        const contactSubjectInput = document.getElementById('subject') || document.querySelector('input[name="subject"]');
+        if (contactMsgInput) {
+          contactMsgInput.value = msg;
+        }
+        if (contactSubjectInput && !contactSubjectInput.value.trim()) {
+          contactSubjectInput.value = lang === 'ar' ? `مشروع جديد: ${typeLabel}` : `Project Inquiry: ${typeLabel}`;
+        }
+
+        // Smooth scroll to contact
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+          if (contactMsgInput) {
+            setTimeout(() => contactMsgInput.focus(), 600);
+          }
+        }
+
+        if (window.PFTrack) {
+          try { window.PFTrack('planner_proceed', selectedType); } catch (e) {}
+        }
+      });
+    }
+
+    // Reset button
+    const resetBtn = document.getElementById('planner-reset-btn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        typeButtons[0]?.click();
+        paceButtons[0]?.click();
+        capButtons.forEach((b, i) => {
+          if (i < 2 && !b.classList.contains('active')) b.click();
+          if (i >= 2 && b.classList.contains('active')) b.click();
+        });
+        update();
+      });
+    }
+
+    document.addEventListener('langchange', update);
+    update();
+  }
+
+  // ============== Client FAQ Accordion ==============
+
+  function setupFAQAccordion() {
+    const faqList = document.getElementById('freelance-faq-list');
+    if (!faqList) return;
+
+    faqList.addEventListener('click', (e) => {
+      const btn = e.target.closest('.faq-question');
+      if (!btn) return;
+      const item = btn.closest('.faq-item');
+      if (!item) return;
+
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const answer = item.querySelector('.faq-answer');
+
+      btn.setAttribute('aria-expanded', String(!expanded));
+      item.classList.toggle('open', !expanded);
+      if (answer) {
+        answer.hidden = expanded;
+      }
+    });
+  }
+
+  // ============== Developer Micro-Terminal (>_) ==============
+
+  function setupDeveloperTerminal() {
+    const modal = document.getElementById('terminal-modal');
+    if (!modal) return;
+
+    const output = document.getElementById('terminal-output');
+    const form = document.getElementById('terminal-form');
+    const input = document.getElementById('terminal-input');
+    const openBtn = document.getElementById('terminal-open-btn');
+    let lastFocused = null;
+    let removeTrap = null;
+    const history = [];
+    let histIdx = -1;
+
+    function openTerminal() {
+      lastFocused = document.activeElement;
+      modal.hidden = false;
+      document.body.classList.add('no-scroll');
+      removeTrap = trapFocus(modal);
+      setTimeout(() => {
+        if (input) input.focus();
+      }, 50);
+      if (window.PFTrack) {
+        try { window.PFTrack('terminal_open', 'user'); } catch (e) {}
+      }
+    }
+
+    function closeTerminal() {
+      modal.hidden = true;
+      document.body.classList.remove('no-scroll');
+      if (removeTrap) { removeTrap(); removeTrap = null; }
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openTerminal);
+
+    const brandPrompt = document.querySelector('.brand-prompt');
+    if (brandPrompt) {
+      brandPrompt.style.cursor = 'pointer';
+      brandPrompt.setAttribute('title', 'Developer Terminal (>_)');
+      brandPrompt.addEventListener('click', (e) => {
+        e.preventDefault();
+        openTerminal();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        const tag = (e.target && e.target.tagName) || '';
+        if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+          e.preventDefault();
+          if (modal.hidden) openTerminal(); else closeTerminal();
+        }
+      } else if (e.key === 'Escape' && !modal.hidden) {
+        closeTerminal();
+      }
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target.closest('[data-terminal-close]')) closeTerminal();
+    });
+
+    function print(text, type = 'output') {
+      if (!output) return;
+      const line = document.createElement('div');
+      line.className = `term-line ${type}`;
+      line.innerHTML = text;
+      output.appendChild(line);
+      output.scrollTop = output.scrollHeight;
+    }
+
+    const COMMANDS = {
+      help: () => {
+        return `Available commands:\n` +
+          `  <span class="term-cmd">whoami</span>       - About Abdullah AL-Ghoul\n` +
+          `  <span class="term-cmd">skills</span>       - Top tech stack & proficiency\n` +
+          `  <span class="term-cmd">projects</span>     - Key featured systems & links\n` +
+          `  <span class="term-cmd">philosophy</span>   - Core engineering principles\n` +
+          `  <span class="term-cmd">contact</span>      - Reach out directly (Email, WhatsApp, LinkedIn)\n` +
+          `  <span class="term-cmd">cv</span>           - Download Abdullah's resume / CV\n` +
+          `  <span class="term-cmd">theme &lt;name&gt;</span>  - Switch theme (dark, gold, light, cyberpunk)\n` +
+          `  <span class="term-cmd">lang &lt;ar|en&gt;</span>   - Switch language\n` +
+          `  <span class="term-cmd">clear</span>        - Clear terminal screen\n` +
+          `  <span class="term-cmd">exit</span>         - Close terminal`;
+      },
+      whoami: () => {
+        return `<span class="term-accent">Abdullah AL-Ghoul</span>\n` +
+          `Full-Stack Web Application Developer & CS Student at Al-Azhar University, Gaza.\n` +
+          `Specializes in responsive web apps, clean APIs, and practical AI integrations.\n` +
+          `Status: <span style="color:#22c55e">Open to opportunities</span>`;
+      },
+      skills: () => {
+        return `<span class="term-accent">Core Technologies:</span>\n` +
+          `  • Programming : Java, JavaScript (ES6+), HTML5, CSS3, C, Python\n` +
+          `  • Web & UI    : React, Tailwind CSS, Responsive Design, RTL, PWA\n` +
+          `  • Backend/DB  : Node.js, Express, PostgreSQL, Supabase, Firebase\n` +
+          `  • Networking  : TCP/IP, VLAN, DHCP/NAT, Cisco Packet Tracer\n` +
+          `  • Practices   : Automated Testing, WCAG AA A11y, Git/GitHub, Clean Arch`;
+      },
+      projects: () => {
+        return `<span class="term-accent">Featured Projects:</span>\n` +
+          `  1. <a href="https://al-azher-it-hub.vercel.app/" target="_blank" style="color:#38bdf8;text-decoration:underline">AL-Azher IT Hub</a> — React + Tailwind + Firebase (Lighthouse 98)\n` +
+          `  2. <a href="https://abdullah-portfolio26.vercel.app/" target="_blank" style="color:#38bdf8;text-decoration:underline">Portfolio v2.0</a> — Vanilla Web Architecture (100/100 CWV)\n` +
+          `  3. Enterprise Network Design — 5 Segments, VLAN & Router-on-a-Stick\n` +
+          `  4. Smart University Virtual Lab — Cloud VDI proposal over RDP/VPN`;
+      },
+      philosophy: () => {
+        return `<span class="term-accent">Engineering Philosophy:</span>\n` +
+          `  1. Simplicity over Complexity: minimal moving parts, maintainability first.\n` +
+          `  2. Performance by Default: sub-second TTFB, 95+ Lighthouse.\n` +
+          `  3. Clean Contracts & Security: strict schemas, defensive validation.\n` +
+          `  4. Zero Technical Debt: modular boundaries, continuous test gates.`;
+      },
+      principles: () => COMMANDS.philosophy(),
+      contact: () => {
+        return `<span class="term-accent">Direct Contact:</span>\n` +
+          `  • Email    : <a href="mailto:abdallhalghoul200@gmail.com" style="color:#38bdf8">abdallhalghoul200@gmail.com</a>\n` +
+          `  • WhatsApp : <a href="https://wa.me/970592127061" target="_blank" style="color:#22c55e">+970 59-212-7061</a>\n` +
+          `  • LinkedIn : <a href="https://www.linkedin.com/in/abdullah-al-ghoul-a254763a6/" target="_blank" style="color:#38bdf8">linkedin.com/in/abdullah-al-ghoul</a>\n` +
+          `  • Location : Gaza, Palestine`;
+      },
+      cv: () => {
+        const link = document.createElement('a');
+        link.href = '/api/cv-download';
+        link.download = 'Abdullah_ALGhoul_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        return `<span style="color:#22c55e">✓ CV download initiated: Abdullah_ALGhoul_CV.pdf</span>`;
+      },
+      theme: (arg) => {
+        const t = (arg || '').trim().toLowerCase();
+        if (['dark', 'gold', 'light', 'cyberpunk', 'forest', 'sunset'].includes(t)) {
+          applyTheme(t);
+          return `<span style="color:#22c55e">✓ Theme set to '${t}'</span>`;
+        }
+        return `Usage: theme &lt;dark | gold | light | cyberpunk | forest | sunset&gt;`;
+      },
+      lang: (arg) => {
+        const l = (arg || '').trim().toLowerCase();
+        if (['ar', 'en'].includes(l)) {
+          applyLang(l);
+          return `<span style="color:#22c55e">✓ Language switched to '${l}'</span>`;
+        }
+        return `Usage: lang &lt;ar | en&gt;`;
+      },
+      clear: () => {
+        if (output) output.innerHTML = '';
+        return '';
+      },
+      sudo: () => `Permission denied: Guest user already has root read privileges on this portfolio :)`,
+      exit: () => {
+        closeTerminal();
+        return '';
+      }
+    };
+
+    function execCommand(raw) {
+      const trimmed = (raw || '').trim();
+      if (!trimmed) return;
+      history.push(trimmed);
+      histIdx = history.length;
+
+      print(`&gt; <span class="term-prompt">${trimmed}</span>`, 'user-cmd');
+
+      const parts = trimmed.split(/\s+/);
+      const cmd = parts[0].toLowerCase();
+      const arg = parts.slice(1).join(' ');
+
+      if (cmd in COMMANDS) {
+        const res = COMMANDS[cmd](arg);
+        if (res) print(res, 'output');
+      } else {
+        print(`Command not found: <span style="color:#ef4444">${trimmed}</span>. Type <span class="term-cmd">help</span> for valid commands.`, 'output');
+      }
+    }
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!input) return;
+        const val = input.value;
+        input.value = '';
+        execCommand(val);
+      });
+    }
+
+    if (input) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp') {
+          if (histIdx > 0) {
+            histIdx--;
+            input.value = history[histIdx] || '';
+          }
+          e.preventDefault();
+        } else if (e.key === 'ArrowDown') {
+          if (histIdx < history.length - 1) {
+            histIdx++;
+            input.value = history[histIdx] || '';
+          } else {
+            histIdx = history.length;
+            input.value = '';
+          }
+          e.preventDefault();
+        }
+      });
+    }
+
+    const chips = modal.querySelectorAll('[data-term-quick]');
+    chips.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cmd = btn.dataset.termQuick;
+        if (cmd) execCommand(cmd);
+      });
+    });
+  }
+
   // ============== Init ==============
 
   /**
@@ -4197,6 +4711,9 @@
     setupRadarChart();
     setupTimelineModals();
     setupProjectModals();
+    setupProjectPlanner();
+    setupFAQAccordion();
+    setupDeveloperTerminal();
     setupNavDots();
     setupPreloader();
     setupVoice();

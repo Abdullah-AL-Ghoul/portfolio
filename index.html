@@ -254,6 +254,9 @@
       </nav>
 
       <div class="nav-actions">
+        <button class="icon-btn terminal-nav-btn" id="terminal-open-btn" aria-label="Open developer terminal" title="Developer Terminal (>_)" data-i18n-aria="nav.terminal" data-i18n-title="nav.terminal">
+          <span class="terminal-nav-sym" aria-hidden="true">&gt;_</span>
+        </button>
         <button class="icon-btn" id="lang-toggle" aria-label="Switch language" title="Switch language" aria-pressed="false" data-i18n-aria="nav.lang" data-i18n-title="nav.lang">
           <i data-lucide="languages"></i>
           <span id="lang-label">AR</span>
@@ -527,6 +530,37 @@
             </div>
           </aside>
         </div>
+
+        <!-- Engineering Principles & Architectural Philosophy -->
+        <div class="principles-wrap reveal-up">
+          <div class="principles-head">
+            <span class="principles-kicker" data-i18n="about.prin_kicker">// Core Philosophy</span>
+            <h3 class="principles-title" data-i18n="about.prin_title">Engineering Principles I Build By</h3>
+            <p class="principles-intro" data-i18n="about.prin_intro">Clean software is not an accident—it comes from deliberate architectural decisions, rigorous testing, and respect for performance.</p>
+          </div>
+          <div class="principles-grid">
+            <article class="principle-card">
+              <div class="principle-icon"><i data-lucide="code-2" aria-hidden="true"></i></div>
+              <h4 data-i18n="about.p1_title">Simplicity Over Complexity</h4>
+              <p data-i18n="about.p1_desc">Minimal moving parts, straightforward folder structures, and self-documenting code over convoluted abstractions.</p>
+            </article>
+            <article class="principle-card">
+              <div class="principle-icon"><i data-lucide="gauge" aria-hidden="true"></i></div>
+              <h4 data-i18n="about.p2_title">Performance by Default</h4>
+              <p data-i18n="about.p2_desc">Sub-second TTFB, zero bundle waste, and 95+ Lighthouse scores baked in from sprint zero, never patched on later.</p>
+            </article>
+            <article class="principle-card">
+              <div class="principle-icon"><i data-lucide="shield-check" aria-hidden="true"></i></div>
+              <h4 data-i18n="about.p3_title">Clean Contracts &amp; Security</h4>
+              <p data-i18n="about.p3_desc">Strict schema validation, defensive API boundaries, and type safety across every layer of the data stack.</p>
+            </article>
+            <article class="principle-card">
+              <div class="principle-icon"><i data-lucide="git-branch" aria-hidden="true"></i></div>
+              <h4 data-i18n="about.p4_title">Zero Technical Debt</h4>
+              <p data-i18n="about.p4_desc">Modular boundaries, continuous automated test gates, and clear documentation that makes future handovers seamless.</p>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -668,6 +702,11 @@
               <p data-i18n="proj.p4d">
                 Bilingual educational platform for Al-Azhar University IT students — lectures, resources, and study materials. Built with React, Tailwind CSS, and Firebase, with PWA support for offline access.
               </p>
+              <div class="project-metrics">
+                <span class="metric-chip"><i data-lucide="gauge" aria-hidden="true"></i> <span>Lighthouse 98</span></span>
+                <span class="metric-chip"><i data-lucide="zap" aria-hidden="true"></i> <span>PWA Offline</span></span>
+                <span class="metric-chip"><i data-lucide="sparkles" aria-hidden="true"></i> <span>Sub-1s TTFB</span></span>
+              </div>
               <div class="project-tags">
                 <span>React</span><span>Tailwind CSS</span><span>Firebase</span><span>PWA</span>
               </div>
@@ -699,6 +738,11 @@
               <p data-i18n="proj.p1d">
                 A responsive, modern, bilingual portfolio showcasing my skills, projects, and educational milestones. Built with semantic HTML, modern CSS, and vanilla JavaScript. Includes dark/light theme and full RTL support.
               </p>
+              <div class="project-metrics">
+                <span class="metric-chip"><i data-lucide="gauge" aria-hidden="true"></i> <span>100/100 CWV</span></span>
+                <span class="metric-chip"><i data-lucide="shield-check" aria-hidden="true"></i> <span>Strict A11y</span></span>
+                <span class="metric-chip"><i data-lucide="cpu" aria-hidden="true"></i> <span>Zero Bloat</span></span>
+              </div>
               <div class="project-tags">
                 <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>i18n</span><span>RTL</span>
               </div>
@@ -730,6 +774,11 @@
               <p data-i18n="proj.p2d">
                 Designed and implemented a segmented business network using VLANs, DHCP, DNS, NAT, subnetting, and Router-on-a-Stick architecture in Cisco Packet Tracer.
               </p>
+              <div class="project-metrics">
+                <span class="metric-chip"><i data-lucide="network" aria-hidden="true"></i> <span>5 Segments</span></span>
+                <span class="metric-chip"><i data-lucide="lock" aria-hidden="true"></i> <span>Isolated VLAN</span></span>
+                <span class="metric-chip"><i data-lucide="shield" aria-hidden="true"></i> <span>DHCP/NAT Sec</span></span>
+              </div>
               <div class="project-tags">
                 <span>Cisco Packet Tracer</span><span>VLAN</span><span>DHCP</span><span>DNS</span><span>NAT</span><span>Routing</span>
               </div>
@@ -761,6 +810,11 @@
               <p data-i18n="proj.p3d">
                 Proposed cloud-based virtual desktop infrastructure enabling university students to access a full Windows workstation from mobile devices via RDP. Designed to help students without personal computers access programming environments remotely.
               </p>
+              <div class="project-metrics">
+                <span class="metric-chip"><i data-lucide="cloud" aria-hidden="true"></i> <span>Azure VDI</span></span>
+                <span class="metric-chip"><i data-lucide="shield" aria-hidden="true"></i> <span>RDP / VPN</span></span>
+                <span class="metric-chip"><i data-lucide="smartphone" aria-hidden="true"></i> <span>Mobile Client</span></span>
+              </div>
               <div class="project-tags">
                 <span>RDP</span><span>Windows</span><span>Azure</span><span>Cloud Infra</span><span>VPN</span>
               </div>
@@ -792,6 +846,10 @@
               <p data-i18n="proj.p5d">
                 Team task management application for organizing and tracking shared tasks with colleagues. Features task creation, assignment, status tracking, and deadline management.
               </p>
+              <div class="project-metrics">
+                <span class="metric-chip"><i data-lucide="check-square" aria-hidden="true"></i> <span>Java OOP</span></span>
+                <span class="metric-chip"><i data-lucide="hard-drive" aria-hidden="true"></i> <span>File I/O</span></span>
+              </div>
               <div class="project-tags">
                 <span>Java</span><span>OOP</span><span>File I/O</span><span>Team Collaboration</span>
               </div>
@@ -820,6 +878,10 @@
               <p data-i18n="proj.p6d">
                 Java-based library management system for managing books, borrowers, and lending operations. Includes add, search, borrow, return functionality with data persistence.
               </p>
+              <div class="project-metrics">
+                <span class="metric-chip"><i data-lucide="database" aria-hidden="true"></i> <span>Data Structs</span></span>
+                <span class="metric-chip"><i data-lucide="layers" aria-hidden="true"></i> <span>CRUD Engine</span></span>
+              </div>
               <div class="project-tags">
                 <span>Java</span><span>OOP</span><span>Data Structures</span><span>File I/O</span>
               </div>
@@ -848,6 +910,10 @@
               <p data-i18n="proj.p7d">
                 Python productivity assistant with automated reminders that helps manage tasks and study schedules more effectively.
               </p>
+              <div class="project-metrics">
+                <span class="metric-chip"><i data-lucide="cpu" aria-hidden="true"></i> <span>Python Async</span></span>
+                <span class="metric-chip"><i data-lucide="bell" aria-hidden="true"></i> <span>Auto Crons</span></span>
+              </div>
               <div class="project-tags">
                 <span>Python</span><span>Automation</span><span>Scheduling</span>
               </div>
@@ -1214,6 +1280,108 @@
           </div>
         </div>
 
+        <!-- Interactive Project Planner & Scope Estimator -->
+        <div class="project-planner reveal-up" id="project-planner">
+          <div class="planner-head">
+            <span class="planner-kicker" data-i18n="planner.kicker">// Interactive Scope Estimator</span>
+            <h3 class="planner-title" data-i18n="planner.title">Calculate Your Project Timeline &amp; Architecture</h3>
+            <p class="planner-desc" data-i18n="planner.desc">Select your desired project type, core features, and target schedule to see an estimated sprint roadmap.</p>
+          </div>
+
+          <div class="planner-body">
+            <!-- Step 1: Type -->
+            <div class="planner-group">
+              <label class="planner-label" data-i18n="planner.l_type">1. Project Type</label>
+              <div class="planner-options" role="radiogroup" aria-label="Project Type" id="planner-types">
+                <button type="button" class="planner-chip active" data-type="webapp" data-time="3–4 Weeks" data-stack="React · Tailwind · Node/Supabase" aria-checked="true">
+                  <i data-lucide="layout" aria-hidden="true"></i>
+                  <span data-i18n="planner.t_webapp">Full-Stack Web App</span>
+                </button>
+                <button type="button" class="planner-chip" data-type="ai" data-time="2–3 Weeks" data-stack="Python / Node · LLM API · Vector DB" aria-checked="false">
+                  <i data-lucide="sparkles" aria-hidden="true"></i>
+                  <span data-i18n="planner.t_ai">AI Agent / Workflow</span>
+                </button>
+                <button type="button" class="planner-chip" data-type="landing" data-time="1–2 Weeks" data-stack="Semantic HTML5 / React · CSS3 · High-SEO" aria-checked="false">
+                  <i data-lucide="globe" aria-hidden="true"></i>
+                  <span data-i18n="planner.t_landing">Modern Landing / Corporate</span>
+                </button>
+                <button type="button" class="planner-chip" data-type="api" data-time="2–3 Weeks" data-stack="PostgreSQL · REST/GraphQL API · Auth" aria-checked="false">
+                  <i data-lucide="database" aria-hidden="true"></i>
+                  <span data-i18n="planner.t_api">Backend API &amp; Database</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: Capabilities / Add-ons -->
+            <div class="planner-group">
+              <label class="planner-label" data-i18n="planner.l_caps">2. Key Requirements</label>
+              <div class="planner-options" role="group" aria-label="Key Requirements" id="planner-caps">
+                <button type="button" class="planner-chip toggle-chip active" data-cap="bilingual" aria-pressed="true">
+                  <i data-lucide="languages" aria-hidden="true"></i>
+                  <span data-i18n="planner.c_bilingual">Bilingual AR/EN &amp; RTL</span>
+                </button>
+                <button type="button" class="planner-chip toggle-chip active" data-cap="dashboard" aria-pressed="true">
+                  <i data-lucide="sliders" aria-hidden="true"></i>
+                  <span data-i18n="planner.c_dashboard">Custom Admin / CMS</span>
+                </button>
+                <button type="button" class="planner-chip toggle-chip" data-cap="auth" aria-pressed="false">
+                  <i data-lucide="shield-check" aria-hidden="true"></i>
+                  <span data-i18n="planner.c_auth">Auth &amp; User Roles</span>
+                </button>
+                <button type="button" class="planner-chip toggle-chip" data-cap="speed" aria-pressed="false">
+                  <i data-lucide="gauge" aria-hidden="true"></i>
+                  <span data-i18n="planner.c_speed">95+ Lighthouse Performance</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Speed / Urgency -->
+            <div class="planner-group">
+              <label class="planner-label" data-i18n="planner.l_speed">3. Target Pace</label>
+              <div class="planner-options" role="radiogroup" aria-label="Pace" id="planner-pace">
+                <button type="button" class="planner-chip active" data-pace="standard" data-pace-label="Standard Agile Sprints" aria-checked="true">
+                  <i data-lucide="calendar" aria-hidden="true"></i>
+                  <span data-i18n="planner.p_std">Standard Sprints (2–4 wks)</span>
+                </button>
+                <button type="button" class="planner-chip" data-pace="fast" data-pace-label="Fast-Track MVP Sprint" aria-checked="false">
+                  <i data-lucide="zap" aria-hidden="true"></i>
+                  <span data-i18n="planner.p_fast">Fast-Track MVP (1–2 wks)</span>
+                </button>
+                <button type="button" class="planner-chip" data-pace="flexible" data-pace-label="Milestone-Based Roadmap" aria-checked="false">
+                  <i data-lucide="clock" aria-hidden="true"></i>
+                  <span data-i18n="planner.p_flex">Phased Roadmap (4+ wks)</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Output Result Summary Box -->
+            <div class="planner-result">
+              <div class="planner-result-main">
+                <div class="result-metric">
+                  <span class="metric-label" data-i18n="planner.res_est">Estimated Sprint</span>
+                  <span class="metric-val" id="planner-est-time">3–4 Weeks</span>
+                </div>
+                <div class="result-metric">
+                  <span class="metric-label" data-i18n="planner.res_stack">Recommended Stack</span>
+                  <span class="metric-val stack-val" id="planner-est-stack">React · Tailwind · Node/Supabase</span>
+                </div>
+              </div>
+              <div class="planner-deliverables">
+                <span class="deliv-item"><i data-lucide="check" aria-hidden="true"></i> <span data-i18n="planner.deliv1">100% Code Ownership</span></span>
+                <span class="deliv-item"><i data-lucide="check" aria-hidden="true"></i> <span data-i18n="planner.deliv2">Automated Tests</span></span>
+                <span class="deliv-item"><i data-lucide="check" aria-hidden="true"></i> <span data-i18n="planner.deliv3">Live Milestone Demos</span></span>
+              </div>
+              <div class="planner-actions">
+                <button type="button" class="btn btn-primary" id="planner-proceed-btn">
+                  <i data-lucide="arrow-right" aria-hidden="true"></i>
+                  <span data-i18n="planner.proceed">Proceed With This Scope</span>
+                </button>
+                <button type="button" class="btn btn-ghost" id="planner-reset-btn" data-i18n="planner.reset">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Direct CTA & Guarantees Box -->
         <div class="freelance-cta-banner reveal-up">
           <div class="cta-banner-content">
@@ -1246,6 +1414,53 @@
             <div class="guarantee-badge">
               <i data-lucide="check-circle-2" aria-hidden="true"></i>
               <span data-i18n="freelance.g4">Post-Launch Support</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Client FAQ Accordion -->
+        <div class="freelance-faq reveal-up">
+          <div class="faq-head">
+            <span class="faq-kicker" data-i18n="faq.kicker">// Client FAQ</span>
+            <h3 class="faq-title" data-i18n="faq.title">Frequently Asked Questions</h3>
+            <p class="faq-desc" data-i18n="faq.desc">Straightforward answers about collaboration, code ownership, and delivery guarantees.</p>
+          </div>
+          <div class="faq-accordion" id="freelance-faq-list">
+            <div class="faq-item">
+              <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-ans-1">
+                <span class="faq-q-text" data-i18n="faq.q1">How do we communicate and track sprint progress?</span>
+                <i data-lucide="chevron-down" class="faq-chevron" aria-hidden="true"></i>
+              </button>
+              <div id="faq-ans-1" class="faq-answer" hidden>
+                <p data-i18n="faq.a1">We work in agile sprints with scheduled milestone reviews and live staging preview links. Direct communication happens via WhatsApp, Slack, or Email with guaranteed sub-24h response times.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-ans-2">
+                <span class="faq-q-text" data-i18n="faq.q2">Who owns the code and intellectual property?</span>
+                <i data-lucide="chevron-down" class="faq-chevron" aria-hidden="true"></i>
+              </button>
+              <div id="faq-ans-2" class="faq-answer" hidden>
+                <p data-i18n="faq.a2">You own 100% of all intellectual property, source repositories, documentation, and database configurations. No lock-in, no hidden proprietary licenses.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-ans-3">
+                <span class="faq-q-text" data-i18n="faq.q3">How do you ensure high quality, security, and performance?</span>
+                <i data-lucide="chevron-down" class="faq-chevron" aria-hidden="true"></i>
+              </button>
+              <div id="faq-ans-3" class="faq-answer" hidden>
+                <p data-i18n="faq.a3">Every deliverable is backed by automated test suites, WCAG AA accessibility compliance, strict input validation, and Lighthouse 95+ performance optimization.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-ans-4">
+                <span class="faq-q-text" data-i18n="faq.q4">What support is included after the project is launched?</span>
+                <i data-lucide="chevron-down" class="faq-chevron" aria-hidden="true"></i>
+              </button>
+              <div id="faq-ans-4" class="faq-answer" hidden>
+                <p data-i18n="faq.a4">Every launch includes a dedicated warranty period for bug fixes and adjustments, along with full deployment documentation and flexible ongoing maintenance arrangements.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -1438,6 +1653,46 @@
           <p data-i18n="certs.noimage">Certificate image not uploaded yet.</p>
           <p class="cert-modal-hint" data-i18n="certs.noimageHint">Drop the file into assets/certs/ and reload.</p>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Developer Micro-Terminal Modal -->
+  <div class="terminal-modal" id="terminal-modal" role="dialog" aria-modal="true" aria-label="Developer Terminal" hidden>
+    <div class="terminal-backdrop" data-terminal-close></div>
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-controls" aria-hidden="true">
+          <button type="button" class="term-btn term-close" data-terminal-close aria-label="Close terminal"></button>
+          <span class="term-btn term-min"></span>
+          <span class="term-btn term-max"></span>
+        </div>
+        <div class="terminal-title">abdullah@engineer:~ (Micro-CLI)</div>
+        <button type="button" class="terminal-close-btn" data-terminal-close aria-label="Close terminal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="terminal-body" id="terminal-output" tabindex="0">
+        <div class="term-line welcome">
+          <span class="term-accent">Welcome to Abdullah AL-Ghoul's Developer Terminal v2.0.</span><br/>
+          Type <span class="term-cmd">help</span> to view available commands, or try <span class="term-cmd">skills</span>, <span class="term-cmd">projects</span>, <span class="term-cmd">whoami</span>.
+        </div>
+      </div>
+      <form class="terminal-input-row" id="terminal-form">
+        <span class="term-prompt">&gt;_</span>
+        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" placeholder="Type a command (e.g. help, skills, contact)..." aria-label="Terminal command input" />
+        <button type="submit" class="terminal-submit-btn" aria-label="Execute command">
+          <i data-lucide="corner-down-left"></i>
+        </button>
+      </form>
+      <div class="terminal-quick-chips">
+        <button type="button" data-term-quick="help">help</button>
+        <button type="button" data-term-quick="whoami">whoami</button>
+        <button type="button" data-term-quick="skills">skills</button>
+        <button type="button" data-term-quick="projects">projects</button>
+        <button type="button" data-term-quick="philosophy">philosophy</button>
+        <button type="button" data-term-quick="contact">contact</button>
+        <button type="button" data-term-quick="clear">clear</button>
       </div>
     </div>
   </div>
