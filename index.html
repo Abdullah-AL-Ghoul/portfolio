@@ -168,6 +168,7 @@
   <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
   <symbol id="i-code-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></symbol>
   <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></symbol>
   <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
   <symbol id="i-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
   <symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
@@ -247,6 +248,7 @@
         <a href="#about" data-i18n="nav.about">About</a>
         <a href="#skills" data-i18n="nav.skills">Skills</a>
         <a href="#projects" data-i18n="nav.projects">Projects</a>
+        <a href="#architecture" data-i18n="nav.architecture">Architecture</a>
         <a href="#services" data-i18n="nav.services" id="nav-services" hidden>Services</a>
         <a href="#certs" data-i18n="nav.certs">Certifications</a>
         <a href="#experience" data-i18n="nav.exp">Experience</a>
@@ -924,6 +926,215 @@
               </div>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- System Architecture & Database Modeling Showcase (Full Stack Engineering) -->
+    <section class="section" id="architecture">
+      <div class="container">
+        <div class="section-head reveal-up">
+          <span class="eyebrow" data-index="03.5" data-i18n="arch.eyebrow">// System Architecture &amp; Modeling</span>
+          <h2 class="section-title" data-i18n="arch.title">Interactive Architecture &amp; Data Modeling</h2>
+          <p class="section-desc" data-i18n="arch.desc">
+            How I architect, scale, and secure complete full-stack systems from browser edge to database storage.
+          </p>
+        </div>
+
+        <div class="arch-workbench">
+          <!-- Top Mode Selector Tabs -->
+          <div class="arch-tabs" role="tablist" aria-label="Architecture Views">
+            <button type="button" class="arch-tab active" data-arch-tab="explorer" role="tab" aria-selected="true" id="tab-btn-explorer">
+              <i data-lucide="layers" aria-hidden="true"></i>
+              <span data-i18n="arch.tab_explorer">System Design Explorer</span>
+            </button>
+            <button type="button" class="arch-tab" data-arch-tab="schema" role="tab" aria-selected="false" id="tab-btn-schema">
+              <i data-lucide="database" aria-hidden="true"></i>
+              <span data-i18n="arch.tab_schema">Database Schema &amp; ERD</span>
+            </button>
+            <button type="button" class="arch-tab" data-arch-tab="ddl" role="tab" aria-selected="false" id="tab-btn-ddl">
+              <i data-lucide="code-2" aria-hidden="true"></i>
+              <span data-i18n="arch.tab_ddl">PostgreSQL DDL &amp; RLS Policies</span>
+            </button>
+          </div>
+
+          <!-- TAB 1: System Design Explorer -->
+          <div class="arch-pane active" id="pane-explorer" role="tabpanel" aria-labelledby="tab-btn-explorer">
+            <div class="arch-toolbar">
+              <span class="arch-toolbar-label" data-i18n="arch.preset_label">System Blueprint:</span>
+              <div class="arch-presets" role="radiogroup">
+                <button type="button" class="preset-btn active" data-arch-preset="saas">
+                  <i data-lucide="server" aria-hidden="true"></i>
+                  <span data-i18n="arch.preset_saas">Fullstack Web &amp; SaaS Core</span>
+                </button>
+                <button type="button" class="preset-btn" data-arch-preset="portal">
+                  <i data-lucide="network" aria-hidden="true"></i>
+                  <span data-i18n="arch.preset_portal">Al-Azher Hub &amp; Realtime Sync</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="arch-grid">
+              <!-- Interactive Visual Tiers Flow -->
+              <div class="arch-flow" role="region" aria-label="Architecture Tiers Flow">
+                <div class="arch-tier-card active" data-arch-tier="client" role="button" tabindex="0" aria-label="Tier 1 Client">
+                  <div class="tier-badge" data-i18n="arch.t1_badge">Tier 1 · Client</div>
+                  <div class="tier-title"><i data-lucide="cpu" aria-hidden="true"></i> <span data-i18n="arch.t1_title">Frontend &amp; PWA</span></div>
+                  <div class="tier-sub" data-i18n="arch.t1_sub">React 18 · Offline Service Worker · Client State</div>
+                </div>
+                <div class="arch-connector" aria-hidden="true">
+                  <div class="connector-line"></div>
+                  <span class="connector-label">HTTPS / TLS 1.3 · WebSockets</span>
+                </div>
+                <div class="arch-tier-card" data-arch-tier="edge" role="button" tabindex="0" aria-label="Tier 2 Edge">
+                  <div class="tier-badge" data-i18n="arch.t2_badge">Tier 2 · Edge</div>
+                  <div class="tier-title"><i data-lucide="globe" aria-hidden="true"></i> <span data-i18n="arch.t2_title">Global Edge &amp; CDN</span></div>
+                  <div class="tier-sub" data-i18n="arch.t2_sub">Edge Caching · Brotli · Strict CSP &amp; DDoS Shield</div>
+                </div>
+                <div class="arch-connector" aria-hidden="true">
+                  <div class="connector-line"></div>
+                  <span class="connector-label">Zero-Trust REST / JSON RPC</span>
+                </div>
+                <div class="arch-tier-card" data-arch-tier="api" role="button" tabindex="0" aria-label="Tier 3 Compute">
+                  <div class="tier-badge" data-i18n="arch.t3_badge">Tier 3 · Compute</div>
+                  <div class="tier-title"><i data-lucide="server" aria-hidden="true"></i> <span data-i18n="arch.t3_title">API &amp; Serverless Handlers</span></div>
+                  <div class="tier-sub" data-i18n="arch.t3_sub">Node.js · JWT Auth Guard · Zod Validation · Rate Limiting</div>
+                </div>
+                <div class="arch-connector" aria-hidden="true">
+                  <div class="connector-line"></div>
+                  <span class="connector-label">PgBouncer Pool · SSL Verified</span>
+                </div>
+                <div class="arch-tier-card" data-arch-tier="db" role="button" tabindex="0" aria-label="Tier 4 Data">
+                  <div class="tier-badge" data-i18n="arch.t4_badge">Tier 4 · Data</div>
+                  <div class="tier-title"><i data-lucide="database" aria-hidden="true"></i> <span data-i18n="arch.t4_title">PostgreSQL &amp; Supabase</span></div>
+                  <div class="tier-sub" data-i18n="arch.t4_sub">Row-Level Security (RLS) · B-Tree Indexes · ACID Transactions</div>
+                </div>
+                <div class="arch-connector" aria-hidden="true">
+                  <div class="connector-line"></div>
+                  <span class="connector-label">S3 API &amp; Async Webhooks</span>
+                </div>
+                <div class="arch-tier-card" data-arch-tier="storage" role="button" tabindex="0" aria-label="Tier 5 Storage">
+                  <div class="tier-badge" data-i18n="arch.t5_badge">Tier 5 · Async &amp; Media</div>
+                  <div class="tier-title"><i data-lucide="layers" aria-hidden="true"></i> <span data-i18n="arch.t5_title">Object Storage &amp; Webhooks</span></div>
+                  <div class="tier-sub" data-i18n="arch.t5_sub">Private CV Buckets · Public Assets · Email Webhooks</div>
+                </div>
+              </div>
+
+              <!-- Inspector Details Panel -->
+              <div class="arch-detail-panel" id="arch-detail-panel"></div>
+            </div>
+          </div>
+
+          <!-- TAB 2: Database Schema & ERD Showcase -->
+          <div class="arch-pane" id="pane-schema" role="tabpanel" aria-labelledby="tab-btn-schema" hidden>
+            <div class="schema-layout">
+              <!-- Visual ERD Cards Grid -->
+              <div class="erd-grid" role="region" aria-label="Entity Relationship Diagram">
+                <div class="erd-card active" data-table-id="users" role="button" tabindex="0" aria-label="Table users">
+                  <div class="erd-head">
+                    <span class="erd-badge pk">Auth Root</span>
+                    <h4>users / admin_users</h4>
+                  </div>
+                  <ul class="erd-cols">
+                    <li><span class="col-pk">PK</span> <code>id (UUID)</code></li>
+                    <li><span>•</span> <code>email (varchar)</code></li>
+                    <li><span>•</span> <code>role (varchar)</code></li>
+                    <li><span>•</span> <code>created_at (timestamptz)</code></li>
+                  </ul>
+                </div>
+
+                <div class="erd-card" data-table-id="projects" role="button" tabindex="0" aria-label="Table projects">
+                  <div class="erd-head">
+                    <span class="erd-badge">Relational Entity</span>
+                    <h4>projects</h4>
+                  </div>
+                  <ul class="erd-cols">
+                    <li><span class="col-pk">PK</span> <code>id (int8)</code></li>
+                    <li><span class="col-uq">UQ</span> <code>slug (varchar)</code></li>
+                    <li><span>•</span> <code>title_en / ar (text)</code></li>
+                    <li><span>•</span> <code>stack (text[])</code></li>
+                    <li><span>•</span> <code>metrics (jsonb)</code></li>
+                    <li><span>•</span> <code>published_at (timestamptz)</code></li>
+                  </ul>
+                </div>
+
+                <div class="erd-card" data-table-id="services" role="button" tabindex="0" aria-label="Table services">
+                  <div class="erd-head">
+                    <span class="erd-badge">Relational Entity</span>
+                    <h4>services</h4>
+                  </div>
+                  <ul class="erd-cols">
+                    <li><span class="col-pk">PK</span> <code>id (int8)</code></li>
+                    <li><span class="col-uq">UQ</span> <code>slug (varchar)</code></li>
+                    <li><span>•</span> <code>title_en / ar (text)</code></li>
+                    <li><span>•</span> <code>features (jsonb)</code></li>
+                    <li><span>•</span> <code>sort_order (int4)</code></li>
+                  </ul>
+                </div>
+
+                <div class="erd-card" data-table-id="inquiries" role="button" tabindex="0" aria-label="Table inquiries">
+                  <div class="erd-head">
+                    <span class="erd-badge">Transactions</span>
+                    <h4>inquiries (contact)</h4>
+                  </div>
+                  <ul class="erd-cols">
+                    <li><span class="col-pk">PK</span> <code>id (int8)</code></li>
+                    <li><span>•</span> <code>sender_name (text)</code></li>
+                    <li><span>•</span> <code>sender_email (text)</code></li>
+                    <li><span>•</span> <code>message (text)</code></li>
+                    <li><span>•</span> <code>client_ip_hash (text)</code></li>
+                  </ul>
+                </div>
+
+                <div class="erd-card" data-table-id="analytics" role="button" tabindex="0" aria-label="Table analytics_events">
+                  <div class="erd-head">
+                    <span class="erd-badge">Telemetry</span>
+                    <h4>analytics_events</h4>
+                  </div>
+                  <ul class="erd-cols">
+                    <li><span class="col-pk">PK</span> <code>id (int8)</code></li>
+                    <li><span class="col-idx">IDX</span> <code>event_type (varchar)</code></li>
+                    <li><span class="col-idx">IDX</span> <code>event_target (varchar)</code></li>
+                    <li><span>•</span> <code>session_id (varchar)</code></li>
+                    <li><span>•</span> <code>created_at (timestamptz)</code></li>
+                  </ul>
+                </div>
+
+                <div class="erd-card" data-table-id="audit_logs" role="button" tabindex="0" aria-label="Table audit_logs">
+                  <div class="erd-head">
+                    <span class="erd-badge">Compliance</span>
+                    <h4>audit_logs</h4>
+                  </div>
+                  <ul class="erd-cols">
+                    <li><span class="col-pk">PK</span> <code>id (int8)</code></li>
+                    <li><span class="col-fk">FK</span> <code>actor_id (UUID)</code></li>
+                    <li><span>•</span> <code>action (varchar)</code></li>
+                    <li><span>•</span> <code>entity (varchar)</code></li>
+                    <li><span>•</span> <code>summary (jsonb)</code></li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Table Inspector Panel -->
+              <div class="schema-detail-panel" id="schema-detail-panel"></div>
+            </div>
+          </div>
+
+          <!-- TAB 3: PostgreSQL DDL & RLS Policies -->
+          <div class="arch-pane" id="pane-ddl" role="tabpanel" aria-labelledby="tab-btn-ddl" hidden>
+            <div class="ddl-wrap">
+              <div class="ddl-subtabs">
+                <button type="button" class="ddl-subtab active" data-ddl-file="schema">schema.sql (DDL)</button>
+                <button type="button" class="ddl-subtab" data-ddl-file="rls">rls_policies.sql (Zero-Trust)</button>
+                <button type="button" class="ddl-subtab" data-ddl-file="indexes">indexes_perf.sql (Optimizations)</button>
+                <button type="button" class="copy-sql-btn" id="copy-sql-btn" aria-label="Copy SQL code">
+                  <i data-lucide="clipboard-list" aria-hidden="true"></i>
+                  <span data-i18n="arch.copy_sql">Copy SQL</span>
+                </button>
+              </div>
+              <pre class="ddl-code-block"><code id="ddl-code-content" class="language-sql"></code></pre>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1688,6 +1899,8 @@
       <div class="terminal-quick-chips">
         <button type="button" data-term-quick="help">help</button>
         <button type="button" data-term-quick="whoami">whoami</button>
+        <button type="button" data-term-quick="arch">arch</button>
+        <button type="button" data-term-quick="schema">schema</button>
         <button type="button" data-term-quick="skills">skills</button>
         <button type="button" data-term-quick="projects">projects</button>
         <button type="button" data-term-quick="philosophy">philosophy</button>
