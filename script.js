@@ -362,6 +362,18 @@
       'proj.tier_ds': 'Data Structures',
       'proj.tier_python': 'Python Automation',
       'proj.repo': 'GitHub',
+      'proj.peek_code': 'Architecture',
+      'proj.copy_code': 'Copy',
+      'proj.code_copied': 'Copied!',
+
+      'hero.card_avail': 'Available for Projects',
+      'hero.card_fullstack': 'Full-Stack',
+      'hero.card_focus': 'Core Focus',
+      'hero.card_focus_val': 'Production Web Apps & Systems',
+      'hero.card_resp': 'Response < 2h',
+      'hero.card_cta': 'Start a Project →',
+      'nav.process': 'Process & Planner',
+      'toast.email_copied': 'Email copied to clipboard! (abdallhalghoul200@gmail.com)',
 
       'certs.eyebrow': '// Certifications',
       'certs.title': 'Verified Credentials',
@@ -741,6 +753,18 @@
       'proj.tier_ds': 'هياكل بيانات وخوارزميات',
       'proj.tier_python': 'أتمتة برمجية بلغة بايثون',
       'proj.repo': 'المستودع',
+      'proj.peek_code': 'المعمارية البرمجية',
+      'proj.copy_code': 'نسخ',
+      'proj.code_copied': 'تم النسخ!',
+
+      'hero.card_avail': 'متاح للمشاريع الجديدة',
+      'hero.card_fullstack': 'تطوير متكامل',
+      'hero.card_focus': 'التركيز الهندسي',
+      'hero.card_focus_val': 'تطبيقات ويب متكاملة وأنظمة قابلة للتوسع',
+      'hero.card_resp': 'الرد خلال أقل من ساعتين',
+      'hero.card_cta': 'ابدأ مشروعك ←',
+      'nav.process': 'المنهجية والتخطيط',
+      'toast.email_copied': 'تم نسخ البريد الإلكتروني إلى الحافظة بنجاح!',
 
       'certs.eyebrow': '# الشهادات',
       'certs.title': 'شهادات موثقة',
@@ -2028,6 +2052,96 @@
             card.hidden = true;
           }
         });
+      });
+    });
+  }
+
+  // ============== Toast Notification ==============
+
+  let toastTimer = null;
+  function showToast(msg) {
+    let toast = document.getElementById('toast-notify');
+    if (!toast) return;
+    const msgEl = document.getElementById('toast-message');
+    if (msgEl) msgEl.textContent = msg;
+    toast.hidden = false;
+    toast.offsetHeight; // trigger reflow
+    toast.classList.add('is-visible');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('is-visible');
+      setTimeout(() => { toast.hidden = true; }, 350);
+    }, 2800);
+  }
+
+  // ============== Email Copy Button ==============
+
+  function setupEmailCopy() {
+    const copyBtn = document.getElementById('hero-copy-email');
+    if (!copyBtn) return;
+    copyBtn.addEventListener('click', async () => {
+      const email = 'abdallhalghoul200@gmail.com';
+      const dict = i18n[state.lang] || i18n.en;
+      try {
+        await navigator.clipboard.writeText(email);
+        showToast(dict['toast.email_copied'] || 'Email copied to clipboard!');
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = email;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast(dict['toast.email_copied'] || 'Email copied to clipboard!');
+      }
+    });
+  }
+
+  // ============== Project Code Drawers ==============
+
+  function setupCodePeeks() {
+    document.addEventListener('click', (e) => {
+      const peekBtn = e.target.closest('[data-peek-target]');
+      if (peekBtn) {
+        const targetId = peekBtn.dataset.peekTarget;
+        const drawer = document.getElementById(targetId);
+        if (drawer) {
+          const isOpen = !drawer.hidden;
+          drawer.hidden = isOpen;
+          peekBtn.classList.toggle('is-active', !isOpen);
+          peekBtn.setAttribute('aria-expanded', String(!isOpen));
+        }
+      }
+
+      const copyBtn = e.target.closest('[data-copy-target]');
+      if (copyBtn) {
+        const snippetId = copyBtn.dataset.copyTarget;
+        const codeEl = document.getElementById(snippetId);
+        if (codeEl) {
+          navigator.clipboard.writeText(codeEl.textContent.trim()).then(() => {
+            const span = copyBtn.querySelector('span');
+            const originalText = span ? span.textContent : '';
+            const dict = i18n[state.lang] || i18n.en;
+            if (span) span.textContent = dict['proj.code_copied'] || 'Copied!';
+            showToast(dict['proj.code_copied'] || 'Code copied to clipboard!');
+            setTimeout(() => {
+              if (span) span.textContent = originalText;
+            }, 2000);
+          }).catch(() => {});
+        }
+      }
+    });
+  }
+
+  // ============== Spotlight Hover Effect ==============
+
+  function setupSpotlightHover() {
+    const targets = $$('.project-card, .skill-card, .cert-card, .freelance-pillar, .stat');
+    targets.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
       });
     });
   }
@@ -4865,6 +4979,9 @@
     setupTimelineModals();
     setupProjectModals();
     setupProjectPlanner();
+    setupCodePeeks();
+    setupSpotlightHover();
+    setupEmailCopy();
     setupFAQAccordion();
     setupDeveloperTerminal();
     setupNavDots();

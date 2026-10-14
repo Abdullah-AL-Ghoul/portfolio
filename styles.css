@@ -7933,4 +7933,293 @@ body::after {
     border-color: #38bdf8;
     color: #38bdf8;
   }
+}
+
+/* ===== V4.5 Elite Enhancements: Floating Status, Code Drawers, Spotlight & Toast ===== */
+
+/* 1. Hero Floating Status Card */
+.hero-status-card {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  background: color-mix(in srgb, var(--bg-elev) 88%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  border-radius: var(--radius);
+  padding: 0.9rem 1.15rem;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45), 0 0 24px var(--accent-glow);
+  z-index: 3;
+  width: 280px;
+  text-align: start;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  animation: cardPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+.hero-status-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.5), 0 0 32px var(--accent-glow);
+}
+[dir='rtl'] .hero-status-card {
+  right: auto;
+  left: -20px;
+  text-align: start;
+}
+.hsc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+.hsc-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.hsc-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  text-transform: uppercase;
+}
+.hsc-focus {
+  margin-bottom: 0.55rem;
+}
+.hsc-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+.hsc-val {
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.hsc-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.65rem;
+}
+.hsc-pills span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.15rem 0.45rem;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+}
+.hsc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+}
+.hsc-meta {
+  color: var(--text-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+}
+.hsc-meta i {
+  width: 13px;
+  height: 13px;
+  color: var(--accent);
+}
+.hsc-cta {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.75rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.hsc-cta:hover {
+  color: var(--accent-2);
+  text-decoration: underline;
+}
+@media (max-width: 900px) {
+  .hero-status-card {
+    position: static;
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+}
+
+/* 2. Interactive Email Copy Button in Hero */
+.btn-copy-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.55rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-copy-email:hover {
+  background: var(--bg-elev);
+  border-color: var(--border);
+  color: var(--accent);
+}
+.btn-copy-email .copy-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.btn-copy-email:hover .copy-icon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* 3. Toast Notification */
+.toast-notify {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: color-mix(in srgb, var(--bg-elev) 92%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  padding: 0.75rem 1.35rem;
+  border-radius: 999px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 24px var(--accent-glow);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast-notify.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.toast-notify i {
+  width: 18px;
+  height: 18px;
+  color: var(--success, #10b981);
+}
+
+/* 4. Project Architecture Code Drawer */
+.project-code-drawer {
+  margin-top: 1rem;
+  background: #08090d;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  text-align: start;
+  animation: drawerSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes drawerSlide {
+  from { opacity: 0; transform: translateY(-8px); max-height: 0; }
+  to { opacity: 1; transform: translateY(0); max-height: 400px; }
+}
+.code-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.85rem;
+  background: #0f1118;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.code-drawer-title {
+  color: #94a3b8;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.code-drawer-title i {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+.btn-copy-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.55rem;
+  color: #cbd5e1;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-copy-code:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.btn-copy-code i {
+  width: 12px;
+  height: 12px;
+}
+.code-drawer-pre {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+  background: transparent;
+}
+.btn-code-peek.is-active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* 5. Spotlight Hover Effect (Radial Follow Glow) */
+.project-card, .skill-card, .cert-card, .freelance-pillar, .stat {
+  position: relative;
+}
+.project-card::before, .skill-card::before, .cert-card::before, .freelance-pillar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), color-mix(in srgb, var(--accent) 15%, transparent), transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+.project-card:hover::before, .skill-card:hover::before, .cert-card:hover::before, .freelance-pillar:hover::before {
+  opacity: 1;
 }

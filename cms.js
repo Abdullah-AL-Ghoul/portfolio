@@ -352,7 +352,7 @@
     var rows = Array.isArray(data.professional_profiles) ? data.professional_profiles : [];
     // profile_url='' rows are excluded server-side; guard here anyway.
     var usable = rows.filter(function (p) { return p && p.profile_url; });
-    section.hidden = usable.length === 0;
+    grid.hidden = usable.length === 0;
 
     grid.textContent = '';
     if (!usable.length) return;
