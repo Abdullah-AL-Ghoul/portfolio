@@ -625,7 +625,34 @@
             ? cs.challenges.map(function (c) { return (c || {})[l] || ''; }).filter(Boolean)
             : [],
           tech: Array.isArray(p.stack) ? p.stack : [],
-          links: []
+          links: (function () {
+            var linksList = [];
+            if (p.live_url) {
+              linksList.push({
+                id: 'live',
+                icon: 'external-link',
+                label: l === 'ar' ? 'الموقع مباشر' : 'Live Site',
+                href: p.live_url
+              });
+            }
+            if (p.repo_url) {
+              linksList.push({
+                id: 'repo',
+                icon: 'folder-git-2',
+                label: l === 'ar' ? 'المستودع البرمجي' : 'GitHub Repo',
+                href: p.repo_url
+              });
+            }
+            if (p.extra_url) {
+              linksList.push({
+                id: 'extra',
+                icon: 'file-text',
+                label: l === 'ar' ? (p.extra_url_label_ar || 'تفاصيل إضافية') : (p.extra_url_label_en || 'Extra Info'),
+                href: p.extra_url
+              });
+            }
+            return linksList;
+          })()
         };
       });
     });

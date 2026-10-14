@@ -342,6 +342,10 @@
       'proj.p7t': 'SmartTimeCoach',
       'proj.p7d': 'Python productivity assistant with automated reminders that helps manage tasks and study schedules more effectively.',
 
+      'proj.p8tag': 'Featured · Live',
+      'proj.p8t': 'NEXORA — Luxury E-Commerce Platform',
+      'proj.p8d': 'Full-stack luxury e-commerce platform built with Next.js 16 (App Router), React 19, TypeScript, PostgreSQL (Prisma 7), Stripe checkout with webhook idempotency, server-authoritative cart pricing, and role-based admin dashboard.',
+
       'certs.eyebrow': '// Certifications',
       'certs.title': 'Verified Credentials',
       'certs.view': 'View certificate',
@@ -699,6 +703,10 @@
       'proj.p7tag': 'مشروع شخصي',
       'proj.p7t': 'SmartTimeCoach',
       'proj.p7d': 'مساعد إنتاجية بلغة Python مع تذكيرات تلقائية يساعد على إدارة المهام وجداول الدراسة بشكل أكثر فعالية.',
+
+      'proj.p8tag': 'مشروع مميز · مباشر',
+      'proj.p8t': 'منصة نكسورا للتجارة الإلكترونية والمنتجات الفاخرة (NEXORA)',
+      'proj.p8d': 'منصة تجارة إلكترونية متكاملة للمنتجات الفاخرة مبنية بـ Next.js 16 و React 19 و TypeScript و PostgreSQL عبر Prisma 7، مزودة ببوابة دفع Stripe بنظام التحقق والتفويض، وحساب أسعار صارم من الخادم، ولوحة تحكم إدارية متعددة الصلاحيات.',
 
       'certs.eyebrow': '# الشهادات',
       'certs.title': 'شهادات موثقة',
@@ -3447,6 +3455,19 @@
         architecture: 'Python asynchronous task scheduler utilizing non-blocking timers, persistent SQLite state, and modular notification hooks.',
         tech: ['Python', 'Automation', 'Scheduling'],
         links: []
+      },
+      p8: {
+        tag: 'Featured · Live',
+        title: 'NEXORA — Modern Luxury E-Commerce Platform',
+        problem: 'Modern e-commerce requires high-performance storefronts, strictly authoritative checkout calculations to prevent price tampering, zero-loss webhook order reconciliation, and real-time inventory management.',
+        solution: 'Engineered a production-ready luxury commerce platform with Next.js 16 (App Router) and React 19. Features server-authoritative cart quotes, Stripe Checkout integration with cryptographically verified webhook idempotency, optimistic UI updates, and an administrative analytics dashboard.',
+        result: 'Sub-second page navigation, bulletproof financial transaction processing, atomic inventory reservations, and 100% type safety from database schema to UI components.',
+        architecture: 'Next.js 16 Server Components & Server Actions, Prisma 7 ORM over PostgreSQL, Stripe Checkout session lifecycle, better-auth session management, and Tailwind CSS v4 design system.',
+        tech: ['Next.js 16', 'React 19', 'TypeScript', 'Prisma', 'PostgreSQL', 'Stripe', 'Tailwind CSS', 'better-auth'],
+        links: [
+          { id: 'live', icon: 'external-link', label: 'Live Site', href: 'https://nexora-luxury.vercel.app/' },
+          { id: 'github', icon: 'folder-git-2', label: 'GitHub Repository', href: 'https://github.com/abdallhalghoul/nexora' }
+        ]
       }
     },
     ar: {
@@ -3527,6 +3548,19 @@
         architecture: 'جدولة مهام غير متزامنة بـ Python مع مؤقتات خفيفة وحفظ حالات المهام ونظام إشعارات تلقائي.',
         tech: ['Python', 'Automation', 'Scheduling'],
         links: []
+      },
+      p8: {
+        tag: 'مشروع مميز · مباشر',
+        title: 'منصة نكسورا للتجارة الإلكترونية والمنتجات الفاخرة (NEXORA)',
+        problem: 'تتطلب منصات التجارة الإلكترونية الحديثة واجهات فائقة السرعة، وحساباً صارماً للأسعار عبر الخادم لمنع التلاعب بالقيمة، ومعالجة غير منقوصة للطلبات عبر Webhooks، وإدارة دقيقة للمخزون.',
+        solution: 'طوّرت منصة متكاملة للتجارة الإلكترونية للمنتجات الفاخرة باستخدام Next.js 16 (App Router) و React 19. تتضمن تدقيقاً صارماً لسلة المشتريات من الخادم، وتكاملاً مع بوابة Stripe Checkout مع التحقق المشفر من الـ Webhooks لمنع تكرار العمليات، وتحديثات واجهة فورية، ولوحة تحكم إدارية شاملة.',
+        result: 'تصفح فائق السرعة، ومعالجة مالية محكمة وموثوقة، وحجز فوري للكميات بالمخزون، وتوافق تام للأنواع البرمجية (Type-Safe) عبر كافة الطبقات.',
+        architecture: 'مكونات خادم وإجراءات Next.js 16 Server Actions، وقاعدة بيانات PostgreSQL مع Prisma 7 ORM، ودورة دفع Stripe، ومصادقة better-auth، وتصميم عصري بـ Tailwind CSS v4.',
+        tech: ['Next.js 16', 'React 19', 'TypeScript', 'Prisma', 'PostgreSQL', 'Stripe', 'Tailwind CSS', 'better-auth'],
+        links: [
+          { id: 'live', icon: 'external-link', label: 'الموقع مباشر', href: 'https://nexora-luxury.vercel.app/' },
+          { id: 'github', icon: 'folder-git-2', label: 'المستودع البرمجي', href: 'https://github.com/abdallhalghoul/nexora' }
+        ]
       }
     }
   };
