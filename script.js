@@ -343,8 +343,25 @@
       'proj.p7d': 'Python productivity assistant with automated reminders that helps manage tasks and study schedules more effectively.',
 
       'proj.p8tag': 'Featured · Live',
-      'proj.p8t': 'NEXORA — Luxury E-Commerce Platform',
+      'proj.p8t': 'NEXORA — Modern Luxury E-Commerce Platform',
       'proj.p8d': 'Full-stack luxury e-commerce platform built with Next.js 16 (App Router), React 19, TypeScript, PostgreSQL (Prisma 7), Stripe checkout with webhook idempotency, server-authoritative cart pricing, and role-based admin dashboard.',
+
+      'proj.intro': 'Production-grade web applications, full-stack systems, and engineering case studies built with modern architecture and strict performance standards.',
+      'proj.f_all': 'All Projects',
+      'proj.f_fullstack': 'Full-Stack & Web',
+      'proj.f_network': 'Networking & Cloud',
+      'proj.f_software': 'Software & Systems',
+      'proj.open_live': 'Open Live Site',
+      'proj.open_store': 'Open Live Store',
+      'proj.tier_fullstack': 'Flagship Full-Stack',
+      'proj.tier_academic': 'Academic Portal',
+      'proj.tier_portfolio': 'Personal Branding',
+      'proj.tier_network': 'Enterprise Infra',
+      'proj.tier_cloud': 'Cloud VDI',
+      'proj.tier_java': 'Java Desktop',
+      'proj.tier_ds': 'Data Structures',
+      'proj.tier_python': 'Python Automation',
+      'proj.repo': 'GitHub',
 
       'certs.eyebrow': '// Certifications',
       'certs.title': 'Verified Credentials',
@@ -707,6 +724,23 @@
       'proj.p8tag': 'مشروع مميز · مباشر',
       'proj.p8t': 'منصة نكسورا للتجارة الإلكترونية والمنتجات الفاخرة (NEXORA)',
       'proj.p8d': 'منصة تجارة إلكترونية متكاملة للمنتجات الفاخرة مبنية بـ Next.js 16 و React 19 و TypeScript و PostgreSQL عبر Prisma 7، مزودة ببوابة دفع Stripe بنظام التحقق والتفويض، وحساب أسعار صارم من الخادم، ولوحة تحكم إدارية متعددة الصلاحيات.',
+
+      'proj.intro': 'تطبيقات ويب متكاملة، وأنظمة هندسية موزعة، ودراسات حالة مبنية بمعماريات حديثة ومعايير أداء صارمة.',
+      'proj.f_all': 'جميع المشاريع',
+      'proj.f_fullstack': 'تطبيقات الويب و Full-Stack',
+      'proj.f_network': 'الشبكات والسحابة',
+      'proj.f_software': 'البرمجيات والأنظمة',
+      'proj.open_live': 'زيارة الموقع المباشر',
+      'proj.open_store': 'زيارة المتجر المباشر',
+      'proj.tier_fullstack': 'مشروع رئيسي متكامل',
+      'proj.tier_academic': 'بوابة أكاديمية',
+      'proj.tier_portfolio': 'الهوية الشخصية',
+      'proj.tier_network': 'بنية تحتية للمؤسسات',
+      'proj.tier_cloud': 'بنية سطح مكتب افتراضي',
+      'proj.tier_java': 'تطبيق جافا مكتبي',
+      'proj.tier_ds': 'هياكل بيانات وخوارزميات',
+      'proj.tier_python': 'أتمتة برمجية بلغة بايثون',
+      'proj.repo': 'المستودع',
 
       'certs.eyebrow': '# الشهادات',
       'certs.title': 'شهادات موثقة',
@@ -1961,6 +1995,36 @@
             card.hidden = false;
           } else {
             card.style.display = 'none';
+            card.hidden = true;
+          }
+        });
+      });
+    });
+  }
+
+  // ============== Project Filters ==============
+
+  function setupProjectFilters() {
+    const filterBtns = $$('.project-filter-btn');
+    if (!filterBtns.length) return;
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        const filter = btn.dataset.filter;
+        $$('.projects-grid .project-card').forEach((card) => {
+          const cat = card.dataset.category || '';
+          if (filter === 'all' || cat === filter) {
+            card.style.display = '';
+            card.classList.remove('is-hidden');
+            card.hidden = false;
+          } else {
+            card.style.display = 'none';
+            card.classList.add('is-hidden');
             card.hidden = true;
           }
         });
@@ -4788,6 +4852,7 @@
     setupKeyboardShortcuts();
     setupCertModal();
     setupCertFilters();
+    setupProjectFilters();
     setupTestimonialModal();
     setupCursor();
     setupSectionTransitions();

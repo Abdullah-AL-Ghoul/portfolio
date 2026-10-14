@@ -649,10 +649,84 @@
         <div class="section-head reveal-up">
           <span class="eyebrow" data-index="03" data-i18n="proj.eyebrow">// Projects</span>
           <h2 class="section-title" data-i18n="proj.title">Featured Projects</h2>
+          <p class="section-intro" data-i18n="proj.intro">Production-grade web applications, full-stack systems, and engineering case studies built with modern architecture and strict performance standards.</p>
         </div>
 
+        <nav class="projects-filters reveal-up" aria-label="Project categories">
+          <button type="button" class="project-filter-btn active" data-filter="all" aria-selected="true">
+            <i data-lucide="layout-grid" aria-hidden="true"></i>
+            <span data-i18n="proj.f_all">All Projects</span>
+            <span class="filter-count">8</span>
+          </button>
+          <button type="button" class="project-filter-btn" data-filter="fullstack" aria-selected="false">
+            <i data-lucide="layers" aria-hidden="true"></i>
+            <span data-i18n="proj.f_fullstack">Full-Stack &amp; Web</span>
+            <span class="filter-count">3</span>
+          </button>
+          <button type="button" class="project-filter-btn" data-filter="network" aria-selected="false">
+            <i data-lucide="network" aria-hidden="true"></i>
+            <span data-i18n="proj.f_network">Networking &amp; Cloud</span>
+            <span class="filter-count">2</span>
+          </button>
+          <button type="button" class="project-filter-btn" data-filter="software" aria-selected="false">
+            <i data-lucide="cpu" aria-hidden="true"></i>
+            <span data-i18n="proj.f_software">Software &amp; Systems</span>
+            <span class="filter-count">3</span>
+          </button>
+        </nav>
+
         <div class="projects-grid">
-          <article class="project-card featured featured-primary reveal-scale" data-project="p4">
+          <article class="project-card featured featured-primary reveal-scale" data-project="p8" data-category="fullstack">
+            <div class="project-cover" data-cover="portfolio">
+              <div class="browser-chrome" aria-hidden="true">
+                <span class="browser-dot red"></span>
+                <span class="browser-dot yellow"></span>
+                <span class="browser-dot green"></span>
+                <span class="browser-address">nexora-luxury.vercel.app</span>
+              </div>
+              <a href="https://nexora-luxury.vercel.app/" target="_blank" rel="noopener" class="project-cover-link" aria-label="Open NEXORA Live Store">
+                <img src="assets/project-nexora.jpg" alt="NEXORA Luxury E-Commerce preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
+                <div class="cover-hover-overlay" aria-hidden="true">
+                  <span class="cover-hover-pill">
+                    <i data-lucide="external-link"></i> <span data-i18n="proj.open_store">Open Live Store</span>
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div class="project-body">
+              <div class="project-status-row">
+                <div class="project-tag"><span class="live-indicator"></span><span data-i18n="proj.p8tag">Featured · Live</span></div>
+                <span class="project-tier-badge" data-i18n="proj.tier_fullstack">Flagship Full-Stack</span>
+              </div>
+              <div class="project-icon"><i data-lucide="sparkles" aria-hidden="true"></i></div>
+              <h3 data-i18n="proj.p8t">NEXORA — Modern Luxury E-Commerce Platform</h3>
+              <p data-i18n="proj.p8d">
+                Full-stack luxury e-commerce platform built with Next.js 16 (App Router), React 19, TypeScript, PostgreSQL (Prisma 7), Stripe checkout with webhook idempotency, server-authoritative cart pricing, and role-based admin dashboard.
+              </p>
+              <div class="project-metrics">
+                <span class="metric-chip"><i data-lucide="zap" aria-hidden="true"></i> <span>Next.js 16 / React 19</span></span>
+                <span class="metric-chip"><i data-lucide="shield-check" aria-hidden="true"></i> <span>Stripe Verified</span></span>
+                <span class="metric-chip"><i data-lucide="database" aria-hidden="true"></i> <span>Prisma 7 / Postgres</span></span>
+              </div>
+              <div class="project-tags">
+                <span>Next.js 16</span><span>React 19</span><span>TypeScript</span><span>Prisma</span><span>PostgreSQL</span><span>Stripe</span><span>Tailwind CSS</span>
+              </div>
+              <div class="project-links">
+                <a class="btn btn-sm btn-primary" href="https://nexora-luxury.vercel.app/" target="_blank" rel="noopener">
+                  <i data-lucide="external-link"></i> <span data-i18n="proj.live">Live Site</span>
+                </a>
+                <a class="btn btn-sm btn-outline btn-repo" href="https://github.com/abdallhalghoul/nexora" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                  <span data-i18n="proj.repo">GitHub</span>
+                </a>
+                <button type="button" class="btn btn-sm btn-ghost" data-case-open="p8">
+                  <i data-lucide="book-open"></i> <span data-i18n="proj.case">Case Study</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card featured featured-primary reveal-scale" data-project="p4" data-category="fullstack">
             <div class="project-cover" data-cover="edu">
               <div class="browser-chrome" aria-hidden="true">
                 <span class="browser-dot red"></span>
@@ -660,10 +734,20 @@
                 <span class="browser-dot green"></span>
                 <span class="browser-address">al-azher-it-hub.vercel.app</span>
               </div>
-              <img src="assets/project-alazher.jpg" alt="AL-Azher IT Hub preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
+              <a href="https://al-azher-it-hub.vercel.app/" target="_blank" rel="noopener" class="project-cover-link" aria-label="Open AL-Azher IT Hub Live Site">
+                <img src="assets/project-alazher.jpg" alt="AL-Azher IT Hub preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
+                <div class="cover-hover-overlay" aria-hidden="true">
+                  <span class="cover-hover-pill">
+                    <i data-lucide="external-link"></i> <span data-i18n="proj.open_live">Open Live Site</span>
+                  </span>
+                </div>
+              </a>
             </div>
             <div class="project-body">
-              <div class="project-tag" data-i18n="proj.p4tag">Live</div>
+              <div class="project-status-row">
+                <div class="project-tag"><span class="live-indicator"></span><span data-i18n="proj.p4tag">Live</span></div>
+                <span class="project-tier-badge" data-i18n="proj.tier_academic">Academic Portal</span>
+              </div>
               <div class="project-icon"><i data-lucide="graduation-cap" aria-hidden="true"></i></div>
               <h3 data-i18n="proj.p4t">AL-Azher IT Hub</h3>
               <p data-i18n="proj.p4d">
@@ -688,43 +772,7 @@
             </div>
           </article>
 
-          <article class="project-card featured reveal-scale" data-project="p8">
-            <div class="project-cover" data-cover="portfolio">
-              <div class="browser-chrome" aria-hidden="true">
-                <span class="browser-dot red"></span>
-                <span class="browser-dot yellow"></span>
-                <span class="browser-dot green"></span>
-                <span class="browser-address">nexora-luxury.vercel.app</span>
-              </div>
-              <img src="assets/project-nexora.jpg" alt="NEXORA Luxury E-Commerce preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
-            </div>
-            <div class="project-body">
-              <div class="project-tag" data-i18n="proj.p8tag">Featured · Live</div>
-              <div class="project-icon"><i data-lucide="sparkles" aria-hidden="true"></i></div>
-              <h3 data-i18n="proj.p8t">NEXORA — Luxury E-Commerce Platform</h3>
-              <p data-i18n="proj.p8d">
-                Full-stack luxury e-commerce platform built with Next.js 16 (App Router), React 19, TypeScript, PostgreSQL (Prisma 7), Stripe checkout with webhook idempotency, server-authoritative cart pricing, and role-based admin dashboard.
-              </p>
-              <div class="project-metrics">
-                <span class="metric-chip"><i data-lucide="zap" aria-hidden="true"></i> <span>Next.js 16 / React 19</span></span>
-                <span class="metric-chip"><i data-lucide="shield-check" aria-hidden="true"></i> <span>Stripe Verified</span></span>
-                <span class="metric-chip"><i data-lucide="database" aria-hidden="true"></i> <span>Prisma 7 / Postgres</span></span>
-              </div>
-              <div class="project-tags">
-                <span>Next.js 16</span><span>React 19</span><span>TypeScript</span><span>Prisma</span><span>PostgreSQL</span><span>Stripe</span><span>Tailwind CSS</span>
-              </div>
-              <div class="project-links">
-                <a class="btn btn-sm btn-primary" href="https://nexora-luxury.vercel.app/" target="_blank" rel="noopener">
-                  <i data-lucide="external-link"></i> <span data-i18n="proj.live">Live Site</span>
-                </a>
-                <button type="button" class="btn btn-sm btn-ghost" data-case-open="p8">
-                  <i data-lucide="book-open"></i> <span data-i18n="proj.case">Case Study</span>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card tier-2 reveal-scale" data-project="p1">
+          <article class="project-card tier-2 reveal-scale" data-project="p1" data-category="fullstack">
             <div class="project-cover" data-cover="portfolio">
               <div class="browser-chrome" aria-hidden="true">
                 <span class="browser-dot red"></span>
@@ -732,10 +780,20 @@
                 <span class="browser-dot green"></span>
                 <span class="browser-address">abdullah.dev</span>
               </div>
-              <img src="assets/project-portfolio.jpg" alt="Personal Portfolio Website preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
+              <a href="https://abdullah-portfolio26.vercel.app/" target="_blank" rel="noopener" class="project-cover-link" aria-label="Open Personal Portfolio">
+                <img src="assets/project-portfolio.jpg" alt="Personal Portfolio Website preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
+                <div class="cover-hover-overlay" aria-hidden="true">
+                  <span class="cover-hover-pill">
+                    <i data-lucide="external-link"></i> <span data-i18n="proj.open_live">Open Live Site</span>
+                  </span>
+                </div>
+              </a>
             </div>
             <div class="project-body">
-              <div class="project-tag" data-i18n="proj.p1tag">Live · This Site</div>
+              <div class="project-status-row">
+                <div class="project-tag"><span class="live-indicator"></span><span data-i18n="proj.p1tag">Live · This Site</span></div>
+                <span class="project-tier-badge" data-i18n="proj.tier_portfolio">Personal Branding</span>
+              </div>
               <div class="project-icon"><i data-lucide="globe" aria-hidden="true"></i></div>
               <h3 data-i18n="proj.p1t">Personal Portfolio Website</h3>
               <p data-i18n="proj.p1d">
@@ -760,7 +818,7 @@
             </div>
           </article>
 
-          <article class="project-card tier-2 reveal-scale" data-project="p2">
+          <article class="project-card tier-2 reveal-scale" data-project="p2" data-category="network">
             <div class="project-cover" data-cover="network">
               <div class="browser-chrome" aria-hidden="true">
                 <span class="browser-dot red"></span>
@@ -771,7 +829,10 @@
               <img src="assets/project-network.jpg" alt="Enterprise Network Design topology" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
-              <div class="project-tag" data-i18n="proj.p2tag">Completed</div>
+              <div class="project-status-row">
+                <div class="project-tag"><span data-i18n="proj.p2tag">Completed</span></div>
+                <span class="project-tier-badge" data-i18n="proj.tier_network">Enterprise Infra</span>
+              </div>
               <div class="project-icon"><i data-lucide="network" aria-hidden="true"></i></div>
               <h3 data-i18n="proj.p2t">Enterprise Network Design</h3>
               <p data-i18n="proj.p2d">
@@ -796,7 +857,7 @@
             </div>
           </article>
 
-          <article class="project-card tier-2 reveal-scale" data-project="p3">
+          <article class="project-card tier-2 reveal-scale" data-project="p3" data-category="network">
             <div class="project-cover" data-cover="cloud">
               <div class="browser-chrome" aria-hidden="true">
                 <span class="browser-dot red"></span>
@@ -807,7 +868,10 @@
               <img src="assets/project-virtuallab.jpg" alt="Smart University Virtual Lab preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
-              <div class="project-tag" data-i18n="proj.p3tag">Concept Proposal</div>
+              <div class="project-status-row">
+                <div class="project-tag"><span data-i18n="proj.p3tag">Concept Proposal</span></div>
+                <span class="project-tier-badge" data-i18n="proj.tier_cloud">Cloud VDI</span>
+              </div>
               <div class="project-icon"><i data-lucide="cloud" aria-hidden="true"></i></div>
               <h3 data-i18n="proj.p3t">Smart University Virtual Lab</h3>
               <p data-i18n="proj.p3d">
@@ -832,7 +896,7 @@
             </div>
           </article>
 
-          <article class="project-card tier-3 reveal-scale" data-project="p5">
+          <article class="project-card tier-3 reveal-scale" data-project="p5" data-category="software">
             <div class="project-cover" data-cover="tasks">
               <div class="browser-chrome" aria-hidden="true">
                 <span class="browser-dot red"></span>
@@ -843,7 +907,10 @@
               <img src="assets/project-taskmanager.jpg" alt="Task Manager sprint board preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
-              <div class="project-tag" data-i18n="proj.p5tag">Team Project</div>
+              <div class="project-status-row">
+                <div class="project-tag"><span data-i18n="proj.p5tag">Team Project</span></div>
+                <span class="project-tier-badge" data-i18n="proj.tier_java">Java Desktop</span>
+              </div>
               <div class="project-icon"><i data-lucide="clipboard-list" aria-hidden="true"></i></div>
               <h3 data-i18n="proj.p5t">Task Manager</h3>
               <p data-i18n="proj.p5d">
@@ -864,7 +931,7 @@
             </div>
           </article>
 
-          <article class="project-card tier-3 reveal-scale" data-project="p6">
+          <article class="project-card tier-3 reveal-scale" data-project="p6" data-category="software">
             <div class="project-cover" data-cover="library">
               <div class="browser-chrome" aria-hidden="true">
                 <span class="browser-dot red"></span>
@@ -875,7 +942,10 @@
               <img src="assets/project-library.jpg" alt="Library Management System terminal preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
-              <div class="project-tag" data-i18n="proj.p6tag">Completed</div>
+              <div class="project-status-row">
+                <div class="project-tag"><span data-i18n="proj.p6tag">Completed</span></div>
+                <span class="project-tier-badge" data-i18n="proj.tier_ds">Data Structures</span>
+              </div>
               <div class="project-icon"><i data-lucide="book-marked" aria-hidden="true"></i></div>
               <h3 data-i18n="proj.p6t">Library Management System</h3>
               <p data-i18n="proj.p6d">
@@ -896,7 +966,7 @@
             </div>
           </article>
 
-          <article class="project-card tier-3 reveal-scale" data-project="p7">
+          <article class="project-card tier-3 reveal-scale" data-project="p7" data-category="software">
             <div class="project-cover" data-cover="timer">
               <div class="browser-chrome" aria-hidden="true">
                 <span class="browser-dot red"></span>
@@ -907,7 +977,10 @@
               <img src="assets/project-timecoach.jpg" alt="SmartTimeCoach productivity preview" class="project-thumb-img" loading="lazy" width="900" height="500" />
             </div>
             <div class="project-body">
-              <div class="project-tag" data-i18n="proj.p7tag">Personal Project</div>
+              <div class="project-status-row">
+                <div class="project-tag"><span data-i18n="proj.p7tag">Personal Project</span></div>
+                <span class="project-tier-badge" data-i18n="proj.tier_python">Python Automation</span>
+              </div>
               <div class="project-icon"><i data-lucide="alarm-clock" aria-hidden="true"></i></div>
               <h3 data-i18n="proj.p7t">SmartTimeCoach</h3>
               <p data-i18n="proj.p7d">

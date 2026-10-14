@@ -63,8 +63,16 @@
         var live = links.querySelector('a.btn-primary, a.btn-outline');
         if (live && live.href !== p.live_url) live.href = p.live_url;
       }
+      var repo = links ? links.querySelector('a.btn-repo') : null;
+      if (repo && p.repo_url && repo.href !== p.repo_url) {
+        repo.href = p.repo_url;
+      }
+      var img = card.querySelector('.project-cover img');
+      if (img && p.cover_path && img.getAttribute('src') !== p.cover_path) {
+        img.src = p.cover_path;
+      }
       card.classList.toggle('featured', !!p.is_featured);
-      card.classList.toggle('featured-primary', Number(p.featured_rank) === 1);
+      card.classList.toggle('featured-primary', Number(p.featured_rank) === 1 || Number(p.featured_rank) === 2);
     });
 
     // Projects published from the dashboard that have no static card are
