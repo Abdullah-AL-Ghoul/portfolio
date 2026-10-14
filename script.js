@@ -3565,7 +3565,8 @@
         architecture: 'React 18 SPA with Tailwind utility styling, Firebase Firestore real-time sync, offline service worker caching, and Lighthouse 98 performance tuning.',
         tech: ['React', 'Tailwind CSS', 'Firebase', 'PWA'],
         links: [
-          { id: 'live', icon: 'external-link', label: 'Live Site', href: 'https://al-azher-it-hub.vercel.app/' }
+          { id: 'live', icon: 'external-link', label: 'Live Site', href: 'https://al-azher-it-hub.vercel.app/' },
+          { id: 'github', icon: 'folder-git-2', label: 'GitHub Repository', href: 'https://github.com/Abdullah-AL-Ghoul/al-azher-it-hub' }
         ]
       },
       p5: {
@@ -3608,7 +3609,7 @@
         tech: ['Next.js 16', 'React 19', 'TypeScript', 'Prisma', 'PostgreSQL', 'Stripe', 'Tailwind CSS', 'better-auth'],
         links: [
           { id: 'live', icon: 'external-link', label: 'Live Site', href: 'https://nexora-luxury.vercel.app/' },
-          { id: 'github', icon: 'folder-git-2', label: 'GitHub Repository', href: 'https://github.com/abdallhalghoul/nexora' }
+          { id: 'github', icon: 'folder-git-2', label: 'GitHub Repository', href: 'https://github.com/Abdullah-AL-Ghoul/nexora' }
         ]
       }
     },
@@ -3658,7 +3659,8 @@
         architecture: 'تطبيق أحادي الصفحة بـ React 18 مع Tailwind CSS ومزامنة فورية مع Firebase Firestore، مع كاش Service Worker وتجاوز 98 على Lighthouse.',
         tech: ['React', 'Tailwind CSS', 'Firebase', 'PWA'],
         links: [
-          { id: 'live', icon: 'external-link', label: 'الموقع مباشر', href: 'https://al-azher-it-hub.vercel.app/' }
+          { id: 'live', icon: 'external-link', label: 'الموقع مباشر', href: 'https://al-azher-it-hub.vercel.app/' },
+          { id: 'github', icon: 'folder-git-2', label: 'المستودع البرمجي', href: 'https://github.com/Abdullah-AL-Ghoul/al-azher-it-hub' }
         ]
       },
       p5: {
@@ -3701,7 +3703,7 @@
         tech: ['Next.js 16', 'React 19', 'TypeScript', 'Prisma', 'PostgreSQL', 'Stripe', 'Tailwind CSS', 'better-auth'],
         links: [
           { id: 'live', icon: 'external-link', label: 'الموقع مباشر', href: 'https://nexora-luxury.vercel.app/' },
-          { id: 'github', icon: 'folder-git-2', label: 'المستودع البرمجي', href: 'https://github.com/abdallhalghoul/nexora' }
+          { id: 'github', icon: 'folder-git-2', label: 'المستودع البرمجي', href: 'https://github.com/Abdullah-AL-Ghoul/nexora' }
         ]
       }
     }
