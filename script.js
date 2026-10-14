@@ -2097,42 +2097,6 @@
     });
   }
 
-  // ============== Project Code Drawers ==============
-
-  function setupCodePeeks() {
-    document.addEventListener('click', (e) => {
-      const peekBtn = e.target.closest('[data-peek-target]');
-      if (peekBtn) {
-        const targetId = peekBtn.dataset.peekTarget;
-        const drawer = document.getElementById(targetId);
-        if (drawer) {
-          const isOpen = !drawer.hidden;
-          drawer.hidden = isOpen;
-          peekBtn.classList.toggle('is-active', !isOpen);
-          peekBtn.setAttribute('aria-expanded', String(!isOpen));
-        }
-      }
-
-      const copyBtn = e.target.closest('[data-copy-target]');
-      if (copyBtn) {
-        const snippetId = copyBtn.dataset.copyTarget;
-        const codeEl = document.getElementById(snippetId);
-        if (codeEl) {
-          navigator.clipboard.writeText(codeEl.textContent.trim()).then(() => {
-            const span = copyBtn.querySelector('span');
-            const originalText = span ? span.textContent : '';
-            const dict = i18n[state.lang] || i18n.en;
-            if (span) span.textContent = dict['proj.code_copied'] || 'Copied!';
-            showToast(dict['proj.code_copied'] || 'Code copied to clipboard!');
-            setTimeout(() => {
-              if (span) span.textContent = originalText;
-            }, 2000);
-          }).catch(() => {});
-        }
-      }
-    });
-  }
-
   // ============== Spotlight Hover Effect ==============
 
   function setupSpotlightHover() {
@@ -4979,7 +4943,6 @@
     setupTimelineModals();
     setupProjectModals();
     setupProjectPlanner();
-    setupCodePeeks();
     setupSpotlightHover();
     setupEmailCopy();
     setupFAQAccordion();
