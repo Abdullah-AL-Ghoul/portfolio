@@ -6740,7 +6740,7 @@ body::after {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .project-filter-btn i {
   width: 15px;
@@ -7949,7 +7949,7 @@ body::after {
   color: var(--text-dim);
   font-size: 0.88rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 .btn-copy-email:hover {
   background: var(--bg-elev);
@@ -8019,4 +8019,203 @@ body::after {
 }
 .project-card:hover::before, .skill-card:hover::before, .cert-card:hover::before, .freelance-pillar:hover::before {
   opacity: 1;
+}
+
+/* ==========================================================================
+   V5 — Evolution: Project Search, Empty State & Recruiter Highlights
+   ========================================================================== */
+
+.projects-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.projects-search-bar {
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.search-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-input-wrap .search-icon {
+  position: absolute;
+  inset-inline-start: 1rem;
+  width: 18px;
+  height: 18px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.project-search-input {
+  width: 100%;
+  padding-block: 0.7rem;
+  padding-inline-start: 2.75rem;
+  padding-inline-end: 2.5rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  transition: border-color var(--dur-routine) var(--ease-out), box-shadow var(--dur-routine) var(--ease-out), background-color var(--dur-routine) var(--ease-out);
+}
+
+.project-search-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+  background: var(--bg-elev-2);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.project-search-input::placeholder {
+  color: var(--text-faint);
+  opacity: 0.85;
+}
+
+.search-clear-btn {
+  position: absolute;
+  inset-inline-end: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+}
+
+.search-clear-btn:hover {
+  color: var(--text);
+  background: var(--border-strong);
+}
+
+.search-clear-btn i {
+  width: 14px;
+  height: 14px;
+}
+
+.search-clear-btn[hidden],
+.projects-empty-state[hidden] {
+  display: none !important;
+}
+
+/* Projects Empty State */
+.projects-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  margin-top: 1rem;
+  background: var(--bg-elev);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  grid-column: 1 / -1;
+}
+
+.empty-state-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gradient-soft);
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.empty-state-icon i {
+  width: 26px;
+  height: 26px;
+}
+
+.projects-empty-state h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.projects-empty-state p {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  max-width: 420px;
+  margin-bottom: 1.5rem;
+}
+
+/* Recruiter Quick View Mode */
+.btn-recruiter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.15rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--dur-routine) var(--ease-out), border-color var(--dur-routine) var(--ease-out), color var(--dur-routine) var(--ease-out), box-shadow var(--dur-routine) var(--ease-out), transform var(--dur-routine) var(--ease-out);
+}
+
+.btn-recruiter i {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+}
+
+.btn-recruiter:hover,
+.btn-recruiter[aria-pressed="true"],
+.recruiter-nav-btn[aria-pressed="true"] {
+  background: var(--gradient-soft);
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.recruiter-nav-btn i {
+  width: 18px;
+  height: 18px;
+}
+
+body.recruiter-mode .project-card[data-project="p8"],
+body.recruiter-mode .project-card[data-project="p4"] {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 16px 40px var(--accent-glow);
+}
+
+body.recruiter-mode .skill-card[data-tier="4"],
+body.recruiter-mode .skill-row[data-tier="4"] {
+  background: var(--gradient-soft);
+}
+
+body.recruiter-mode .hero-cta a[download] {
+  animation: pulse-cv 2s infinite ease-in-out;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@keyframes pulse-cv {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  50% { box-shadow: 0 0 18px 4px var(--accent-glow); }
 }

@@ -55,7 +55,7 @@
   // ============== Constants ==============
   const THEME_ICONS = { dark: 'moon', gold: 'sparkles', light: 'sun', cyberpunk: 'zap', forest: 'tree-pine', sunset: 'sunset' };
   const THEME_COLORS = { dark: '#08090a', gold: '#101318', light: '#f4f5f9', cyberpunk: '#0a0014', forest: '#0b1410', sunset: '#160c08' };
-  const THEME_ORDER = ['dark', 'gold', 'light', 'cyberpunk', 'forest', 'sunset'];
+  const THEME_ORDER = ['gold', 'dark', 'light', 'cyberpunk', 'forest', 'sunset'];
   const SCROLL_THRESHOLD = 600;
   const NAV_SCROLL_THRESHOLD = 10;
   const STAGGER_DELAY_MS = 150;
@@ -365,6 +365,18 @@
       'proj.peek_code': 'Architecture',
       'proj.copy_code': 'Copy',
       'proj.code_copied': 'Copied!',
+      'proj.search_label': 'Search projects by name, technology, or keywords',
+      'proj.search_placeholder': 'Search projects (e.g. Next.js, AI, Stripe, Python)...',
+      'proj.clear_search': 'Clear search',
+      'proj.empty_title': 'No projects match your search',
+      'proj.empty_desc': 'Try searching for another technology or reset your active filters.',
+      'proj.reset_filters': 'Reset Filters',
+
+      'nav.recruiter': 'Recruiter Snapshot',
+      'nav.recruiter_title': 'Toggle recruiter summary view',
+      'hero.recruiter_mode': 'Recruiter Snapshot',
+      'hero.recruiter_on': 'Recruiter view active — key highlights & credentials prioritized',
+      'hero.recruiter_off': 'Standard view active',
 
       'hero.card_avail': 'Available for Projects',
       'hero.card_fullstack': 'Full-Stack',
@@ -756,6 +768,18 @@
       'proj.peek_code': 'المعمارية البرمجية',
       'proj.copy_code': 'نسخ',
       'proj.code_copied': 'تم النسخ!',
+      'proj.search_label': 'ابحث في المشاريع بالاسم، التقنية، أو الكلمات المفتاحية',
+      'proj.search_placeholder': 'ابحث في المشاريع (مثل Next.js، الذكاء الاصطناعي، Stripe، Python)...',
+      'proj.clear_search': 'مسح البحث',
+      'proj.empty_title': 'لا توجد مشاريع تطابق بحثك',
+      'proj.empty_desc': 'جرب البحث عن تقنية أخرى أو أعد ضبط تصنيفات التصفية.',
+      'proj.reset_filters': 'إعادة ضبط التصفية',
+
+      'nav.recruiter': 'نظرة سريعة للمسؤولين',
+      'nav.recruiter_title': 'تبديل وضع ملخص التوظيف',
+      'hero.recruiter_mode': 'نظرة سريعة للمسؤولين',
+      'hero.recruiter_on': 'تم تفعيل وضع التوظيف — إبراز أهم المهارات والشهادات والخبرات',
+      'hero.recruiter_off': 'تم تفعيل العرض القياسي',
 
       'hero.card_avail': 'متاح للمشاريع الجديدة',
       'hero.card_fullstack': 'تطوير متكامل',
@@ -900,8 +924,9 @@
   const getInitialTheme = () => {
     const saved = localStorage.getItem('theme');
     if (saved && THEME_ORDER.includes(saved)) return saved;
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return prefersDark ? 'dark' : 'light';
+    const docTheme = document.documentElement.getAttribute('data-theme');
+    if (docTheme && THEME_ORDER.includes(docTheme)) return docTheme;
+    return 'gold';
   };
 
   const state = {
@@ -2026,11 +2051,55 @@
     });
   }
 
-  // ============== Project Filters ==============
+  // ============== Project Filters & Live Search ==============
 
   function setupProjectFilters() {
     const filterBtns = $$('.project-filter-btn');
-    if (!filterBtns.length) return;
+    const searchInput = $('#project-search-input');
+    const clearBtn = $('#project-search-clear');
+    const emptyState = $('#projects-empty');
+    const resetBtn = $('#projects-reset-filters');
+    const cards = () => $$('.projects-grid .project-card');
+
+    if (!filterBtns.length && !searchInput) return;
+
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    function applyFilterAndSearch() {
+      const q = (searchQuery || '').trim().toLowerCase();
+      let visibleCount = 0;
+
+      cards().forEach((card) => {
+        const cat = card.dataset.category || '';
+        const catMatch = activeFilter === 'all' || cat === activeFilter;
+        let textMatch = true;
+        if (q) {
+          const text = (card.textContent || '').toLowerCase();
+          const slug = (card.dataset.slug || '').toLowerCase();
+          textMatch = text.includes(q) || slug.includes(q);
+        }
+
+        if (catMatch && textMatch) {
+          card.style.display = '';
+          card.classList.remove('is-hidden');
+          card.hidden = false;
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+          card.classList.add('is-hidden');
+          card.hidden = true;
+        }
+      });
+
+      if (emptyState) {
+        emptyState.hidden = visibleCount > 0;
+      }
+      if (clearBtn) {
+        clearBtn.hidden = !q;
+      }
+    }
+
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         filterBtns.forEach((b) => {
@@ -2039,21 +2108,42 @@
         });
         btn.classList.add('active');
         btn.setAttribute('aria-selected', 'true');
-        const filter = btn.dataset.filter;
-        $$('.projects-grid .project-card').forEach((card) => {
-          const cat = card.dataset.category || '';
-          if (filter === 'all' || cat === filter) {
-            card.style.display = '';
-            card.classList.remove('is-hidden');
-            card.hidden = false;
-          } else {
-            card.style.display = 'none';
-            card.classList.add('is-hidden');
-            card.hidden = true;
-          }
-        });
+        activeFilter = btn.dataset.filter || 'all';
+        applyFilterAndSearch();
       });
     });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value || '';
+        applyFilterAndSearch();
+      });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        if (searchInput) {
+          searchInput.value = '';
+          searchQuery = '';
+          applyFilterAndSearch();
+          searchInput.focus();
+        }
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        searchQuery = '';
+        const allBtn = document.querySelector('.project-filter-btn[data-filter="all"]');
+        if (allBtn) {
+          allBtn.click();
+        } else {
+          activeFilter = 'all';
+          applyFilterAndSearch();
+        }
+      });
+    }
   }
 
   // ============== Toast Notification ==============
@@ -2289,6 +2379,21 @@
     const stats = document.querySelectorAll('.stat-num');
     if (!stats.length) return;
 
+    // Dynamically derive project and cert counts from the DOM so numbers reflect actual records
+    const projectCards = document.querySelectorAll('.projects-grid .project-card');
+    const certCards = document.querySelectorAll('.certs-grid .cert-card');
+    stats.forEach((el) => {
+      const item = el.closest('.stat-item');
+      if (!item) return;
+      const label = item.querySelector('.stat-label');
+      const key = label ? label.getAttribute('data-i18n') : '';
+      if (key === 'stats.projects' && projectCards.length) {
+        el.textContent = projectCards.length + '+';
+      } else if (key === 'stats.certs' && certCards.length) {
+        el.textContent = certCards.length + '+';
+      }
+    });
+
     // Stash the original text and reset display to 0 so the actual number
     // is never visible before the counter animates into place.
     const prepared = [];
@@ -2484,6 +2589,7 @@
           learning: ['Frontend Development', 'Java OOP', 'Data Structures', 'Algorithms', 'Software Engineering Principles']
         },
         projects: [
+          { name: 'NEXORA — Luxury Commerce', tag: 'Featured · Live', stack: 'Next.js 16, React 19, TypeScript, Prisma, PostgreSQL, Stripe, Tailwind CSS v4', desc: 'Modern luxury commerce platform with server-authoritative cart validation, Stripe webhook idempotency, and admin analytics.' },
           { name: 'Personal Portfolio Website', tag: 'Live · This Site', stack: 'HTML5, CSS3, JavaScript, i18n, RTL', desc: 'A responsive, modern, bilingual portfolio — this very site.' },
           { name: 'Enterprise Network Design', tag: 'Completed', stack: 'Cisco Packet Tracer, VLAN, DHCP, DNS, NAT, Routing', desc: 'Segmented business network using VLANs, DHCP, DNS, NAT, subnetting, and Router-on-a-Stick.' },
           { name: 'Smart University Virtual Lab', tag: 'Concept Proposal', stack: 'RDP, Windows, Azure, Cloud Infra, VPN', desc: 'Cloud-based virtual desktops for students without PCs to access programming environments via RDP.' },
@@ -2553,6 +2659,7 @@
           learning: ['تطوير الواجهات', 'Java OOP', 'هياكل البيانات', 'الخوارزميات', 'مبادئ هندسة البرمجيات']
         },
         projects: [
+          { name: 'نيكسورا — منصة تجارة إلكترونية فاخرة', tag: 'مميز · مباشر', stack: 'Next.js 16, React 19, TypeScript, Prisma, PostgreSQL, Stripe, Tailwind CSS v4', desc: 'منصة تجارة إلكترونية فاخرة بحسابات أسعار حصرية على الخادم، وتحقق آمن من مدفوعات Stripe، ولوحة تحليلات إدارية.' },
           { name: 'موقع البورتفوليو الشخصي', tag: 'مباشر · هذا الموقع', stack: 'HTML5, CSS3, JavaScript, i18n, RTL', desc: 'موقع شخصي ثنائي اللغة، متجاوب وعصري — هذا الموقع بالذات.' },
           { name: 'تصميم شبكة مؤسسية', tag: 'مكتمل', stack: 'Cisco Packet Tracer, VLAN, DHCP, DNS, NAT, Routing', desc: 'شبكة أعمال مُجزّأة باستخدام VLAN و DHCP و DNS و NAT و Router-on-a-Stick.' },
           { name: 'مختبر جامعي افتراضي ذكي', tag: 'مقترح', stack: 'RDP, Windows, Azure, Cloud Infra, VPN', desc: 'بيئة سطح مكتب سحابية للطلاب الذين لا يملكون حواسيب للوصول إلى بيئات البرمجة عبر RDP.' },
@@ -3144,16 +3251,10 @@
       }
     });
 
-    // Quick-open shortcut: "/" or Ctrl/Cmd+K focuses the assistant input.
+    // Quick-open shortcut: "/" focuses the assistant input.
     // Ignored while the user is typing in any field or editing content.
     document.addEventListener('keydown', (e) => {
       const inField = !!(e.target && e.target.closest && e.target.closest('input, textarea, select, [contenteditable]'));
-      if (e.key === 'k' && (e.ctrlKey || e.metaKey)) {
-        e.preventDefault();
-        if (!isOpen()) setOpen(true);
-        setTimeout(() => input.focus({ preventScroll: true }), 50);
-        return;
-      }
       if (e.key === '/' && !inField) {
         e.preventDefault();
         if (!isOpen()) setOpen(true);
@@ -3736,7 +3837,26 @@
         <p>${esc(text)}</p>
       </div>`;
 
-    function open(id) {
+    const SLUG_TO_ID = {
+      nexora: 'p8',
+      alazher: 'p4',
+      portfolio: 'p1',
+      network: 'p2',
+      virtuallab: 'p3',
+      taskmanager: 'p5',
+      library: 'p6',
+      timecoach: 'p7'
+    };
+
+    function resolveId(val) {
+      if (!val) return null;
+      const clean = String(val).trim().toLowerCase().replace(/^#case-/, '');
+      return SLUG_TO_ID[clean] || clean;
+    }
+
+    function open(rawId) {
+      const id = resolveId(rawId);
+      if (!id) return;
       const lang = state.lang === 'ar' ? 'ar' : 'en';
       const dict = i18n[lang];
       const cases = PROJECT_CASES[lang];
@@ -3782,6 +3902,13 @@
       document.body.classList.add('no-scroll');
       if (window.lucide) window.lucide.createIcons({ nameAttr: 'data-lucide' });
 
+      // Update URL query parameter without reloading
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('case', id);
+        window.history.replaceState({ caseModal: id }, '', url.toString());
+      } catch (e) {}
+
       removeTrap = trapFocus(modal);
       setTimeout(() => {
         const closeBtn = modal.querySelector('.case-modal-close');
@@ -3794,6 +3921,17 @@
       document.body.classList.remove('no-scroll');
       if (removeTrap) { removeTrap(); removeTrap = null; }
       if (lastFocused && lastFocused.focus) lastFocused.focus();
+
+      // Clear case query parameter from URL
+      try {
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('case')) {
+          url.searchParams.delete('case');
+          const cleanQuery = url.searchParams.toString();
+          const cleanUrl = url.pathname + (cleanQuery ? '?' + cleanQuery : '') + url.hash;
+          window.history.replaceState({}, '', cleanUrl);
+        }
+      } catch (e) {}
     }
 
     // Delegated: also fires for cards added dynamically by the CMS (cms.js).
@@ -3809,6 +3947,32 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !modal.hidden) close();
     });
+
+    window.addEventListener('popstate', () => {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const caseParam = urlParams.get('case');
+        if (caseParam) {
+          open(caseParam);
+        } else if (!modal.hidden) {
+          close();
+        }
+      } catch (e) {}
+    });
+
+    // Initial check for deep link: ?case=<id|slug> or #case-<id|slug>
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const caseParam = urlParams.get('case');
+      const hashMatch = window.location.hash.match(/^#case-([a-zA-Z0-9_-]+)$/);
+      const targetParam = caseParam || (hashMatch ? hashMatch[1] : null);
+      if (targetParam) {
+        const resolved = resolveId(targetParam);
+        if (resolved) {
+          setTimeout(() => open(resolved), 150);
+        }
+      }
+    } catch (e) {}
   }
 
   // ============== Interactive Milestones Timeline ==============
@@ -4793,10 +4957,11 @@
       },
       projects: () => {
         return `<span class="term-accent">Featured Projects:</span>\n` +
-          `  1. <a href="https://al-azher-it-hub.vercel.app/" target="_blank" style="color:#38bdf8;text-decoration:underline">AL-Azher IT Hub</a> — React + Tailwind + Firebase (Lighthouse 98)\n` +
-          `  2. <a href="https://abdullah-portfolio26.vercel.app/" target="_blank" style="color:#38bdf8;text-decoration:underline">Portfolio v2.0</a> — Vanilla Web Architecture (100/100 CWV)\n` +
-          `  3. Enterprise Network Design — 5 Segments, VLAN & Router-on-a-Stick\n` +
-          `  4. Smart University Virtual Lab — Cloud VDI proposal over RDP/VPN`;
+          `  1. <a href="https://nexora-luxury.vercel.app/" target="_blank" style="color:#38bdf8;text-decoration:underline">NEXORA</a> — Next.js 16 + React 19 + Stripe + Prisma Luxury Commerce\n` +
+          `  2. <a href="https://al-azher-it-hub.vercel.app/" target="_blank" style="color:#38bdf8;text-decoration:underline">AL-Azher IT Hub</a> — React + Tailwind + Firebase (Lighthouse 98)\n` +
+          `  3. <a href="https://abdullah-portfolio26.vercel.app/" target="_blank" style="color:#38bdf8;text-decoration:underline">Portfolio v2.0</a> — Vanilla Web Architecture (100/100 CWV)\n` +
+          `  4. Enterprise Network Design — 5 Segments, VLAN & Router-on-a-Stick\n` +
+          `  5. Smart University Virtual Lab — Cloud VDI proposal over RDP/VPN`;
       },
       philosophy: () => {
         return `<span class="term-accent">Engineering Philosophy:</span>\n` +
@@ -4909,6 +5074,49 @@
     });
   }
 
+  // ============== Recruiter Snapshot Mode ==============
+
+  function setupRecruiterMode() {
+    const heroBtn = document.getElementById('recruiter-mode-btn');
+    const navBtn = document.getElementById('nav-recruiter-btn');
+    if (!heroBtn && !navBtn) return;
+
+    function setRecruiter(enable, notify) {
+      document.body.classList.toggle('recruiter-mode', enable);
+      [heroBtn, navBtn].forEach((btn) => {
+        if (btn) {
+          btn.setAttribute('aria-pressed', enable ? 'true' : 'false');
+          btn.classList.toggle('active', enable);
+        }
+      });
+      try {
+        localStorage.setItem('pf_recruiter_mode', enable ? '1' : '0');
+      } catch (e) {}
+
+      if (notify) {
+        const dict = i18n[state.lang] || i18n.en;
+        showToast(enable ? (dict['hero.recruiter_on'] || 'Recruiter snapshot enabled') : (dict['hero.recruiter_off'] || 'Standard view enabled'));
+      }
+    }
+
+    // Restore saved state
+    try {
+      if (localStorage.getItem('pf_recruiter_mode') === '1') {
+        setRecruiter(true, false);
+      }
+    } catch (e) {}
+
+    [heroBtn, navBtn].forEach((btn) => {
+      if (btn) {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const current = document.body.classList.contains('recruiter-mode');
+          setRecruiter(!current, true);
+        });
+      }
+    });
+  }
+
   // ============== Init ==============
 
   /**
@@ -4933,6 +5141,7 @@
     setupCertModal();
     setupCertFilters();
     setupProjectFilters();
+    setupRecruiterMode();
     setupTestimonialModal();
     setupCursor();
     setupSectionTransitions();
